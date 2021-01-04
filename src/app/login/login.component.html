@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-4 d-flex flex-column justify-content-center mx-auto mt-5">
+
+      <div class="card rounded shadow shadow-lg">
+        <h5 class="card-header">Uloguj se</h5>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" method="post">
+            <div class="form-group">
+              <label for="un">Korisničko ime</label>
+              <input type="text" id="un" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Korisničko ime je obavezno polje</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Lozinka</label>
+              <input type="password" id="pwd" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Lozinka je obavezno polje</div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <button class="btn btn-primary">Uloguj se</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

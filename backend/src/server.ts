@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
+import user from './model/user';
 
 const app = express();
 
@@ -17,6 +18,22 @@ conn.once('open', () => {
 });
 
 const router = express.Router();
+
+router.route('/login').post((req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  user.findOne(
+    {'username':username, 'password':password},
+    (err, user) => {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.json(user);
+      }
+    });
+});
 
 app.use('/', router);
 
