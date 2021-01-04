@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" style="overflow-x: hidden">
 
   <div id="header">
 
@@ -23,7 +23,9 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Osnovne studije</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">Odsek za Računarsku tehniku i informatiku</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Odsek za Softversko inženjerstvo</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Ostali odseci</a>
             </div>
           </li>
@@ -37,6 +39,7 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nauka</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">Istraživanja</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Projekti</a>
             </div>
           </li>
@@ -44,8 +47,11 @@
             <a class="nav-link" href="#">Kontakt</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" *ngIf="user == null">
           <button class="btn btn-primary my-2 my-sm-0" routerLink="login">Uloguj se</button>
+        </form>
+        <form class="form-inline my-2 my-lg-0" *ngIf="user">
+          <button class="btn btn-danger my-2 my-sm-0" (click)="logout()">Izloguj se</button>
         </form>
       </div>
     </nav>
