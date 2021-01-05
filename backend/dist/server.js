@@ -17,13 +17,17 @@ conn.once('open', () => {
     console.log('Mongo connection open');
 });
 const router = express_1.default.Router();
-router.route('/login').post((req, res, next) => {
+router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    user_1.default
-        .findOne({ 'username': username, 'password': password })
-        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
-        .catch(err => next(err));
+    user_1.default.findOne({ 'username': username, 'password': password }, (err, user) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.json(user);
+        }
+    });
 });
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

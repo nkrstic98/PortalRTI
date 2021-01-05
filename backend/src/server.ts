@@ -19,14 +19,21 @@ conn.once('open', () => {
 
 const router = express.Router();
 
-router.route('/login').post((req, res, next) => {
+router.route('/login').post((req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  user
-    .findOne({'username':username, 'password':password})
-    .then(user => user ? res.json(user) : res.status(400).json({message: 'Korisničko ime ili lozinka nisu ispravni'}))
-    .catch(err => next(err));
+  user.findOne(
+    {'username':username, 'password':password},
+    (err, user) => {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.json(user);
+      }
+    }
+    );
 });
 
 app.use('/', router);

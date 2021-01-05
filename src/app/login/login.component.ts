@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../services/login.service';
 import {first} from 'rxjs/operators';
 import {AlertService} from '../services/alert.service';
+import {User, UserType} from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -44,17 +45,26 @@ export class LoginComponent implements OnInit {
     this.loginService
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
-      .subscribe({
-        next: () => {
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          this.router.navigateByUrl(returnUrl);
-        },
-        error: error => {
-          this.alertService.error(error.error.message);
+      .subscribe((user: User) => {
+        if(user) {
+          switch (user.type)
+          {
+            case UserType.Student:
+              break;
+
+            case UserType.Worker:
+              break;
+          }
+
+          this.router.navigate(['/home']);
+        }
+        else {
+          this.alertService.error("Korisničko ime ili lozinka nisu ispravni");
           this.f.password.setValue('');
           this.submitted = false;
         }
-      })
+      });
+
   }
 
 }
