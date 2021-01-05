@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LoginService} from '../services/login.service';
 import {first} from 'rxjs/operators';
 import {AlertService} from '../services/alert.service';
 import {User, UserType} from '../models/user';
+import {AccountService} from '../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService,
+    private accountService: AccountService,
     private alertService: AlertService
   ) { }
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService
+    this.accountService
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe((user: User) => {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
               break;
           }
 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         }
         else {
           this.alertService.error("Korisničko ime ili lozinka nisu ispravni");
@@ -64,7 +64,5 @@ export class LoginComponent implements OnInit {
           this.submitted = false;
         }
       });
-
   }
-
 }
