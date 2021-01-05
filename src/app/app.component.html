@@ -11,7 +11,8 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="home" routerLinkActive="active-link">Početna</a>
+            <a class="nav-link" [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Početna</a>
+            <span></span>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Zaposleni</a>
