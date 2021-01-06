@@ -15,6 +15,7 @@ let User = new Schema({
         type: String,
         required: true
     },
+    default_pass: Boolean,
     type: {
         type: Number,
         required: true

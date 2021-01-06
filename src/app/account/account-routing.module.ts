@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '', component: AccountComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'change_pass', component: ChangePassComponent }
+      { path: 'changePass', component: ChangePassComponent }
     ]
   }
 ];

@@ -43,4 +43,14 @@ export class AccountService {
     this.userSubject.next(null);
     this.router.navigate(['/']);
   }
+
+  changePass(password) {
+    const data = {
+      username: this.userValue.username,
+      password: password,
+      type: this.userValue.type
+    }
+
+    return this.http.put(`${this.uri}/changePass`, data);
+  }
 }

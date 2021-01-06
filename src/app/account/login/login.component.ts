@@ -47,16 +47,21 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe((user: User) => {
         if(user) {
-          switch (user.type)
-          {
-            case UserType.Student:
-              break;
-
-            case UserType.Worker:
-              break;
+          if(user.default_pass == true) {
+            this.router.navigate(['account/changePass']);
           }
+          else {
+            switch (user.type)
+            {
+              case UserType.Student:
+                break;
 
-          this.router.navigate(['/']);
+              case UserType.Worker:
+                break;
+            }
+
+            this.router.navigate(['/']);
+          }
         }
         else {
           this.alertService.error("Korisničko ime ili lozinka nisu ispravni");

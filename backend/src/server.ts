@@ -2,7 +2,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
-import user from './model/user';
+import User from './model/user';
+import Worker from './model/worker';
+import Student from './model/student';
 
 const app = express();
 
@@ -23,7 +25,7 @@ router.route('/login').post((req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  user.findOne(
+  User.findOne(
     {'username':username, 'password':password},
     (err, user) => {
       if(err) {
@@ -35,6 +37,60 @@ router.route('/login').post((req, res) => {
     }
     );
 });
+
+router.route('/changePass').put((req, res) => {
+  const userParam = {
+    password: req.body.password,
+    default_pass: false
+  }
+
+  User.findOne(
+    {'username':req.body.username},
+    (err, user) => {
+      if(user) {
+        Object.assign(user, userParam);
+
+        user.save()
+          .then(r => res.json(r))
+          .catch(err => res.json(err));
+      }
+      else {
+        res.json(err);
+      }
+    });
+
+  if(req.body.type == 1) {
+    Worker.findOne(
+      {'username': req.body.username},
+      (err, worker) => {
+        if(worker) {
+          Object.assign(worker, {password:req.body.password});
+
+          worker.save();
+        }
+        else {
+          res.json(err);
+        }
+      }
+    )
+  }
+
+  if(req.body.type == 2) {
+    Student.findOne(
+      {'username': req.body.username},
+      (err, student) => {
+        if(student) {
+          Object.assign(student, {password:req.body.password});
+
+          student.save();
+        }
+        else {
+          res.json(err);
+        }
+      }
+    )
+  }
+})
 
 app.use('/', router);
 
