@@ -9,49 +9,19 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Početna</a>
-            <span></span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Zaposleni</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Obaveštenja</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Osnovne studije</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Odsek za Računarsku tehniku i informatiku</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Odsek za Softversko inženjerstvo</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Ostali odseci</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Master studije</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Projekti</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nauka</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Istraživanja</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Projekti</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Kontakt</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" *ngIf="user == null">
+
+        <app-header-default *ngIf="user == null"></app-header-default>
+
+        <div *ngIf="user != null" [ngSwitch]="user.type">
+          <app-header-admin *ngSwitchCase="0"></app-header-admin>
+          <app-header-teacher *ngSwitchCase="1"></app-header-teacher>
+          <app-header-default *ngSwitchDefault></app-header-default>
+        </div>
+
+        <form class="form-inline my-2 my-lg-0 ml-auto" *ngIf="user == null">
           <button class="btn btn-primary my-2 my-sm-0" routerLink="account/login">Uloguj se</button>
         </form>
-        <form class="form-inline my-2 my-lg-0" *ngIf="user">
+        <form class="form-inline my-2 my-lg-0 ml-auto" *ngIf="user">
           <button class="btn btn-danger my-2 my-sm-0" (click)="logout()">Izloguj se</button>
         </form>
       </div>

@@ -7,12 +7,18 @@ import { HomeComponent } from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './helpers/alert/alert.component';
+import { HeaderDefaultComponent } from './headers/header-default/header-default.component';
+import { HeaderAdminComponent } from './headers/header-admin/header-admin.component';
+import { HeaderTeacherComponent } from './headers/header-teacher/header-teacher.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AlertComponent
+    AlertComponent,
+    HeaderDefaultComponent,
+    HeaderAdminComponent,
+    HeaderTeacherComponent
   ],
   imports: [
     BrowserModule,
