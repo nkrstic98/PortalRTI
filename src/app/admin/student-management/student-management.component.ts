@@ -58,4 +58,8 @@ export class StudentManagementComponent implements OnInit {
 
     this.ngOnInit();
   }
+
+  delete(student) {
+
+  }
 }

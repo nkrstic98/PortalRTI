@@ -1,11 +1,11 @@
 <div class="container-fluid">
-  <div class="row mt-2">
-    <div class="col-sm-2">
-      <h5 class="display-4">Studenti</h5>
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <button class="btn btn-outline-success" [routerLink]="['../../account/registerStudent']">Dodaj studenta</button>
     </div>
   </div>
 
-  <div class="row mt-2">
+  <div class="row mt-4">
     <div class="col-sm-3">
       <select class="custom-select" (change)="sort($event)" [(ngModel)]="sortCriteria">
         <option selected value="" disabled>Sortiraj po...</option>
@@ -36,22 +36,28 @@
     <div class="col-sm-12">
       <table class="table table-striped text-center">
         <thead>
-        <tr>
-          <th>Prezime</th>
-          <th>Ime</th>
-          <th>Broj indeksa</th>
-          <th>Tip studija</th>
-          <th>Status</th>
-        </tr>
+          <tr>
+            <th>Prezime</th>
+            <th>Ime</th>
+            <th>Broj indeksa</th>
+            <th>Tip studija</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let s of students">
-          <td>{{s.lastname}}</td>
-          <td>{{s.firstname}}</td>
-          <td>{{s.index}}</td>
-          <td>{{s.type}}</td>
-          <td>{{s.status}}</td>
-        </tr>
+          <tr *ngFor="let s of students">
+            <td>{{s.lastname}}</td>
+            <td>{{s.firstname}}</td>
+            <td>{{s.index}}</td>
+            <td>{{s.type}}</td>
+            <td>{{s.status}}</td>
+
+            <td>
+              <button class="btn btn-outline-danger float-right" (click)="delete(s.username)">Obriši</button>
+              <button routerLink="edit/{{s.username}}" class="btn btn-outline-warning float-right mr-2">Izmeni</button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

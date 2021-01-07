@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../services/account.service';
 import {AlertService} from '../../services/alert.service';
 import {first} from 'rxjs/operators';
+import user from '../../../../backend/src/model/user';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-register-student',
@@ -11,6 +13,8 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./register-student.component.css']
 })
 export class RegisterStudentComponent implements OnInit {
+  user: User;
+
   form: FormGroup;
 
   submitted = false;
@@ -27,7 +31,9 @@ export class RegisterStudentComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private alertService: AlertService
-  ) { }
+  ) {
+    this.accountService.user.subscribe(user => this.user = user);
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -61,8 +67,18 @@ export class RegisterStudentComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.alertService.success('Uspešno ste se registrovali na portal', {keepAfterRouteChange: true, autoClose: true});
-          this.router.navigate(['../login'], {relativeTo: this.route});
+          if(this.user != null && this.user.type == 0) {
+            this.alertService.success(
+              'Student ' + this.f.firstname.value + ' ' + this.f.lastname.value + ' je uspešno registrovan', {keepAfterRouteChange: true, autoClose: true}
+              );
+
+            this.router.navigate(['../../admin/studentManagement'], {relativeTo: this.route});
+          }
+          else {
+            this.alertService.success('Uspešno ste se registrovali na portal', {keepAfterRouteChange: true, autoClose: true});
+            this.router.navigate(['../login'], {relativeTo: this.route});
+          }
+
         },
         error: err => {
           this.alertService.error('Korisničko ime "' + this.form.value.username + '" je zauzeto!');
