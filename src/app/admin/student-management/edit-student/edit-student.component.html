@@ -1,1 +1,116 @@
-<p>edit-student works!</p>
+<ol class="breadcrumb bg-white">
+  <li class="breadcrumb-item"><a routerLink="/">Početna</a></li>
+  <li class="breadcrumb-item"><a [routerLink]="['../../']">Studenti</a></li>
+  <li class="breadcrumb-item active">Izmena informacija</li>
+</ol>
+
+<div class="container-fluid">
+  <div class="row pt-3">
+    <div class="col-sm-12">
+      <h3>Ažuriranje informacija o studentu</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-8 mt-4 ml-3">
+
+          <form (ngSubmit)="edit()" class="bg-light p-3">
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="name">Ime</label>
+                <input type="text" id="name" class="form-control" name="firstname" disabled
+                       [(ngModel)]="firstname" [ngClass]="{ 'is-invalid': submitted && firstname == '' }"/>
+                <div *ngIf="submitted && firstname == ''" class="invalid-feedback">
+                  <div *ngIf="firstname == ''">Ime je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="lname">Prezime</label>
+                <input type="text" id="lname" class="form-control" name="lastname" disabled
+                       [(ngModel)]="lastname" [ngClass]="{ 'is-invalid': submitted && lastname == '' }"/>
+                <div *ngIf="submitted && lastname == ''" class="invalid-feedback">
+                  <div *ngIf="lastname == ''">Prezime je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="uname">Korisničko ime (studentska e-mail adresa)</label>
+                <input type="text" id="uname" class="form-control" name="username" disabled
+                       [(ngModel)]="username" [ngClass]="{ 'is-invalid': submitted && username == '' }"
+                       ngModel pattern="([a-z][a-z](\d){6}(d|m|p)@student.etf.rs)"
+                />
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="username == ''">Korisničko ime je obavezno polje</div>
+                </div>
+                <div *ngIf="(username != '') && !usernameRegex && submitted" class="invalid-feedback">
+                  <div>Vrednost je u pogrešnom formatu</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="pwd">Lozinka (menjati iskljucivo po zahtevu vlasnika)</label>
+                <input type="password" id="pwd" class="form-control" name="password" [(ngModel)]="password"/>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="index">Broj indeksa (u formatu GGGG/BBBB)</label>
+                <input type="text" id="index" class="form-control" name="index" disabled
+                       [(ngModel)]="index" [ngClass]="{ 'is-invalid': submitted && index == '' }"
+                       ngModel pattern="(\d\d\d\d\/\d\d\d\d)"
+                />
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="index == ''">Broj indeksa je obavezno polje</div>
+                </div>
+                <div *ngIf="(index != '') && !indexRegex && submitted" class="invalid-feedback">
+                  <div>Vrednost je u pogrešnom formatu</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="type">Tip studija</label>
+                <select id="type" class="form-control custom-select" name="type" disabled [(ngModel)]="type" [ngClass]="{ 'is-invalid': submitted && type == '' }">
+                  <option value="" disabled>Izaberite tip studija</option>
+                  <option *ngFor="let type of studiesType" [value]="type">{{type}}</option>
+                </select>
+                <div *ngIf="submitted && type == ''" class="invalid-feedback">
+                  <div *ngIf="type == ''">Tip studija je obavezno polje</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="status">Status</label>
+                <select id="status" class="form-control custom-select" name="status" [(ngModel)]="status" [ngClass]="{ 'is-invalid': submitted && status == '' }">
+                  <option value="" disabled>Status studenta</option>
+                  <option *ngFor="let st of studentStatus" [value]="st" >{{st}}</option>
+                </select>
+                <div *ngIf="submitted && status == ''" class="invalid-feedback">
+                  <div *ngIf="status == ''">Tip studija je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="col d-flex flex-column justify-content-end mx-auto">
+                <div class="form-group">
+                  <button class="btn btn-primary float-right">Potvrdi</button>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>

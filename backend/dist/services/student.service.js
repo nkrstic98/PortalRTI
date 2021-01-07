@@ -51,5 +51,19 @@ router.route('/delete').post((req, res, next) => {
     })
         .catch((err => next(err)));
 });
+router.route('/:username').get((req, res, next) => {
+    student_1.default.findOne({ username: req.params.username })
+        .then(user => res.json(user))
+        .catch(err => next(err));
+});
+router.route('/update').post((req, res, next) => {
+    student_1.default.findOneAndUpdate({ username: req.body.username }, req.body)
+        .then(() => {
+        user_1.default.findOneAndUpdate({ username: req.body.username }, { password: req.body.password, default_pass: true })
+            .then(() => res.json({}))
+            .catch(err => next(err));
+    })
+        .catch(err => next(err));
+});
 module.exports = router;
 //# sourceMappingURL=student.service.js.map

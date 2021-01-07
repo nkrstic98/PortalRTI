@@ -1,7 +1,12 @@
+<ol class="breadcrumb bg-white">
+  <li class="breadcrumb-item"><a routerLink="../home">Početna</a></li>
+  <li class="breadcrumb-item active">Studenti</li>
+</ol>
+
 <div class="container-fluid">
   <div class="row mt-4">
     <div class="col-sm-3">
-      <button class="btn btn-outline-success" [routerLink]="['../../account/registerStudent']">Dodaj studenta</button>
+      <button class="btn btn-outline-success" [routerLink]="['addStudent']">Dodaj studenta</button>
     </div>
   </div>
 
@@ -55,7 +60,7 @@
 
             <td>
               <button class="btn btn-outline-danger float-right" (click)="delete(s.username)">Obriši</button>
-              <button routerLink="edit/{{s.username}}" class="btn btn-outline-warning float-right mr-2">Izmeni</button>
+              <button routerLink="editStudent/{{s.username}}" class="btn btn-outline-warning float-right mr-2">Izmeni</button>
             </td>
           </tr>
         </tbody>

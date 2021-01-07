@@ -28,4 +28,12 @@ export class StudentService {
   delete(student) {
     return this.http.post(`${this.uri}/delete`, {username: student});
   }
+
+  get(username) {
+    return this.http.get<Student>(`${this.uri}/${username}`);
+  }
+
+  update(student) {
+    return this.http.post(`${this.uri}/update`, student);
+  }
 }

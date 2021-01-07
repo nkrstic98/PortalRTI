@@ -1,9 +1,16 @@
+<ol class="breadcrumb bg-white" *ngIf="user.type == 0">
+  <li class="breadcrumb-item"><a routerLink="/">Početna</a></li>
+  <li class="breadcrumb-item"><a [routerLink]="['../']">Studenti</a></li>
+  <li class="breadcrumb-item active">Registracija studenta</li>
+</ol>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-center mx-auto mt-5">
 
       <div class="card rounded shadow shadow-lg">
-        <h5 class="card-header">Registrujte se na RTI Portal</h5>
+        <h5 class="card-header" *ngIf="user == null">Registrujte se na RTI Portal</h5>
+        <h5 class="card-header" *ngIf="user.type == 0">Registrujte studenta na RTI Portal</h5>
 
         <div class="card-body">
           <form [formGroup]="form" (ngSubmit)="onSubmit()" method="post">
