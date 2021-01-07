@@ -67,7 +67,7 @@
 
               <div class="form-group col">
                 <label for="type">Tip studija</label>
-                <select id="type" formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                <select id="type" formControlName="type" class="form-control custom-select" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
                   <option value="" disabled>Izaberite tip studija</option>
                   <option *ngFor="let type of studiesType" [ngValue]="type">{{type}}</option>
                 </select>
@@ -82,7 +82,7 @@
 
               <div class="form-group col">
                 <label for="status">Status studenta</label>
-                <select id="status" formControlName="status" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <select id="status" formControlName="status" class="form-control custom-select" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
                   <option value="" disabled>Izaberite svoj status</option>
                   <option *ngFor="let status of studentStatus" [ngValue]="status">{{status}}</option>
                 </select>

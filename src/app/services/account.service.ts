@@ -13,7 +13,7 @@ export class AccountService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
-  uri = 'http://localhost:4000';
+  uri = 'http://localhost:4000/account';
 
   constructor(private router: Router, private http: HttpClient) {
     this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
@@ -31,7 +31,7 @@ export class AccountService {
     }
 
     return this.http
-      .post<User>(`${this.uri}/account/login`, data)
+      .post<User>(`${this.uri}/login`, data)
       .pipe(map(user => {
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
@@ -52,10 +52,10 @@ export class AccountService {
       type: this.userValue.type
     }
 
-    return this.http.put(`${this.uri}/account/changePass`, data);
+    return this.http.put(`${this.uri}/changePass`, data);
   }
 
   register(student: Student) {
-    return this.http.post(`${this.uri}/account/registerStudent`, student);
+    return this.http.post(`${this.uri}/registerStudent`, student);
   }
 }

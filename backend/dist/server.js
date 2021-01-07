@@ -16,5 +16,6 @@ conn.once('open', () => {
     console.log('Mongo connection open');
 });
 app.use('/account', require('./services/account.service'));
+app.use('/students', require('./services/student.service'));
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

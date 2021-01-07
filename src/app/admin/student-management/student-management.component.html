@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row mt-2">
+    <div class="col-sm-2">
+      <h5 class="display-4">Studenti</h5>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-sm-3">
+      <select class="custom-select" (change)="sort($event)" [(ngModel)]="sortCriteria">
+        <option selected value="" disabled>Sortiraj po...</option>
+        <option value="1">Broj indeksa</option>
+        <option value="2">Prezime</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <select id="type" class="custom-select" (change)="getByStudies($event)">
+        <option selected value="" disabled>Izaberite tip studija za prikazivanje</option>
+        <option value="Osnovne akademske studije">Osnovne akademske studije</option>
+        <option value="Master akademske studije">Master akademske studije</option>
+        <option value="Doktorske studije">Doktorske studije</option>
+      </select>
+    </div>
+    <div class="col-sm-3 d-flex flex-column justify-content-center">
+      <div class="custom-checkbox ml-3">
+        <input class="form-check-input" type="checkbox" (change)="showActiveOnly()" [checked]="active">
+        Prikaži samo aktivne studente
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-info float-right" (click)="reset()">Resetuj filtere</button>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-12">
+      <table class="table table-striped text-center">
+        <thead>
+        <tr>
+          <th>Prezime</th>
+          <th>Ime</th>
+          <th>Broj indeksa</th>
+          <th>Tip studija</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let s of students">
+          <td>{{s.lastname}}</td>
+          <td>{{s.firstname}}</td>
+          <td>{{s.index}}</td>
+          <td>{{s.type}}</td>
+          <td>{{s.status}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
