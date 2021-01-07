@@ -53,14 +53,18 @@ export class LoginComponent implements OnInit {
           else {
             switch (user.type)
             {
-              case UserType.Student:
+              case UserType.Admin:
+                this.router.navigate(['admin/home']);
                 break;
 
               case UserType.Worker:
+                this.router.navigate(['/']);
+                break;
+
+              case UserType.Student:
+                this.router.navigate(['/']);
                 break;
             }
-
-            this.router.navigate(['/']);
           }
         }
         else {

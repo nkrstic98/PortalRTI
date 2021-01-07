@@ -11,7 +11,7 @@ export class AccountComponent implements OnInit {
 
   constructor(private router: Router, private accountService: AccountService) {
     if(this.accountService.userValue) {
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
     }
   }
 
