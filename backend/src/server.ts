@@ -92,6 +92,38 @@ router.route('/changePass').put((req, res) => {
   }
 })
 
+router.route('/registerStudent').post((req, res, next) => {
+  Student.findOne(
+    {'username': req.body.username},
+    (err, student) => {
+      try{
+        if(student) {
+          throw 'Korisničko ime "' + req.body.username + '" je zauzeto';
+        }
+        else {
+          let newStudent = new Student(req.body);
+          newStudent.save();
+
+          const userData = {
+            username: req.body.username,
+            password: req.body.password,
+            default_pass: true,
+            type: 2
+          }
+
+          let newUser = new User(userData);
+          newUser.save();
+
+          res.json({});
+        }
+      }
+      catch (err) {
+        next(err);
+      }
+    }
+    );
+})
+
 app.use('/', router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));

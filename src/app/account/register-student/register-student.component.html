@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-center mx-auto mt-5">
+
+      <div class="card rounded shadow shadow-lg">
+        <h5 class="card-header">Registrujte se na RTI Portal</h5>
+
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" method="post">
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="name">Ime</label>
+                <input type="text" id="name" formControlName="firstname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                  <div *ngIf="f.firstname.errors.required">Ime je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="lname">Prezime</label>
+                <input type="text" id="lname" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                  <div *ngIf="f.lastname.errors.required">Prezime je obavezno polje</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="un">Korisničko ime (studentska e-mail adresa)</label>
+                <input type="text" id="un" formControlName="username" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && f.username.errors }" ngModel pattern="([a-z][a-z](\d){6}(d|m|p)@student.etf.rs)" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Korisničko ime je obavezno polje</div>
+                </div>
+                <div *ngIf="!f.username.errors && !patternUsername && submitted" class="invalid-feedback">
+                  <div>Vrednost je u pogrešnom formatu</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="pwd">Lozinka</label>
+                <input type="password" id="pwd" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Lozinka je obavezno polje</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="index">Broj indeksa (u formatu GGGG/BBBB)</label>
+                <input type="text" id="index" formControlName="index" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && f.index.errors }" ngModel pattern="(\d\d\d\d\/\d\d\d\d)" />
+                <div *ngIf="submitted && f.index.errors" class="invalid-feedback">
+                  <div *ngIf="f.index.errors.required">Broj indeksa je obavezno polje</div>
+                </div>
+                <div *ngIf="!f.index.errors && !patternIndex && submitted" class="invalid-feedback">
+                  <div>Vrednost je u pogrešnom formatu</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="type">Tip studija</label>
+                <select id="type" formControlName="type" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                  <option value="" disabled>Izaberite tip studija</option>
+                  <option *ngFor="let type of studiesType" [ngValue]="type">{{type}}</option>
+                </select>
+                <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                  <div *ngIf="f.type.errors.required">Tip studija je obavezno polje</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="status">Status studenta</label>
+                <select id="status" formControlName="status" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                  <option value="" disabled>Izaberite svoj status</option>
+                  <option *ngFor="let status of studentStatus" [ngValue]="status">{{status}}</option>
+                </select>
+                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                  <div *ngIf="f.status.errors.required">Status studenta je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="col d-flex flex-column justify-content-end mx-auto">
+                <div class="form-group">
+                  <button class="btn btn-primary float-right">Registruj se</button>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

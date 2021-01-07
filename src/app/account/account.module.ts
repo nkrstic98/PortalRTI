@@ -6,13 +6,15 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {ChangePassComponent} from './change-pass/change-pass.component';
 import { AccountComponent } from './account.component';
+import { RegisterStudentComponent } from './register-student/register-student.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     ChangePassComponent,
-    AccountComponent
+    AccountComponent,
+    RegisterStudentComponent
   ],
   imports: [
     CommonModule,

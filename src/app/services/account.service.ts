@@ -4,6 +4,7 @@ import {User} from '../models/user';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {Student} from '../models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,9 @@ export class AccountService {
     }
 
     return this.http.put(`${this.uri}/changePass`, data);
+  }
+
+  register(student: Student) {
+    return this.http.post(`${this.uri}/registerStudent`, student);
   }
 }
