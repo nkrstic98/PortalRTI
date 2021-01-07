@@ -10,6 +10,7 @@ import { AlertComponent } from './helpers/alert/alert.component';
 import { HeaderDefaultComponent } from './headers/header-default/header-default.component';
 import { HeaderAdminComponent } from './headers/header-admin/header-admin.component';
 import { HeaderTeacherComponent } from './headers/header-teacher/header-teacher.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderTeacherComponent } from './headers/header-teacher/header-teacher.
     AlertComponent,
     HeaderDefaultComponent,
     HeaderAdminComponent,
-    HeaderTeacherComponent
+    HeaderTeacherComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
