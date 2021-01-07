@@ -1,5 +1,6 @@
 import express from 'express';
 import Student from '../model/student';
+import User from '../model/user';
 
 const router = express.Router();
 
@@ -41,6 +42,16 @@ router.route('/filter/:data').get((req, res, next) => {
 
   Student.find(criteria)
     .then(users => res.json(users))
+    .catch((err => next(err)));
+})
+
+router.route('/delete').post((req, res, next) => {
+  Student.deleteOne({username:req.body.username})
+    .then(() => {
+      User.deleteOne({username:req.body.username})
+        .then(() => res.json({}))
+        .catch((err => next(err)));
+    })
     .catch((err => next(err)));
 })
 

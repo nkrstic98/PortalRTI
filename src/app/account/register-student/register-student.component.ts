@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../services/account.service';
 import {AlertService} from '../../services/alert.service';
 import {first} from 'rxjs/operators';
-import user from '../../../../backend/src/model/user';
 import {User} from '../../models/user';
 
 @Component({

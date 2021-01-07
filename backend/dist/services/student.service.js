@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const student_1 = __importDefault(require("../model/student"));
+const user_1 = __importDefault(require("../model/user"));
 const router = express_1.default.Router();
 router.route('/').get((req, res, next) => {
     student_1.default.find()
@@ -39,6 +40,15 @@ router.route('/filter/:data').get((req, res, next) => {
     }
     student_1.default.find(criteria)
         .then(users => res.json(users))
+        .catch((err => next(err)));
+});
+router.route('/delete').post((req, res, next) => {
+    student_1.default.deleteOne({ username: req.body.username })
+        .then(() => {
+        user_1.default.deleteOne({ username: req.body.username })
+            .then(() => res.json({}))
+            .catch((err => next(err)));
+    })
         .catch((err => next(err)));
 });
 module.exports = router;

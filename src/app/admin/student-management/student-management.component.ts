@@ -60,6 +60,10 @@ export class StudentManagementComponent implements OnInit {
   }
 
   delete(student) {
-
+    this.studentService.delete(student)
+      .pipe(first())
+      .subscribe(
+        () => this.students = this.students.filter(x => x.username != student)
+      );
   }
 }

@@ -24,4 +24,8 @@ export class StudentService {
 
     return this.http.get<Student[]>(`${this.uri}/filter/${JSON.stringify(data)}`);
   }
+
+  delete(student) {
+    return this.http.post(`${this.uri}/delete`, {username: student});
+  }
 }
