@@ -5,6 +5,7 @@ import {HomeAdminComponent} from './home-admin/home-admin.component';
 import {StudentManagementComponent} from './student-management/student-management.component';
 import {RegisterStudentComponent} from '../account/register-student/register-student.component';
 import {EditStudentComponent} from './student-management/edit-student/edit-student.component';
+import {WorkerManagementComponent} from './worker-management/worker-management.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,20 @@ const routes: Routes = [
             },
             {
               label: 'Ažuriranje studenta',
+              url: ''
+            }
+          ]
+        }
+      },
+      { path: 'workerManagement', component: WorkerManagementComponent, data: {
+          title: 'Radnici',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Radnici',
               url: ''
             }
           ]
