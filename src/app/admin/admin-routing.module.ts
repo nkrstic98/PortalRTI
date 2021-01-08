@@ -6,6 +6,8 @@ import {StudentManagementComponent} from './student-management/student-managemen
 import {RegisterStudentComponent} from '../account/register-student/register-student.component';
 import {EditStudentComponent} from './student-management/edit-student/edit-student.component';
 import {WorkerManagementComponent} from './worker-management/worker-management.component';
+import {RegisterWorkerComponent} from '../account/register-worker/register-worker.component';
+import {EditWorkerComponent} from './worker-management/edit-worker/edit-worker.component';
 
 const routes: Routes = [
   {
@@ -56,7 +58,7 @@ const routes: Routes = [
               url: 'admin/studentManagement'
             },
             {
-              label: 'Ažuriranje studenta',
+              label: 'Ažuriranje studenta "{{username}}"',
               url: ''
             }
           ]
@@ -70,7 +72,43 @@ const routes: Routes = [
               url: 'admin/home'
             },
             {
-              label: 'Radnici',
+              label: 'Zaposleni',
+              url: ''
+            }
+          ]
+        }
+      },
+      { path: 'workerManagement/addWorker', component: RegisterWorkerComponent, data: {
+          title: 'AddWorker',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Zaposleni',
+              url: 'admin/workerManagement'
+            },
+            {
+              label: 'Registracija zaposlenih',
+              url: ''
+            }
+          ]
+        }
+      },
+      { path: 'workerManagement/editWorker/:username', component: EditWorkerComponent, data: {
+          title: 'EditWorker',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Zaposleni',
+              url: 'admin/workerManagement'
+            },
+            {
+              label: 'Ažuriranje zaposlenog "{{username}}"',
               url: ''
             }
           ]

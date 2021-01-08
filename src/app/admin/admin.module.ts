@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import { EditStudentComponent } from './student-management/edit-student/edit-student.component';
 import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { WorkerManagementComponent } from './worker-management/worker-management.component';
+import { EditWorkerComponent } from './worker-management/edit-worker/edit-worker.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { WorkerManagementComponent } from './worker-management/worker-management
     HomeAdminComponent,
     StudentManagementComponent,
     EditStudentComponent,
-    WorkerManagementComponent
+    WorkerManagementComponent,
+    EditWorkerComponent
   ],
   imports: [
     CommonModule,

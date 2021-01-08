@@ -7,6 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {ChangePassComponent} from './change-pass/change-pass.component';
 import { AccountComponent } from './account.component';
 import { RegisterStudentComponent } from './register-student/register-student.component';
+import { RegisterWorkerComponent } from './register-worker/register-worker.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RegisterStudentComponent } from './register-student/register-student.co
     LoginComponent,
     ChangePassComponent,
     AccountComponent,
-    RegisterStudentComponent
+    RegisterStudentComponent,
+    RegisterWorkerComponent
   ],
   imports: [
     CommonModule,
