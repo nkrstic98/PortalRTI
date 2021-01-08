@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {User} from './models/user';
 import {AccountService} from './services/account.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
 
   user: User;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, public router: Router) {
     this.accountService.user.subscribe(user => this.user = user);
   }
 

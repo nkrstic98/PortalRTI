@@ -11,6 +11,7 @@ import { HeaderDefaultComponent } from './headers/header-default/header-default.
 import { HeaderAdminComponent } from './headers/header-admin/header-admin.component';
 import { HeaderTeacherComponent } from './headers/header-teacher/header-teacher.component';
 import { ContactComponent } from './contact/contact.component';
+import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ContactComponent } from './contact/contact.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgDynamicBreadcrumbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

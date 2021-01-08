@@ -7,6 +7,7 @@ import { HomeAdminComponent } from './home-admin/home-admin.component';
 import { StudentManagementComponent } from './student-management/student-management.component';
 import {FormsModule} from '@angular/forms';
 import { EditStudentComponent } from './student-management/edit-student/edit-student.component';
+import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EditStudentComponent } from './student-management/edit-student/edit-stu
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    NgDynamicBreadcrumbModule
   ]
 })
 export class AdminModule { }

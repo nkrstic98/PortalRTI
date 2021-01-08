@@ -30,7 +30,10 @@
   </div>
 
   <div id="body">
-
+    <app-ng-dynamic-breadcrumb
+      [bgColor]="'#f8f9fa!important'" [fontSize]="'15px'"
+      [hidden]="router.url == '/'"
+    ></app-ng-dynamic-breadcrumb>
     <app-alert></app-alert>
     <router-outlet></router-outlet>
 

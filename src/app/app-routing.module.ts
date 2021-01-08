@@ -11,9 +11,22 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   { path: 'account', loadChildren: accountModule },
   { path: 'admin', loadChildren: adminModule },
-  { path: 'contact', component: ContactComponent },
+  { path: 'contact', component: ContactComponent, data: {
+      title: 'Contact',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/',
+        },
+        {
+          label: 'Kontakt',
+          url: ''
+        }
+      ]
+    }
+  },
 
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

@@ -11,9 +11,56 @@ const routes: Routes = [
     path: '', component: AdminComponent,
     children: [
       { path: 'home', component: HomeAdminComponent },
-      { path: 'studentManagement', component: StudentManagementComponent},
-      { path: 'studentManagement/addStudent', component: RegisterStudentComponent },
-      { path: 'studentManagement/editStudent/:username', component: EditStudentComponent }
+      { path: 'studentManagement', component: StudentManagementComponent, data: {
+          title: 'Studenti',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Studenti',
+              url: ''
+            }
+          ]
+        }
+      },
+      { path: 'studentManagement/addStudent', component: RegisterStudentComponent, data: {
+          title: 'AddStudent',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Studenti',
+              url: 'admin/studentManagement'
+            },
+            {
+              label: 'Registracija studenata',
+              url: ''
+            }
+          ]
+        }
+      },
+      { path: 'studentManagement/editStudent/:username', component: EditStudentComponent, data: {
+          title: 'EditStudent',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Studenti',
+              url: 'admin/studentManagement'
+            },
+            {
+              label: 'Ažuriranje studenta',
+              url: ''
+            }
+          ]
+        }
+      }
     ]
   }
 ];
