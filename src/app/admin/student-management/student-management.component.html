@@ -14,8 +14,8 @@
       </select>
     </div>
     <div class="col-sm-3">
-      <select id="type" class="custom-select" (change)="getByStudies($event)">
-        <option selected value="" disabled>Izaberite tip studija za prikazivanje</option>
+      <select id="type" class="custom-select" (change)="getByStudies($event)" [(ngModel)]="type">
+        <option selected value=null disabled>Izaberite tip studija za prikazivanje</option>
         <option value="Osnovne akademske studije">Osnovne akademske studije</option>
         <option value="Master akademske studije">Master akademske studije</option>
         <option value="Doktorske studije">Doktorske studije</option>
