@@ -25,7 +25,8 @@ export class ChangePassComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       oldPassword: ['', Validators.required],
-      newPassword: ['', Validators.required]
+      newPassword: ['', Validators.required],
+      newPasswordConfirm: ['', Validators.required]
     });
   }
 
@@ -42,6 +43,13 @@ export class ChangePassComponent implements OnInit {
 
     if(this.f.oldPassword.value != this.accountService.userValue.password) {
       this.alertService.error("Molimo vas unesite ispravnu lozinku");
+      this.form.reset();
+      return;
+    }
+
+    if(this.f.newPassword.value != this.f.newPasswordConfirm.value) {
+      this.alertService.error("Lozinka i potvrda lozinke se ne poklapaju");
+      this.form.reset();
       return;
     }
 

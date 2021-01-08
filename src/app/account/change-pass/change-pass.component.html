@@ -20,6 +20,13 @@
                 <div *ngIf="f.newPassword.errors.required">Nova lozinka je obavezno polje</div>
               </div>
             </div>
+            <div class="form-group">
+              <label for="newpwdc">Potvrda lozinke</label>
+              <input type="password" id="newpwdc" formControlName="newPasswordConfirm" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.newPasswordConfirm.errors }" />
+              <div *ngIf="submitted && f.newPasswordConfirm.errors" class="invalid-feedback">
+                <div *ngIf="f.newPasswordConfirm.errors.required">Potvrda lozinke je obavezno polje</div>
+              </div>
+            </div>
             <div class="form-group text-center">
               <button class="btn btn-primary">Promeni lozinku</button>
             </div>
