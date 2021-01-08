@@ -1,1 +1,63 @@
-<p>worker-management works!</p>
+<div class="container-fluid">
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <button class="btn btn-outline-success" [routerLink]="['addWorker']">Dodaj zaposlenog</button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <select id="type" class="custom-select" (change)="getByTitle($event)" [(ngModel)]="type">
+        <option selected value=null disabled>Izaberite tip zaposlenih za prikazivanje</option>
+        <option value="redovni profesor">redovni profesor</option>
+        <option value="vanredni profesor">vanredni profesor</option>
+        <option value="docent">docent</option>
+        <option value="asistent">asistent</option>
+        <option value="saradnik u nastavi">saradnik u nastavi</option>
+        <option value="istraživač">istraživač</option>
+        <option value="laboratorijski inženjer">laboratorijski inženjer</option>
+        <option value="laboratorijski tehničar">laboratorijski tehničar</option>
+      </select>
+    </div>
+    <div class="col-sm-3 d-flex flex-column justify-content-center">
+      <div class="custom-checkbox ml-3">
+        <input class="form-check-input" type="checkbox" (change)="showActiveOnly()" [checked]="active">
+        Prikaži samo aktivne zaposlene
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-info float-right" (click)="reset()">Resetuj filtere</button>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-12">
+      <table class="table table-striped text-center">
+        <thead>
+        <tr>
+          <th>Prezime</th>
+          <th>Ime</th>
+          <th>E-mail</th>
+          <th>Zvanje</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let s of workers">
+          <td>{{s.lastname}}</td>
+          <td>{{s.firstname}}</td>
+          <td>{{s.email}}</td>
+          <td>{{s.title}}</td>
+          <td>{{s.status}}</td>
+
+          <td>
+            <button class="btn btn-outline-danger float-right" (click)="delete(s.username)">Obriši</button>
+            <button routerLink="editWorker/{{s.username}}" class="btn btn-outline-warning float-right mr-2">Izmeni</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
