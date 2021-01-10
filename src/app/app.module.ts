@@ -12,6 +12,8 @@ import { HeaderAdminComponent } from './headers/header-admin/header-admin.compon
 import { HeaderTeacherComponent } from './headers/header-teacher/header-teacher.component';
 import { ContactComponent } from './contact/contact.component';
 import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { CreateNotificationComponent } from './notifications/create-notification/create-notification.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
     HeaderDefaultComponent,
     HeaderAdminComponent,
     HeaderTeacherComponent,
-    ContactComponent
+    ContactComponent,
+    NotificationsComponent,
+    CreateNotificationComponent
   ],
   imports: [
     BrowserModule,
