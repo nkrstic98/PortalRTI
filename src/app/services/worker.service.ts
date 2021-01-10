@@ -31,7 +31,7 @@ export class WorkerService {
   }
 
   get(username) {
-    return this.http.get<Student>(`${this.uri}/${username}`);
+    return this.http.get<Worker>(`${this.uri}/${username}`);
   }
 
   update(worker) {
