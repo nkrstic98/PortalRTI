@@ -62,7 +62,7 @@ export class RegisterStudentComponent implements OnInit {
       return;
     }
 
-    this.accountService.register(this.form.value)
+    this.accountService.registerStudent(this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {

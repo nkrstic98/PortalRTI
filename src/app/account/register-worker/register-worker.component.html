@@ -1,1 +1,155 @@
-<p>register-worker works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 col-sm-10 d-flex flex-column justify-content-center mx-auto">
+
+      <div class="card rounded shadow shadow-lg">
+        <h5 class="card-header">Registrujte zaposlenog na RTI Portal</h5>
+
+        <div class="card-body">
+          <div class="p-3">
+
+            <div class="form-row">
+              <div class="form-group col">
+                <label for="name">Ime</label>
+                <input type="text" id="name" class="form-control" name="firstname"
+                       [(ngModel)]="firstname" [ngClass]="{ 'is-invalid': submitted && firstname == '' }"/>
+                <div *ngIf="submitted && firstname == ''" class="invalid-feedback">
+                  <div *ngIf="firstname == ''">Ime je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="lname">Prezime</label>
+                <input type="text" id="lname" class="form-control" name="lastname"
+                       [(ngModel)]="lastname" [ngClass]="{ 'is-invalid': submitted && lastname == '' }"/>
+                <div *ngIf="submitted && lastname == ''" class="invalid-feedback">
+                  <div *ngIf="lastname == ''">Prezime je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="uname">Korisničko ime</label>
+                <input type="text" id="uname" class="form-control" name="username"
+                       [(ngModel)]="username" [ngClass]="{ 'is-invalid': submitted && username == '' }"
+                />
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="username == ''">Korisničko ime je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="title">Zvanje</label>
+                <select id="title" class="custom-select" (change)="isTeacher()" [(ngModel)]="title" [ngClass]="{ 'is-invalid': submitted && title == '' }">
+                  <option selected value="" disabled>Izaberite zvanje zaposlenog</option>
+                  <option value="redovni profesor">redovni profesor</option>
+                  <option value="vanredni profesor">vanredni profesor</option>
+                  <option value="docent">docent</option>
+                  <option value="asistent">asistent</option>
+                  <option value="saradnik u nastavi">saradnik u nastavi</option>
+                  <option value="istraživač">istraživač</option>
+                  <option value="laboratorijski inženjer">laboratorijski inženjer</option>
+                  <option value="laboratorijski tehničar">laboratorijski tehničar</option>
+                </select>
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="title == ''">Zvanje zaposlenog je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="status">Status zaposlenog</label>
+                <select id="status" class="custom-select" [(ngModel)]="status"
+                        [ngClass]="{ 'is-invalid': submitted && status == '' }"
+                >
+                  <option selected value="" disabled>Izaberite status zaposlenog</option>
+                  <option value="aktivan">Aktivan</option>
+                  <option value="neaktivan">Neaktivan</option>
+                </select>
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="status == ''">Status zapslenog je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="office">Broj kabineta</label>
+                <input type="text" id="office" class="form-control" name="office"
+                       [(ngModel)]="office" [ngClass]="{ 'is-invalid': submitted && office == '' && teacher }" [disabled]="!teacher"
+                />
+                <div *ngIf="submitted && teacher" class="invalid-feedback">
+                  <div *ngIf="office == ''">Broj kabineta je obavezno polje</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="address">Adresa</label>
+                <input type="text" id="address" class="form-control" name="address"
+                       [(ngModel)]="address" [ngClass]="{ 'is-invalid': submitted && address == '' }"
+                />
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="address == ''">Adresa je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="phone">Broj telefona</label>
+                <input type="text" id="phone" class="form-control" name="phone" [(ngModel)]="phone" />
+              </div>
+
+              <div class="form-group col">
+                <label for="website">Adresa web sajta</label>
+                <input type="text" id="website" class="form-control" name="website" [(ngModel)]="website" />
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="pwd">Lozinka</label>
+                <input type="password" id="pwd" class="form-control" name="password" [(ngModel)]="password"
+                       [ngClass]="{ 'is-invalid': submitted && password == '' }"/>
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="password == ''">Lozinka je obavezno polje</div>
+                </div>
+              </div>
+
+              <div class="form-group col">
+                <label for="pwdC">Potvrda lozinke</label>
+                <input type="password" id="pwdC" class="form-control" name="passwordC" [(ngModel)]="passwordC"
+                       [ngClass]="{ 'is-invalid': submitted && passwordC == '' }"/>
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="passwordC == ''">Potvrda lozinke je obavezno polje</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col">
+                <label for="bio">Biografija</label>
+                <textarea class="form-control" id="bio" rows="4" [(ngModel)]="biogrpahy"></textarea>
+              </div>
+
+            </div>
+
+            <div class="form-row d-flex flex-row justify-content-center mt-2">
+              <button class="btn btn-primary" (click)="register()">Registracija</button>
+            </div>
+
+          </div >
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+

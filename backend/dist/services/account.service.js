@@ -84,5 +84,28 @@ router.route('/registerStudent').post((req, res, next) => {
         }
     });
 });
+router.route('/registerWorker').post((req, res, next) => {
+    worker_1.default.findOne({ 'username': req.body.username }, (err, worker) => {
+        if (err) {
+            res.json(err);
+        }
+        if (worker) {
+            res.json(worker);
+        }
+        else {
+            let newWorker = new worker_1.default(req.body);
+            newWorker.save();
+            const userData = {
+                username: req.body.username,
+                password: req.body.password,
+                default_pass: true,
+                type: 1
+            };
+            let newUser = new user_1.default(userData);
+            newUser.save();
+            res.json(null);
+        }
+    });
+});
 module.exports = router;
 //# sourceMappingURL=account.service.js.map

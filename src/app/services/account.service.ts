@@ -55,7 +55,11 @@ export class AccountService {
     return this.http.put(`${this.uri}/changePass`, data);
   }
 
-  register(student: Student) {
+  registerStudent(student: Student) {
     return this.http.post(`${this.uri}/registerStudent`, student);
+  }
+
+  registerWorker(worker) {
+    return this.http.post(`${this.uri}/registerWorker`, worker);
   }
 }

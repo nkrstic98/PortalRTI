@@ -108,4 +108,35 @@ router.route('/registerStudent').post((req, res, next) => {
   );
 })
 
+router.route('/registerWorker').post((req, res, next) => {
+  Worker.findOne(
+    {'username': req.body.username},
+    (err, worker) => {
+      if(err) {
+        res.json(err);
+      }
+
+      if(worker) {
+        res.json(worker);
+      }
+      else {
+        let newWorker = new Worker(req.body);
+        newWorker.save();
+
+        const userData = {
+          username: req.body.username,
+          password: req.body.password,
+          default_pass: true,
+          type: 1
+        }
+
+        let newUser = new User(userData);
+        newUser.save();
+
+        res.json(null);
+      }
+    }
+  );
+})
+
 module.exports = router;

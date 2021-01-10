@@ -43,7 +43,7 @@ let Worker = new Schema({
     required: true
   },
   office: {
-    type: Number
+    type: String
   },
   status: {
     type: String,
