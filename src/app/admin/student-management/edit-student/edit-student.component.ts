@@ -19,10 +19,11 @@ export class EditStudentComponent implements OnInit {
   firstname: string;
   lastname: string;
   username: string;
-  password: string;
+  password = '';
   index: string;
   type: string;
   status: string;
+  oldPassword: string;
 
   submitted: boolean;
 
@@ -48,6 +49,7 @@ export class EditStudentComponent implements OnInit {
         this.index = user.index;
         this.type = user.type;
         this.status = user.status;
+        this.oldPassword = user.password;
 
         this.password = '';
       });
@@ -63,7 +65,8 @@ export class EditStudentComponent implements OnInit {
     if(this.password == '') {
       student = {
         username: this.username,
-        status: this.status
+        status: this.status,
+        password: this.oldPassword
       }
     }
     else {
@@ -81,6 +84,8 @@ export class EditStudentComponent implements OnInit {
           this.alertService.success(
             'Podaci o studentu ' + this.firstname + ' ' + this.lastname + ' su uspešno izmenjeni', {autoClose: true}
           );
+
+          this.password = '';
         },
         error: err => {
           this.alertService.error('ERROR');
