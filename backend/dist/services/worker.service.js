@@ -59,7 +59,7 @@ router.route('/:username').get((req, res, next) => {
 router.route('/update').post((req, res, next) => {
     worker_1.default.findOneAndUpdate({ username: req.body.username }, req.body)
         .then(() => {
-        user_1.default.findOneAndUpdate({ username: req.body.username }, { password: req.body.password, default_pass: true })
+        user_1.default.findOneAndUpdate({ username: req.body.username }, { password: req.body.password })
             .then(() => res.json({}))
             .catch(err => next(err));
     })
