@@ -1,1 +1,34 @@
-<p>notifications works!</p>
+<div class="container-fluid">
+  <div class="row d-flex flex-row justify-content-center">
+    <div class="col-sm-4">
+      <div class="input-group">
+
+        <select class="custom-select" [(ngModel)]="category" (change)="filter()">
+          <option value="" selected disabled>Izaberite kategoriju obaveštenja...</option>
+          <option value="Pozivi za studentska takmičenja">Pozivi za studentska takmičenja</option>
+          <option value="Obaveštenja o konferencijama">Obaveštenja o konferencijama</option>
+          <option value="Ponude za praksu">Ponude za praksu</option>
+          <option value="Ponude za posao">Ponude za posao</option>
+        </select>
+        <span class="input-group-btn">
+          <button class="btn btn-outline-info" type="button" (click)="reset()">Prikaži sve</button>
+        </span>
+      </div>
+  </div>
+  </div>
+
+  <hr/>
+  <br/>
+
+  <div class="row d-flex flex-row justify-content-center">
+    <div class="col-sm-8 mb-3" *ngFor="let n of myNotifications">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{n.title}}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{n.time}}</h6>
+          <p class="card-text">{{n.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

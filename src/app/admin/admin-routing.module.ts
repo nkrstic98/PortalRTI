@@ -8,6 +8,8 @@ import {EditStudentComponent} from './student-management/edit-student/edit-stude
 import {WorkerManagementComponent} from './worker-management/worker-management.component';
 import {RegisterWorkerComponent} from '../account/register-worker/register-worker.component';
 import {EditWorkerComponent} from './worker-management/edit-worker/edit-worker.component';
+import {NotificationsComponent} from '../notifications/notifications.component';
+import {CreateNotificationComponent} from '../notifications/create-notification/create-notification.component';
 
 const routes: Routes = [
   {
@@ -109,6 +111,21 @@ const routes: Routes = [
             },
             {
               label: 'Ažuriranje zaposlenog "{{username}}"',
+              url: ''
+            }
+          ]
+        }
+      },
+      {
+        path: 'notifications', component: CreateNotificationComponent, data: {
+          title: 'Notifications',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Obaveštenja',
               url: ''
             }
           ]

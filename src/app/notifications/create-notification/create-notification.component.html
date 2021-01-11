@@ -1,1 +1,57 @@
-<p>create-notification works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-center mx-auto mt-1">
+
+      <div class="card rounded shadow shadow-lg">
+        <h5 class="card-header">Kreirajte obaveštenje</h5>
+
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="name">Naslov</label>
+              <input type="text" id="name" class="form-control" name="title" [(ngModel)]="title" [ngClass]="{ 'is-invalid': submitted && title == '' }" />
+              <div *ngIf="submitted && title == ''" class="invalid-feedback">
+                <div *ngIf="title == ''">Naslov obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="cat">Kategorija</label>
+              <select id="cat" class="custom-select" [(ngModel)]="category" [ngClass]="{ 'is-invalid': submitted && category == '' }">
+                <option value="" selected disabled>Izaberite kategoriju obaveštenja...</option>
+                <option value="Pozivi za studentska takmičenja">Pozivi za studentska takmičenja</option>
+                <option value="Obaveštenja o konferencijama">Obaveštenja o konferencijama</option>
+                <option value="Ponude za praksu">Ponude za praksu</option>
+                <option value="Ponude za posao">Ponude za posao</option>
+              </select>
+
+              <div *ngIf="submitted && title == ''" class="invalid-feedback">
+                <div *ngIf="title == ''">Kategorija obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="txt">Tekst</label>
+              <textarea id="txt" [(ngModel)]="text" name="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && text == '' }" rows="6">
+          </textarea>
+              <div *ngIf="submitted && text == ''" class="invalid-feedback">
+                <div *ngIf="text == ''">Tekst obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row d-flex flex-row justify-content-center">
+            <button class="btn btn-primary" (click)="create()">Kreiraj</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

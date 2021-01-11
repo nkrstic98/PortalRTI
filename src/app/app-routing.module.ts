@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ContactComponent} from './contact/contact.component';
+import {NotificationsComponent} from './notifications/notifications.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -16,10 +17,24 @@ const routes: Routes = [
       breadcrumb: [
         {
           label: 'Početna',
-          url: '/',
+          url: '/'
         },
         {
           label: 'Kontakt',
+          url: ''
+        }
+      ]
+    }
+  },
+  { path: 'notifications', component: NotificationsComponent, data: {
+    title: 'Notifications',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Obaveštenja',
           url: ''
         }
       ]
