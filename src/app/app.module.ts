@@ -14,6 +14,8 @@ import { ContactComponent } from './contact/contact.component';
 import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { CreateNotificationComponent } from './notifications/create-notification/create-notification.component';
+import { WorkersComponent } from './workers/workers.component';
+import { WorkersDetailsComponent } from './workers/workers-details/workers-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { CreateNotificationComponent } from './notifications/create-notification
     HeaderTeacherComponent,
     ContactComponent,
     NotificationsComponent,
-    CreateNotificationComponent
+    CreateNotificationComponent,
+    WorkersComponent,
+    WorkersDetailsComponent
   ],
   imports: [
     BrowserModule,
