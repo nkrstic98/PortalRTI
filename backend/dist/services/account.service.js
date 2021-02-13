@@ -8,6 +8,31 @@ const user_1 = __importDefault(require("../model/user"));
 const worker_1 = __importDefault(require("../model/worker"));
 const student_1 = __importDefault(require("../model/student"));
 const router = express_1.default.Router();
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    }
+    else {
+        cb(null, false);
+    }
+};
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 router.route('/login').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -84,7 +109,8 @@ router.route('/registerStudent').post((req, res, next) => {
         }
     });
 });
-router.route('/registerWorker').post((req, res, next) => {
+router.post('/registerWorker', upload.single('workerImage'), (req, res, next) => {
+    console.log(req.file);
     worker_1.default.findOne({ 'username': req.body.username }, (err, worker) => {
         if (err) {
             res.json(err);
