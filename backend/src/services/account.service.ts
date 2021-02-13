@@ -137,6 +137,7 @@ router.route('/registerStudent').post((req, res, next) => {
 })
 
 router.post('/registerWorker', upload.single('workerImage'), (req, res, next) => {
+  console.log(req.body);
   console.log(req.file);
 
   Worker.findOne(
@@ -168,5 +169,6 @@ router.post('/registerWorker', upload.single('workerImage'), (req, res, next) =>
     }
   );
 })
+
 
 module.exports = router;

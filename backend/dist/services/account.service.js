@@ -110,6 +110,7 @@ router.route('/registerStudent').post((req, res, next) => {
     });
 });
 router.post('/registerWorker', upload.single('workerImage'), (req, res, next) => {
+    console.log(req.body);
     console.log(req.file);
     worker_1.default.findOne({ 'username': req.body.username }, (err, worker) => {
         if (err) {

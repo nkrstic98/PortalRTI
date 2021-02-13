@@ -59,7 +59,23 @@ export class AccountService {
     return this.http.post(`${this.uri}/registerStudent`, student);
   }
 
-  registerWorker(worker) {
-    return this.http.post(`${this.uri}/registerWorker`, worker);
+  registerWorker(worker, workerImage: File) {
+    console.log(workerImage);
+    let fd = new FormData();
+    fd.append('workerImage', workerImage);
+    fd.append("firstname", worker.firstname);
+    fd.append("lastname", worker.lastname);
+    fd.append("username", worker.username);
+    fd.append("email", worker.email);
+    fd.append("title", worker.title);
+    fd.append("status", worker.status);
+    fd.append("office", worker.office);
+    fd.append("address", worker.address);
+    fd.append("phone", worker.phone);
+    fd.append("website", worker.website);
+    fd.append("password", worker.password);
+    fd.append("biography", worker.biography);
+
+    return this.http.post(`${this.uri}/registerWorker`, fd);
   }
 }

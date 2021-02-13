@@ -25,7 +25,7 @@ export class RegisterWorkerComponent implements OnInit {
   status = '';
   email = '';
 
-  selectedFile = null;
+  workerImage: File = null;
 
   submitted: boolean;
   teacher: boolean;
@@ -66,7 +66,7 @@ export class RegisterWorkerComponent implements OnInit {
       status: this.status
     }
 
-    this.accountService.registerWorker(worker)
+    this.accountService.registerWorker(worker, this.workerImage)
       .pipe(first())
       .subscribe({
         next: worker => {
@@ -110,7 +110,6 @@ export class RegisterWorkerComponent implements OnInit {
 
   onFileSelected(event) {
     console.log(event);
-    this.selectedFile = event.target.files[0];
+    this.workerImage = <File>event.target.files[0];
   }
-
 }
