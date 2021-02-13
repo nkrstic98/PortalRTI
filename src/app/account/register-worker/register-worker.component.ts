@@ -47,6 +47,12 @@ export class RegisterWorkerComponent implements OnInit {
       return;
     }
 
+    if(this.username == "" || this.lastname == "" || this.username == "" || this.title == "" || this.status == "" || this.address == "" ||
+      this.password == "" || this.passwordC == "") {
+
+      return;
+    }
+
     let worker = {
       username: this.username,
       password: this.password,
