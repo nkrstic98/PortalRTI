@@ -19,12 +19,12 @@ router.route('/filter/:data').get((req, res, next) => {
     if(data.type != null) {
       criteria = {
         title: data.type,
-        status: 'Aktivan'
+        status: 'aktivan'
       }
     }
     else {
       criteria = {
-        status: 'Aktivan'
+        status: 'aktivan'
       }
     }
   }
