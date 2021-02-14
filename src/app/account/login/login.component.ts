@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                 break;
 
               case UserType.Worker:
-                this.router.navigate(['/']);
+                this.router.navigate(['teacher/home']);
                 break;
 
               case UserType.Student:

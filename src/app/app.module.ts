@@ -16,6 +16,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { CreateNotificationComponent } from './notifications/create-notification/create-notification.component';
 import { WorkersComponent } from './workers/workers.component';
 import { WorkersDetailsComponent } from './workers/workers-details/workers-details.component';
+import { TeacherComponent } from './teacher/teacher.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { WorkersDetailsComponent } from './workers/workers-details/workers-detai
     NotificationsComponent,
     CreateNotificationComponent,
     WorkersComponent,
-    WorkersDetailsComponent
+    WorkersDetailsComponent,
+    TeacherComponent
   ],
   imports: [
     BrowserModule,
