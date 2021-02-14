@@ -23,7 +23,7 @@ export class WorkerService {
       active: active
     }
 
-    return this.http.get<Student[]>(`${this.uri}/filter/${JSON.stringify(data)}`);
+    return this.http.get<Worker[]>(`${this.uri}/filter/${JSON.stringify(data)}`);
   }
 
   delete(worker) {
