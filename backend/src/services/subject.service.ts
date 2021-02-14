@@ -1,5 +1,7 @@
 import express from 'express';
 import Subject from '../model/subject';
+import Worker from '../model/worker';
+import User from '../model/user';
 
 const router = express.Router();
 
@@ -29,6 +31,12 @@ router.route('/addSubject').post((req, res, next) => {
     }
 
   )
+})
+
+router.route('/delete').post((req, res, next) => {
+  Subject.deleteOne({sifra:req.body.sifra})
+    .then(() => res.json({}))
+    .catch((err => next(err)));
 })
 
 module.exports = router;

@@ -26,5 +26,10 @@ router.route('/addSubject').post((req, res, next) => {
         }
     });
 });
+router.route('/delete').post((req, res, next) => {
+    subject_1.default.deleteOne({ sifra: req.body.sifra })
+        .then(() => res.json({}))
+        .catch((err => next(err)));
+});
 module.exports = router;
 //# sourceMappingURL=subject.service.js.map

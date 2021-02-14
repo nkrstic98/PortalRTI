@@ -48,4 +48,17 @@ export class SubjectManagementComponent implements OnInit {
     this.module = "";
     this.semester = null;
   }
+
+  delete(subject) {
+    this.subjectService.delete(subject)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this.subjects = this.subjects
+            .filter(x => x.sifra != subject)
+            .sort((a, b) => a.sifra.localeCompare(b.sifra))
+          this.filteredSubjects = this.subjects
+        }
+      );
+  }
 }

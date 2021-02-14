@@ -43,6 +43,7 @@ export class AddSubjectComponent implements OnInit {
   rti: Boolean;
   oo: Boolean;
   m: Boolean;
+  not_one_selected: Boolean;
 
   constructor(
     private router: Router,
@@ -55,6 +56,7 @@ export class AddSubjectComponent implements OnInit {
     this.oo = false;
     this.m = false;
     this.modul = [];
+    this.not_one_selected = false;
   }
 
   ngOnInit(): void {
@@ -64,6 +66,13 @@ export class AddSubjectComponent implements OnInit {
     this.submitted = true;
 
     this.alertService.clear();
+
+    if(!this.si && !this.rti && !this.oo && !this.m) {
+      console.log("Not one selected");
+      this.not_one_selected = true;
+      console.log(this.not_one_selected)
+      return;
+    }
 
     if(this.si && (this.tip_si =="" || this.semestar_si == "")) {
       return;

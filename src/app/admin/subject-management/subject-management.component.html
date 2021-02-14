@@ -51,7 +51,7 @@
           <td class="text-uppercase align-middle"><span *ngFor="let ods of s.odseci">{{ods.modul}} </span></td>
 
           <td>
-            <button class="btn btn-outline-danger float-right">Obriši</button>
+            <button class="btn btn-outline-danger float-right" (click)="delete(s.sifra)">Obriši</button>
             <button routerLink="editSubject" class="btn btn-outline-warning float-right mr-2">Izmeni</button>
           </td>
         </tr>

@@ -21,4 +21,8 @@ export class SubjectService {
   addSubject(subject) {
     return this.http.post(`${this.uri}/addSubject`, subject);
   }
+
+  delete(subject) {
+    return this.http.post(`${this.uri}/delete`, {sifra: subject});
+  }
 }

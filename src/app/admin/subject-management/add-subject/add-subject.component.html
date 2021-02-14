@@ -42,6 +42,7 @@
           <hr/>
 
           <h4>Izaberite module na kojima se odrzavaju predmeti</h4>
+          <div *ngIf="not_one_selected" class="text-danger">Morate izabrati barem jedan odsek na kome se predmet održava</div>
           <br/>
 
           <div class="row d-flex justify-content-center align-items-center flex-wrap">
