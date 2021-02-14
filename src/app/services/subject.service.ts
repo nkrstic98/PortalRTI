@@ -22,7 +22,15 @@ export class SubjectService {
     return this.http.post(`${this.uri}/addSubject`, subject);
   }
 
+  editSubject(subject) {
+    return this.http.post(`${this.uri}/edit`, subject);
+  }
+
   delete(subject) {
     return this.http.post(`${this.uri}/delete`, {sifra: subject});
+  }
+
+  getSubject(subject) {
+    return this.http.get(`${this.uri}/${subject}`);
   }
 }

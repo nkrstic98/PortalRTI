@@ -11,6 +11,12 @@ router.route('/').get((req, res, next) => {
     .catch(err => next(err));
 })
 
+router.route('/:sifra').get((req, res, next) => {
+  Subject.findOne({sifra: req.params.sifra})
+    .then(subject => res.json(subject))
+    .catch(err => next(err))
+})
+
 router.route('/addSubject').post((req, res, next) => {
   Subject.findOne(
     {'sifra': req.body.sifra},
@@ -37,6 +43,12 @@ router.route('/delete').post((req, res, next) => {
   Subject.deleteOne({sifra:req.body.sifra})
     .then(() => res.json({}))
     .catch((err => next(err)));
+})
+
+router.route('/edit').post((req, res, next) => {
+  Subject.findOneAndUpdate({sifra:req.body.sifra}, req.body)
+    .then(() => res.json({}))
+    .catch(err => next(err));
 })
 
 module.exports = router;
