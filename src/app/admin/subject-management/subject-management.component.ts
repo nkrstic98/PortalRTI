@@ -36,11 +36,11 @@ export class SubjectManagementComponent implements OnInit {
   }
 
   getByModule(event) {
-    this.filteredSubjects = this.subjects.filter(value => value.odseci.find(element => element == event.target.value));
+    this.filteredSubjects = this.subjects.filter(value => value.odseci.find(element => element.modul == event.target.value));
   }
 
   getBySemester(event) {
-    this.filteredSubjects = this.subjects.filter(value => value.semestar == event.target.value);
+    this.filteredSubjects = this.subjects.filter(value => value.odseci.find(el => el.semestar == event.target.value));
   }
 
   reset() {

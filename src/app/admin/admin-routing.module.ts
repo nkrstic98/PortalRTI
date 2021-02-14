@@ -10,6 +10,7 @@ import {RegisterWorkerComponent} from '../account/register-worker/register-worke
 import {EditWorkerComponent} from './worker-management/edit-worker/edit-worker.component';
 import {CreateNotificationComponent} from '../notifications/create-notification/create-notification.component';
 import {SubjectManagementComponent} from './subject-management/subject-management.component';
+import {AddSubjectComponent} from './subject-management/add-subject/add-subject.component';
 
 const routes: Routes = [
   {
@@ -126,6 +127,25 @@ const routes: Routes = [
             },
             {
               label: 'Predmeti',
+              url: ''
+            }
+          ]
+        }
+      },
+      {
+        path: 'subjects/addSubject', component:AddSubjectComponent, data: {
+          title: 'Subjects',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Predmeti',
+              url: 'admin/subjects'
+            },
+            {
+              label: 'Dodavanje predmeta',
               url: ''
             }
           ]

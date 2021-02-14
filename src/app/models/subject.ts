@@ -4,7 +4,7 @@ export class Subject {
   tip: String;
   espb: Number;
   semestar: Number;
-  odseci: String[];
+  odseci: Odsek[];
   predavanja: Number;
   vezbe: Number;
   don: Number;
@@ -14,6 +14,12 @@ export class Subject {
   info_polaganje: String;
   propozicije: String;
   obavestenja: Information[];
+}
+
+export class Odsek {
+  modul: String;
+  tip: String;
+  semestar: Number;
 }
 
 export class Information {

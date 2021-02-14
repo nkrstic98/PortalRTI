@@ -11,5 +11,20 @@ router.route('/').get((req, res, next) => {
         .then(notif => res.json(notif))
         .catch(err => next(err));
 });
+router.route('/addSubject').post((req, res, next) => {
+    subject_1.default.findOne({ 'sifra': req.body.sifra }, (err, subject) => {
+        if (err) {
+            res.json(err);
+        }
+        if (subject) {
+            res.json(subject);
+        }
+        else {
+            let newSubject = new subject_1.default(req.body);
+            newSubject.save();
+            res.json(null);
+        }
+    });
+});
 module.exports = router;
 //# sourceMappingURL=subject.service.js.map

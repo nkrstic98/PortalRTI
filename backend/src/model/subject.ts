@@ -12,15 +12,7 @@ let Subject = new Schema({
     type: String,
     required: true
   },
-  tip: {
-    type: String,
-    required: true
-  },
   espb: {
-    type: Number,
-    required: true
-  },
-  semestar: {
     type: Number,
     required: true
   },

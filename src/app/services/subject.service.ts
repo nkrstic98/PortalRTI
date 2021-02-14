@@ -17,4 +17,8 @@ export class SubjectService {
   getAll() {
     return this.http.get<Subject[]>(`${this.uri}`);
   }
+
+  addSubject(subject) {
+    return this.http.post(`${this.uri}/addSubject`, subject);
+  }
 }

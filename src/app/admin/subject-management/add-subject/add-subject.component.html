@@ -1,0 +1,336 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-10 d-flex flex-column justify-content-center mx-auto mt-5">
+
+      <div class="card rounded shadow shadow-lg">
+
+        <div class="card-body">
+
+          <div class="form-group row">
+            <div class="form-group col">
+              <label for="sifra">Šifra predmeta</label>
+              <input id="sifra" name="sifra" type="text" class="form-control"
+                     [(ngModel)]="sifra"
+                     [ngClass]="{ 'is-invalid': submitted && sifra == '' }"
+              />
+              <div *ngIf="submitted && sifra == ''" class="invalid-feedback">
+                <div *ngIf="sifra == ''">Šifra predmeta je obavezno polje</div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label for="naziv">Naziv predmeta</label>
+              <input id="naziv" name="naziv" type="text" class="form-control"
+                     [(ngModel)]="naziv"
+                     [ngClass]="{ 'is-invalid': submitted && naziv == '' }"
+              />
+              <div *ngIf="submitted && naziv == ''" class="invalid-feedback">
+                <div *ngIf="naziv == ''">Naziv predmeta je obavezno polje</div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label for="espb">Broj ESPB bodova</label>
+              <input id="espb" name="espb" type="number" class="form-control"
+                     [(ngModel)]="espb"
+                     [ngClass]="{ 'is-invalid': submitted && espb == '' }"
+              >
+              <div *ngIf="submitted && espb == ''" class="invalid-feedback">
+                <div *ngIf="espb == ''">Broj ESPB bodova je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+
+          <h4>Izaberite module na kojima se odrzavaju predmeti</h4>
+          <br/>
+
+          <div class="row d-flex justify-content-center align-items-center flex-wrap">
+
+            <div class="col">
+              <div class="custom-checkbox ml-3">
+                <input class="form-check-input" type="checkbox" (change)="checked('si')">
+                <span style="font-size: large">Softversko inženjerstvo</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="tip_si">Tip predmeta</label>
+                <select id="tip_si" name="tip_si" class="custom-select"
+                        [(ngModel)]="tip_si"
+                        [ngClass]="{ 'is-invalid': submitted && tip_si == '' && si }"
+                        [disabled]="!si"
+                >
+                  <option value="">Izaberite tip predmeta</option>
+                  <option value="obavezni">obavezni</option>
+                  <option value="izborni">izborni</option>
+                </select>
+                <div *ngIf="submitted && tip_si == '' && si" class="invalid-feedback">
+                  <div *ngIf="tip_si == ''">Tip predmeta je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="semestar_si">Semestar</label>
+                <select id="semestar_si" name="semestar_si" class="custom-select"
+                        [(ngModel)]="semestar_si"
+                        [ngClass]="{ 'is-invalid': submitted && semestar_si == '' && si }"
+                        [disabled]="!si"
+                >
+                  <option value="">Izaberite semestar u kom se predmet drži</option>
+                  <option value="1">I Semestar</option>
+                  <option value="2">II Semestar</option>
+                  <option value="3">III Semestar</option>
+                  <option value="4">IV Semestar</option>
+                  <option value="5">V Semestar</option>
+                  <option value="6">VI Semestar</option>
+                  <option value="7">VII Semestar</option>
+                  <option value="8">VIII Semestar</option>
+                </select>
+                <div *ngIf="submitted && semestar_si == '' && si" class="invalid-feedback">
+                  <div *ngIf="semestar_si == ''">Semestar održavanja je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-flex justify-content-center align-items-center flex-wrap">
+            <div class="col">
+              <div class="custom-checkbox ml-3">
+                <input class="form-check-input" type="checkbox" (change)="checked('rti')">
+                <span style="font-size: large">Računarska tehnika i informatika</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="tip_rti">Tip predmeta</label>
+                <select id="tip_rti" name="tip_rti" class="custom-select"
+                        [(ngModel)]="tip_rti"
+                        [ngClass]="{ 'is-invalid': submitted && tip_rti == '' && rti }"
+                        [disabled]="!rti"
+                >
+                  <option value="">Izaberite tip predmeta</option>
+                  <option value="obavezni">obavezni</option>
+                  <option value="izborni">izborni</option>
+                </select>
+                <div *ngIf="submitted && tip_rti == '' && rti" class="invalid-feedback">
+                  <div *ngIf="tip_rti == ''">Tip predmeta je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="semestar_rti">Semestar</label>
+                <select id="semestar_rti" name="semestar" class="custom-select"
+                        [(ngModel)]="semestar_rti"
+                        [ngClass]="{ 'is-invalid': submitted && semestar_rti == '' && rti }"
+                        [disabled]="!rti"
+                >
+                  <option value="">Izaberite semestar u kom se predmet drži</option>
+                  <option value="1">I Semestar</option>
+                  <option value="2">II Semestar</option>
+                  <option value="3">III Semestar</option>
+                  <option value="4">IV Semestar</option>
+                  <option value="5">V Semestar</option>
+                  <option value="6">VI Semestar</option>
+                  <option value="7">VII Semestar</option>
+                  <option value="8">VIII Semestar</option>
+                </select>
+                <div *ngIf="submitted && semestar_rti == '' && rti" class="invalid-feedback">
+                  <div *ngIf="semestar_rti == ''">Semestar održavanja je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-flex justify-content-center align-items-center flex-wrap">
+            <div class="col">
+              <div class="custom-checkbox ml-3">
+                <input class="form-check-input" type="checkbox" (change)="checked('oo')">
+                <span style="font-size: large">Ostali odseci</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="tip_oo">Tip predmeta</label>
+                <select id="tip_oo" name="tip_oo" class="custom-select"
+                        [(ngModel)]="tip_oo"
+                        [ngClass]="{ 'is-invalid': submitted && tip_oo == '' && oo }"
+                        [disabled]="!oo"
+                >
+                  <option value="">Izaberite tip predmeta</option>
+                  <option value="obavezni">obavezni</option>
+                  <option value="izborni">izborni</option>
+                </select>
+                <div *ngIf="submitted && tip_oo == '' && oo" class="invalid-feedback">
+                  <div *ngIf="tip_oo == ''">Tip predmeta je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="semestar_oo">Semestar</label>
+                <select id="semestar_oo" name="semestar_oo" class="custom-select"
+                        [(ngModel)]="semestar_oo"
+                        [ngClass]="{ 'is-invalid': submitted && semestar_oo == '' && oo }"
+                        [disabled]="!oo"
+                >
+                  <option value="">Izaberite semestar u kom se predmet drži</option>
+                  <option value="1">I Semestar</option>
+                  <option value="2">II Semestar</option>
+                  <option value="3">III Semestar</option>
+                  <option value="4">IV Semestar</option>
+                  <option value="5">V Semestar</option>
+                  <option value="6">VI Semestar</option>
+                  <option value="7">VII Semestar</option>
+                  <option value="8">VIII Semestar</option>
+                </select>
+                <div *ngIf="submitted && semestar_oo == '' && oo" class="invalid-feedback">
+                  <div *ngIf="semestar_oo == ''">Semestar održavanja je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-flex justify-content-center align-items-center flex-wrap">
+            <div class="col">
+              <div class="custom-checkbox ml-3">
+                <input class="form-check-input" type="checkbox" (change)="checked('m')">
+                <span style="font-size: large">Master studije</span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="tip_m">Tip predmeta</label>
+                <select id="tip_m" name="tip_m" class="custom-select"
+                        [(ngModel)]="tip_m"
+                        [ngClass]="{ 'is-invalid': submitted && tip_m == '' && m }"
+                        [disabled]="!m"
+                >
+                  <option value="">Izaberite tip predmeta</option>
+                  <option value="obavezni">obavezni</option>
+                  <option value="izborni">izborni</option>
+                </select>
+                <div *ngIf="submitted && tip_m == '' && m" class="invalid-feedback">
+                  <div *ngIf="tip_m == ''">Tip predmeta je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="semestar_m">Semestar</label>
+                <select id="semestar_m" name="semestar_m" class="custom-select"
+                        [(ngModel)]="semestar_m"
+                        [ngClass]="{ 'is-invalid': submitted && semestar_m == '' && m }"
+                        [disabled]="!m"
+                >
+                  <option value="">Izaberite semestar u kom se predmet drži</option>
+                  <option value="1">I Semestar</option>
+                  <option value="2">II Semestar</option>
+                  <option value="3">III Semestar</option>
+                  <option value="4">IV Semestar</option>
+                  <option value="5">V Semestar</option>
+                  <option value="6">VI Semestar</option>
+                  <option value="7">VII Semestar</option>
+                  <option value="8">VIII Semestar</option>
+                </select>
+                <div *ngIf="submitted && semestar_m == '' && m" class="invalid-feedback">
+                  <div *ngIf="semestar_m == ''">Semestar održavanja je obavezno polje</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+
+          <div class="form-group row">
+            <div class="form-group col">
+              <label for="predavanja">Fond časova predavanja</label>
+              <input id="predavanja" name="predavanja" type="number" class="form-control"
+                     [(ngModel)]="predavanja"
+                     [ngClass]="{ 'is-invalid': submitted && predavanja == '' }"
+              >
+              <div *ngIf="submitted && predavanja == ''" class="invalid-feedback">
+                <div *ngIf="predavanja == ''">Fond časova predavanja je obavezno polje</div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label for="vezbe">Fond časova vežbi</label>
+              <input id="vezbe" name="vezbe" type="number" class="form-control"
+                     [(ngModel)]="vezbe"
+                     [ngClass]="{ 'is-invalid': submitted && vezbe == '' }"
+              >
+              <div *ngIf="submitted && vezbe == ''" class="invalid-feedback">
+                <div *ngIf="vezbe == ''">Fond časova vežbi je obavezno polje</div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label for="don">Fond časova DON</label>
+              <input id="don" name="don" type="number" class="form-control"
+                     [(ngModel)]="don"
+                     [ngClass]="{ 'is-invalid': submitted && don == '' }"
+              >
+              <div *ngIf="submitted && don == ''" class="invalid-feedback">
+                <div *ngIf="don == ''">Fond časova za DON je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <hr/>
+
+          <div class="form-group row">
+            <div class="form-group col">
+              <label for="cilj">Cilj</label>
+              <textarea id="cilj" name="cilj" cols="40" rows="4" class="form-control"
+                        [(ngModel)]="cilj"
+              ></textarea>
+            </div>
+            <div class="form-group col">
+              <label for="ishod">Ishod</label>
+              <textarea id="ishod" name="ishod" cols="40" rows="4" class="form-control"
+                        [(ngModel)]="ishod"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="form-group col">
+              <label for="info_lab">Informacije o labortorijskim vežbama</label>
+              <textarea id="info_lab" name="info=lab" cols="40" rows="4" class="form-control"
+                        [(ngModel)]="info_lab"
+              ></textarea>
+            </div>
+            <div class="form-group col">
+              <label for="info_polaganje">Način polaganja</label>
+              <textarea id="info_polaganje" name="info?polaganje" cols="40" rows="4" class="form-control"
+                        [(ngModel)]="info_polaganje"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="form-group col">
+              <label for="propozicije">Propozicije</label>
+              <textarea id="propozicije" name="propozicije" cols="40" rows="4" class="form-control"
+                        [(ngModel)]="propozicije"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row text-center">
+            <div class="form-group col">
+              <button class="btn btn-primary" (click)="addSubject()">Dodaj predmet</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
