@@ -1,1 +1,62 @@
-<p>subject-management works!</p>
+<div class="container-fluid">
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <button class="btn btn-outline-success" [routerLink]="['addWorker']">Dodaj predmet</button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <select id="module" class="custom-select" (change)="getByModule($event)" [(ngModel)]="module">
+        <option selected value="" disabled>Izaberite modul</option>
+        <option value="si">Softversko inženjerstvo</option>
+        <option value="rti">Računarska tehnika i informatika</option>
+        <option value="oo">Ostali odseci</option>
+        <option value="m">Master studije</option>
+      </select>
+    </div>
+    <div class="col-sm-3 d-flex flex-column justify-content-center">
+      <select id="semester" class="custom-select" (change)="getBySemester($event)" [(ngModel)]="semester">
+        <option selected value=null disabled>Izaberite semestar</option>
+        <option value="1">I Semestar</option>
+        <option value="2">II Semestar</option>
+        <option value="3">III Semestar</option>
+        <option value="4">IV Semestar</option>
+        <option value="5">V Semestar</option>
+        <option value="6">VI Semestar</option>
+        <option value="7">VII Semestar</option>
+        <option value="8">VIII Semestar</option>
+      </select>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-info float-right" (click)="reset()">Resetuj filtere</button>
+    </div>
+  </div>
+
+  <div class="row mt-3 d-flex justify-content-center align-items-center flex-wrap">
+    <div class="col-sm-12">
+      <table class="table table-striped text-center">
+        <thead>
+        <tr>
+          <th>Sifra predmeta</th>
+          <th>Naziv predmeta</th>
+          <th>Odseci</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let s of filteredSubjects">
+          <td class="align-middle">{{s.sifra}}</td>
+          <td class="align-middle">{{s.naziv}}</td>
+          <td class="text-uppercase align-middle"><span *ngFor="let ods of s.odseci">{{ods}} </span></td>
+
+          <td>
+            <button class="btn btn-outline-danger float-right">Obriši</button>
+            <button routerLink="editWorker" class="btn btn-outline-warning float-right mr-2">Izmeni</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

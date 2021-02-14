@@ -45,11 +45,11 @@
         </thead>
         <tbody>
         <tr *ngFor="let s of workers">
-          <td>{{s.lastname}}</td>
-          <td>{{s.firstname}}</td>
-          <td>{{s.email}}</td>
-          <td>{{s.title}}</td>
-          <td>{{s.status}}</td>
+          <td class="align-middle">{{s.lastname}}</td>
+          <td class="align-middle">{{s.firstname}}</td>
+          <td class="align-middle">{{s.email}}</td>
+          <td class="align-middle">{{s.title}}</td>
+          <td class="align-middle">{{s.status}}</td>
 
           <td>
             <button class="btn btn-outline-danger float-right" (click)="delete(s.username)">Obriši</button>

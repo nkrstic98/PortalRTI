@@ -19,5 +19,6 @@ app.use('/account', require('./services/account.service'));
 app.use('/students', require('./services/student.service'));
 app.use('/workers', require('./services/worker.service'));
 app.use('/notifications', require('./services/notification.service'));
+app.use('/subjects', require('./services/subject.service'));
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

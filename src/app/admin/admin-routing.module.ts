@@ -9,6 +9,7 @@ import {WorkerManagementComponent} from './worker-management/worker-management.c
 import {RegisterWorkerComponent} from '../account/register-worker/register-worker.component';
 import {EditWorkerComponent} from './worker-management/edit-worker/edit-worker.component';
 import {CreateNotificationComponent} from '../notifications/create-notification/create-notification.component';
+import {SubjectManagementComponent} from './subject-management/subject-management.component';
 
 const routes: Routes = [
   {
@@ -110,6 +111,21 @@ const routes: Routes = [
             },
             {
               label: 'Ažuriranje zaposlenog "{{username}}"',
+              url: ''
+            }
+          ]
+        }
+      },
+      {
+        path: 'subjects', component:SubjectManagementComponent, data: {
+          title: 'Subjects',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Predmeti',
               url: ''
             }
           ]
