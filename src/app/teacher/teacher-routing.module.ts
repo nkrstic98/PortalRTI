@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {TeacherComponent} from './teacher.component';
+import {ProfileTeacherComponent} from './profile-teacher/profile-teacher.component';
 
 const routes: Routes = [
   {
     path: '', component: TeacherComponent,
-    children: []
+    children: [
+      { path: 'profile', component: ProfileTeacherComponent }
+    ]
   }
 ];
 
