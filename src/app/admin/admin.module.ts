@@ -12,6 +12,7 @@ import { WorkerManagementComponent } from './worker-management/worker-management
 import { EditWorkerComponent } from './worker-management/edit-worker/edit-worker.component';
 import { SubjectManagementComponent } from './subject-management/subject-management.component';
 import { AddSubjectComponent } from './subject-management/add-subject/add-subject.component';
+import { EditSubjectComponent } from './subject-management/edit-subject/edit-subject.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AddSubjectComponent } from './subject-management/add-subject/add-subjec
     WorkerManagementComponent,
     EditWorkerComponent,
     SubjectManagementComponent,
-    AddSubjectComponent
+    AddSubjectComponent,
+    EditSubjectComponent
   ],
   imports: [
     CommonModule,
