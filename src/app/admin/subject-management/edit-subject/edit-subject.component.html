@@ -33,11 +33,11 @@
               <label for="espb">Broj ESPB bodova</label>
               <input id="espb" name="espb" type="number" class="form-control"
                      [(ngModel)]="subject.espb"
-                     [ngClass]="{ 'is-invalid': submitted && subject.espb == '' }"
+                     [ngClass]="{ 'is-invalid': submitted && subject.espb == null }"
                      disabled
               >
-              <div *ngIf="submitted && subject.espb == ''" class="invalid-feedback">
-                <div *ngIf="subject.espb == ''">Broj ESPB bodova je obavezno polje</div>
+              <div *ngIf="submitted && subject.espb == null" class="invalid-feedback">
+                <div *ngIf="subject.espb == null">Broj ESPB bodova je obavezno polje</div>
               </div>
             </div>
           </div>
@@ -49,30 +49,30 @@
               <label for="predavanja">Fond časova predavanja</label>
               <input id="predavanja" name="predavanja" type="number" class="form-control"
                      [(ngModel)]="subject.predavanja"
-                     [ngClass]="{ 'is-invalid': submitted && subject.predavanja == '' }"
+                     [ngClass]="{ 'is-invalid': submitted && subject.predavanja == null }"
               >
-              <div *ngIf="submitted && subject.predavanja == ''" class="invalid-feedback">
-                <div *ngIf="subject.predavanja == ''">Fond časova predavanja je obavezno polje</div>
+              <div *ngIf="submitted && subject.predavanja == null" class="invalid-feedback">
+                <div *ngIf="subject.predavanja == null">Fond časova predavanja je obavezno polje</div>
               </div>
             </div>
             <div class="form-group col">
               <label for="vezbe">Fond časova vežbi</label>
               <input id="vezbe" name="vezbe" type="number" class="form-control"
                      [(ngModel)]="subject.vezbe"
-                     [ngClass]="{ 'is-invalid': submitted && subject.vezbe == '' }"
+                     [ngClass]="{ 'is-invalid': submitted && subject.vezbe == null }"
               >
-              <div *ngIf="submitted && subject.vezbe == ''" class="invalid-feedback">
-                <div *ngIf="subject.vezbe == ''">Fond časova vežbi je obavezno polje</div>
+              <div *ngIf="submitted && subject.vezbe == null" class="invalid-feedback">
+                <div *ngIf="subject.vezbe == null">Fond časova vežbi je obavezno polje</div>
               </div>
             </div>
             <div class="form-group col">
               <label for="don">Fond časova DON</label>
               <input id="don" name="don" type="number" class="form-control"
                      [(ngModel)]="subject.don"
-                     [ngClass]="{ 'is-invalid': submitted && subject.don == '' }"
+                     [ngClass]="{ 'is-invalid': submitted && subject.don == null }"
               >
-              <div *ngIf="submitted && subject.don == ''" class="invalid-feedback">
-                <div *ngIf="subject.don == ''">Fond časova za DON je obavezno polje</div>
+              <div *ngIf="submitted && subject.don == null" class="invalid-feedback">
+                <div *ngIf="subject.don == null">Fond časova za DON je obavezno polje</div>
               </div>
             </div>
           </div>
