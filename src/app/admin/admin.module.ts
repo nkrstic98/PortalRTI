@@ -10,6 +10,7 @@ import { EditStudentComponent } from './student-management/edit-student/edit-stu
 import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { WorkerManagementComponent } from './worker-management/worker-management.component';
 import { EditWorkerComponent } from './worker-management/edit-worker/edit-worker.component';
+import { SubjectManagementComponent } from './subject-management/subject-management.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EditWorkerComponent } from './worker-management/edit-worker/edit-worker
     StudentManagementComponent,
     EditStudentComponent,
     WorkerManagementComponent,
-    EditWorkerComponent
+    EditWorkerComponent,
+    SubjectManagementComponent
   ],
   imports: [
     CommonModule,
