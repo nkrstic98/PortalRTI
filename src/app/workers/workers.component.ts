@@ -25,7 +25,7 @@ export class WorkersComponent implements OnInit {
       .pipe(first())
       .subscribe(workers => {
         this.workers = workers;
+        this.workers.sort((a, b) => a.firstname.localeCompare(b.firstname));
       })
   }
-
 }

@@ -14,6 +14,7 @@ export class NotificationsComponent implements OnInit {
   category = '';
 
   myNotifications: Notification[];
+  filteredNotifications: Notification[];
 
   constructor(
     private router: Router,
@@ -33,16 +34,18 @@ export class NotificationsComponent implements OnInit {
           let myDate = new Date(value.creationTime);
           value.time = myDate.toDateString() + ", " + myDate.getHours() + ":" + myDate.getMinutes();
         })
+
+        this.filteredNotifications = this.myNotifications;
       });
   }
 
   filter() {
-    this.myNotifications = this.myNotifications.filter(n => n.category == this.category);
+    this.filteredNotifications = this.myNotifications.filter(n => n.category == this.category);
   }
 
   reset() {
     this.category = '';
-    this.ngOnInit();
+    this.filteredNotifications = this.myNotifications;
   }
 
 }
