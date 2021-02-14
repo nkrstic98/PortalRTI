@@ -1,1 +1,21 @@
-<p>workers works!</p>
+<div class="container-fluid">
+  <div class="row d-flex flex-row justify-content-center">
+    <div class="col-sm-6 mb-3">
+      <div class="card border-primary mb-4" *ngFor="let worker of workers">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-2 bg-danger mr-3">
+              <p>{{worker.username}}</p>
+            </div>
+            <div class="col-sm-6">
+              <a routerLink="workerDetails/{{worker.firstname + ' ' + worker.lastname}}" style="text-decoration: none"><h2 class="card-title">{{worker.firstname}} {{worker.lastname}}</h2></a>
+              <h6 class="card-subtitle mb-3 text-uppercase">{{worker.title}}</h6>
+              <span class="card-text"><i class="fa fa-briefcase"></i> Kancelarija: {{worker.office}}</span> <br/>
+              <span class="card-text"><i class="fa fa-envelope"></i> E-mail: {{worker.email}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
