@@ -136,7 +136,7 @@ export class AddSubjectComponent implements OnInit {
 
     if(this.sifra == "" || this.naziv == "" || this.espb == "" || this.modul.length == 0 || this.predavanja == "" ||
       this.vezbe == "" || this.don == "") {
-      console.log("Usao sam u poslednji if, shit");
+      this.modul = [];
       return;
     }
 

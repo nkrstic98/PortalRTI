@@ -1,129 +1,140 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 col-sm-10 d-flex flex-column justify-content-center mx-auto mt-5">
+  <div class="row d-flex justify-content-center align-items-center text-center flex-wrap">
+    <div class="col-lg-8 col-md-8 col-sm-8 mt-5">
 
-      <div class="card rounded shadow shadow-lg">
-
-        <div class="card-body">
-
-          <div class="form-group row">
-            <div class="form-group col">
-              <label for="sifra">Šifra predmeta</label>
-              <input id="sifra" name="sifra" type="text" class="form-control"
-                     [(ngModel)]="subject.sifra"
-                     [ngClass]="{ 'is-invalid': submitted && subject.sifra == '' }"
-                     disabled
-              />
-              <div *ngIf="submitted && subject.sifra == ''" class="invalid-feedback">
-                <div *ngIf="subject.sifra == ''">Šifra predmeta je obavezno polje</div>
-              </div>
-            </div>
-            <div class="form-group col">
-              <label for="naziv">Naziv predmeta</label>
-              <input id="naziv" name="naziv" type="text" class="form-control"
-                     [(ngModel)]="subject.naziv"
-                     [ngClass]="{ 'is-invalid': submitted && subject.naziv == '' }"
-                     disabled
-              />
-              <div *ngIf="submitted && subject.naziv == ''" class="invalid-feedback">
-                <div *ngIf="subject.naziv == ''">Naziv predmeta je obavezno polje</div>
-              </div>
-            </div>
-            <div class="form-group col">
-              <label for="espb">Broj ESPB bodova</label>
-              <input id="espb" name="espb" type="number" class="form-control"
-                     [(ngModel)]="subject.espb"
-                     [ngClass]="{ 'is-invalid': submitted && subject.espb == null }"
-                     disabled
-              >
-              <div *ngIf="submitted && subject.espb == null" class="invalid-feedback">
-                <div *ngIf="subject.espb == null">Broj ESPB bodova je obavezno polje</div>
-              </div>
-            </div>
+      <div class="form-group row">
+        <label for="sifra" class="col-4 col-form-label">Šifra predmeta</label>
+        <div class="col-6">
+          <input id="sifra" name="sifra" type="text" class="form-control"
+                 [(ngModel)]="subject.sifra"
+                 [ngClass]="{ 'is-invalid': submitted && subject.sifra == '' }"
+                 disabled
+          />
+          <div *ngIf="submitted && subject.sifra == ''" class="invalid-feedback">
+            <div *ngIf="subject.sifra == ''">Šifra predmeta je obavezno polje</div>
           </div>
+        </div>
+      </div>
 
-          <hr/>
-
-          <div class="form-group row">
-            <div class="form-group col">
-              <label for="predavanja">Fond časova predavanja</label>
-              <input id="predavanja" name="predavanja" type="number" class="form-control"
-                     [(ngModel)]="subject.predavanja"
-                     [ngClass]="{ 'is-invalid': submitted && subject.predavanja == null }"
-              >
-              <div *ngIf="submitted && subject.predavanja == null" class="invalid-feedback">
-                <div *ngIf="subject.predavanja == null">Fond časova predavanja je obavezno polje</div>
-              </div>
-            </div>
-            <div class="form-group col">
-              <label for="vezbe">Fond časova vežbi</label>
-              <input id="vezbe" name="vezbe" type="number" class="form-control"
-                     [(ngModel)]="subject.vezbe"
-                     [ngClass]="{ 'is-invalid': submitted && subject.vezbe == null }"
-              >
-              <div *ngIf="submitted && subject.vezbe == null" class="invalid-feedback">
-                <div *ngIf="subject.vezbe == null">Fond časova vežbi je obavezno polje</div>
-              </div>
-            </div>
-            <div class="form-group col">
-              <label for="don">Fond časova DON</label>
-              <input id="don" name="don" type="number" class="form-control"
-                     [(ngModel)]="subject.don"
-                     [ngClass]="{ 'is-invalid': submitted && subject.don == null }"
-              >
-              <div *ngIf="submitted && subject.don == null" class="invalid-feedback">
-                <div *ngIf="subject.don == null">Fond časova za DON je obavezno polje</div>
-              </div>
-            </div>
+      <div class="form-group row">
+        <label for="naziv" class="col-4 col-form-label">Naziv predmeta</label>
+        <div class="col-6">
+          <input id="naziv" name="naziv" type="text" class="form-control"
+                 [(ngModel)]="subject.naziv"
+                 [ngClass]="{ 'is-invalid': submitted && subject.naziv == '' }"
+                 disabled
+          />
+          <div *ngIf="submitted && subject.naziv == ''" class="invalid-feedback">
+            <div *ngIf="subject.naziv == ''">Naziv predmeta je obavezno polje</div>
           </div>
+        </div>
+      </div>
 
-          <hr/>
-
-          <div class="form-group row">
-            <div class="form-group col">
-              <label for="cilj">Cilj</label>
-              <textarea id="cilj" name="cilj" cols="40" rows="4" class="form-control"
-                        [(ngModel)]="subject.cilj"
-              ></textarea>
-            </div>
-            <div class="form-group col">
-              <label for="ishod">Ishod</label>
-              <textarea id="ishod" name="ishod" cols="40" rows="4" class="form-control"
-                        [(ngModel)]="subject.ishod"
-              ></textarea>
-            </div>
+      <div class="form-group row">
+        <label for="espb" class="col-4 col-form-label">Broj ESPB bodova</label>
+        <div class="col-6">
+          <input id="espb" name="espb" type="number" class="form-control"
+                 [(ngModel)]="subject.espb"
+                 [ngClass]="{ 'is-invalid': submitted && subject.espb == null }"
+                 disabled
+          >
+          <div *ngIf="submitted && subject.espb == null" class="invalid-feedback">
+            <div *ngIf="subject.espb == null">Broj ESPB bodova je obavezno polje</div>
           </div>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <div class="form-group col">
-              <label for="info_lab">Informacije o labortorijskim vežbama</label>
-              <textarea id="info_lab" name="info=lab" cols="40" rows="4" class="form-control"
-                        [(ngModel)]="subject.info_lab"
-              ></textarea>
-            </div>
-            <div class="form-group col">
-              <label for="info_polaganje">Način polaganja</label>
-              <textarea id="info_polaganje" name="info?polaganje" cols="40" rows="4" class="form-control"
-                        [(ngModel)]="subject.info_polaganje"
-              ></textarea>
-            </div>
+      <hr/>
+
+      <div class="form-group row">
+        <label for="predavanja" class="col-4 col-form-label">Fond časova predavanja</label>
+        <div class="col-6">
+          <input id="predavanja" name="predavanja" type="number" class="form-control"
+                 [(ngModel)]="subject.predavanja"
+                 [ngClass]="{ 'is-invalid': submitted && subject.predavanja == null }"
+          >
+          <div *ngIf="submitted && subject.predavanja == null" class="invalid-feedback">
+            <div *ngIf="subject.predavanja == null">Fond časova predavanja je obavezno polje</div>
           </div>
+        </div>
+      </div>
 
-          <div class="form-group row">
-            <div class="form-group col">
-              <label for="propozicije">Propozicije</label>
-              <textarea id="propozicije" name="propozicije" cols="40" rows="4" class="form-control"
-                        [(ngModel)]="subject.propozicije"
-              ></textarea>
-            </div>
+      <div class="form-group row">
+        <label for="vezbe" class="col-4 col-form-label">Fond časova vežbi</label>
+        <div class="col-6">
+          <input id="vezbe" name="vezbe" type="number" class="form-control"
+                 [(ngModel)]="subject.vezbe"
+                 [ngClass]="{ 'is-invalid': submitted && subject.vezbe == null }"
+          >
+          <div *ngIf="submitted && subject.vezbe == null" class="invalid-feedback">
+            <div *ngIf="subject.vezbe == null">Fond časova vežbi je obavezno polje</div>
           </div>
+        </div>
+      </div>
 
-          <div class="form-group row text-center">
-            <div class="form-group col">
-              <button class="btn btn-primary" (click)="editSubject()">Ažuriraj predmet</button>
-            </div>
+      <div class="form-group row">
+        <label for="don" class="col-4 col-form-label">Fond časova DON</label>
+        <div class="col-6">
+          <input id="don" name="don" type="number" class="form-control"
+                 [(ngModel)]="subject.don"
+                 [ngClass]="{ 'is-invalid': submitted && subject.don == null }"
+          >
+          <div *ngIf="submitted && subject.don == null" class="invalid-feedback">
+            <div *ngIf="subject.don == null">Fond časova za DON je obavezno polje</div>
           </div>
+        </div>
+      </div>
 
+      <hr/>
+
+      <div class="form-group row">
+        <label for="cilj" class="col-4 col-form-label">Cilj</label>
+        <div class="col-6">
+          <textarea id="cilj" name="cilj" cols="40" rows="4" class="form-control"
+                    [(ngModel)]="subject.cilj"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="ishod" class="col-4 col-form-label">Ishod</label>
+        <div class="col-6">
+          <textarea id="ishod" name="ishod" cols="40" rows="4" class="form-control"
+                    [(ngModel)]="subject.ishod"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="info_lab" class="col-4 col-form-label">Informacije o laboratorijskim vežbama</label>
+        <div class="col-6">
+          <textarea id="info_lab" name="info=lab" cols="40" rows="4" class="form-control"
+                    [(ngModel)]="subject.info_lab"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="info_polaganje" class="col-4 col-form-label">Način polaganja</label>
+        <div class="col-6">
+          <textarea id="info_polaganje" name="info?polaganje" cols="40" rows="4" class="form-control"
+                    [(ngModel)]="subject.info_polaganje"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="propozicije" class="col-4 col-form-label">Propozicije</label>
+        <div class="col-6">
+           <textarea id="propozicije" name="propozicije" cols="40" rows="4" class="form-control"
+                     [(ngModel)]="subject.propozicije"
+           ></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row text-center">
+        <div class="col">
+          <button class="btn btn-primary" (click)="editSubject()">Ažuriraj predmet</button>
         </div>
       </div>
 
@@ -131,7 +142,3 @@
   </div>
 
 </div>
-
-
-
-

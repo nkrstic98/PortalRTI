@@ -30,8 +30,8 @@ export class SubjectManagementComponent implements OnInit {
     this.subjectService.getAll()
       .pipe(first())
       .subscribe(subjects => {
-        this.subjects = subjects;
-        this.filteredSubjects = subjects;
+        this.subjects = subjects.sort((a, b) => a.sifra.localeCompare(b.sifra));
+        this.filteredSubjects = this.subjects;
       })
   }
 
