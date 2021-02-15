@@ -49,7 +49,7 @@ let Worker = new Schema({
     type: String,
     required: true
   },
-  workerImage: {
+  image: {
     type: String
   }
 });

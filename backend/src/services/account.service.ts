@@ -93,7 +93,7 @@ router.route('/changePass').put((req, res) => {
   if(req.body.type == 2) {
     Student.findOne(
       {'username': req.body.username},
-      (err: any, student: { save: () => void; }) => {
+      (err, student) => {
         if(student) {
           Object.assign(student, {password:req.body.password});
 
@@ -144,14 +144,17 @@ router.post('/registerWorker', upload.single('workerImage'), async (req, res, ne
   // @ts-ignore
   console.log(req.file);
 
-  fs.access('./uploads/worker_images', (err: any) => {
-    if(err) {
-      fs.mkdirSync('./uploads/worker_images')
-    }
-  })
+  if(req.file != null) {
 
-  // @ts-ignore
-  await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/worker_images/' + req.file.originalname)
+    fs.access('./uploads/worker_images', (err: any) => {
+      if(err) {
+        fs.mkdirSync('./uploads/worker_images')
+      }
+    })
+
+    // @ts-ignore
+    await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/worker_images/' + req.file.originalname)
+  }
 
   Worker.findOne(
     {'username': req.body.username},

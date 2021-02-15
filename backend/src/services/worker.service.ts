@@ -85,15 +85,20 @@ router.route('/:username').get((req, res, next) => {
 })
 
 router.post('/update', upload.single('workerImage'), async (req, res, next) => {
-
-  fs.access('./uploads/worker_images', (err: any) => {
-    if(err) {
-      fs.mkdirSync('./uploads/worker_images')
-    }
-  })
-
+  console.log(req.body);
   // @ts-ignore
-  await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/worker_images/' + req.file.originalname)
+  console.log(req.file);
+
+  if(req.file != null) {
+    fs.access('./uploads/worker_images', (err: any) => {
+      if(err) {
+        fs.mkdirSync('./uploads/worker_images')
+      }
+    })
+
+    // @ts-ignore
+    await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/worker_images/' + req.file.originalname)
+  }
 
   Worker.findOneAndUpdate({username:req.body.username}, req.body)
     .then(() => {

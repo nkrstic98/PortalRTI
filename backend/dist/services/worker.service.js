@@ -85,13 +85,18 @@ router.route('/:username').get((req, res, next) => {
         .catch(err => next(err));
 });
 router.post('/update', upload.single('workerImage'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-    fs.access('./uploads/worker_images', (err) => {
-        if (err) {
-            fs.mkdirSync('./uploads/worker_images');
-        }
-    });
+    console.log(req.body);
     // @ts-ignore
-    yield sharp(req.file.buffer).resize({ width: 300, height: 300 }).toFile('./uploads/worker_images/' + req.file.originalname);
+    console.log(req.file);
+    if (req.file != null) {
+        fs.access('./uploads/worker_images', (err) => {
+            if (err) {
+                fs.mkdirSync('./uploads/worker_images');
+            }
+        });
+        // @ts-ignore
+        yield sharp(req.file.buffer).resize({ width: 300, height: 300 }).toFile('./uploads/worker_images/' + req.file.originalname);
+    }
     worker_1.default.findOneAndUpdate({ username: req.body.username }, req.body)
         .then(() => {
         user_1.default.findOneAndUpdate({ username: req.body.username }, { password: req.body.password })

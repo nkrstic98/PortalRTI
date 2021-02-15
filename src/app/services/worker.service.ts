@@ -51,7 +51,17 @@ export class WorkerService {
     fd.append("website", worker.website);
     fd.append("password", worker.password);
     fd.append("biography", worker.biography);
-    fd.append("workerImage", workerImage.name);
+    if(workerImage != null) {
+      fd.append("image", workerImage.name);
+    }
+    else {
+      if(worker.workerImage != "") {
+        fd.append("image", worker.workerImage);
+      }
+      else {
+        fd.append("image", "");
+      }
+    }
 
     return this.http.post(`${this.uri}/update`, fd);
   }

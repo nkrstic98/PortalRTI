@@ -31,7 +31,7 @@ export class ProfileTeacherComponent implements OnInit {
   }
 
   updateProfile() {
-    this.workerService.update(this.teacher)
+    this.workerService.update(this.teacher, null)
       .pipe(first())
       .subscribe({
         next: () => {

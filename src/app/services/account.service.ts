@@ -75,7 +75,12 @@ export class AccountService {
     fd.append("website", worker.website);
     fd.append("password", worker.password);
     fd.append("biography", worker.biography);
-    fd.append("workerImage", workerImage.name);
+    if(workerImage != null) {
+      fd.append("image", workerImage.name);
+    }
+    else {
+      fd.append("image", "");
+    }
 
     return this.http.post(`${this.uri}/registerWorker`, fd);
   }
