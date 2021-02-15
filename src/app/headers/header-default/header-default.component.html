@@ -7,7 +7,7 @@
     <a class="nav-link" [routerLink]="['workers']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Zaposleni</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link"  [routerLink]="['notifications']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Obaveštenja</a>
+    <a class="nav-link" [routerLink]="['notifications']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Obaveštenja</a>
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Osnovne studije</a>
@@ -20,7 +20,7 @@
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Master studije</a>
+    <a class="nav-link" [routerLink]="['studies/master']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Master studije</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Projekti</a>

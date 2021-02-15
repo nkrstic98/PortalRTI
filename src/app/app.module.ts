@@ -17,6 +17,9 @@ import { CreateNotificationComponent } from './home-pages/notifications/create-n
 import { WorkersComponent } from './home-pages/workers/workers.component';
 import { WorkersDetailsComponent } from './home-pages/workers/workers-details/workers-details.component';
 import { TeacherComponent } from './teacher/teacher.component';
+import { SubjectsComponent } from './home-pages/subjects/subjects.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { TeacherComponent } from './teacher/teacher.component';
     CreateNotificationComponent,
     WorkersComponent,
     WorkersDetailsComponent,
-    TeacherComponent
+    TeacherComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { TeacherComponent } from './teacher/teacher.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgDynamicBreadcrumbModule
+    NgDynamicBreadcrumbModule,
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

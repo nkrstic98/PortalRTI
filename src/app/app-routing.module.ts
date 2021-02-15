@@ -5,6 +5,7 @@ import {ContactComponent} from './home-pages/contact/contact.component';
 import {NotificationsComponent} from './home-pages/notifications/notifications.component';
 import {WorkersComponent} from './home-pages/workers/workers.component';
 import {WorkersDetailsComponent} from './home-pages/workers/workers-details/workers-details.component';
+import {SubjectsComponent} from './home-pages/subjects/subjects.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'account', loadChildren: accountModule },
   { path: 'admin', loadChildren: adminModule },
   { path: 'teacher', loadChildren: teacherModule },
-  { path: 'contact', component: ContactComponent, data: {
+  { path: 'contact', component: ContactComponent, data:
+    {
       title: 'Contact',
       breadcrumb: [
         {
@@ -76,6 +78,21 @@ const routes: Routes = [
       ]
     }
   },
+  { path: 'studies/master', component: SubjectsComponent, data: {
+    title: 'MasterStudies',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Master studije',
+          url: ''
+        }
+      ]
+    }
+  },
+
   { path: '**', redirectTo: '/' }
 ];
 
