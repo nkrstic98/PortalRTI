@@ -36,4 +36,8 @@ export class StudentService {
   update(student) {
     return this.http.post(`${this.uri}/update`, student);
   }
+
+  removeSubject(student, subject) {
+    return this.http.post(`${this.uri}/removeSubject`, { username: student, subject: subject });
+  }
 }

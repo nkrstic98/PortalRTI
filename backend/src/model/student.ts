@@ -32,7 +32,8 @@ let Student = new Schema({
   status: {
     type: String,
     required: true
-  }
+  },
+  subjects: Array
 });
 
 export default mongoose.model('Student', Student, 'studenti');

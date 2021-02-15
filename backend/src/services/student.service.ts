@@ -71,4 +71,17 @@ router.route('/update').post((req, res, next) => {
     .catch(err => next(err));
 })
 
+router.route('/removeSubject').post((req, res, next) => {
+  Student.findOneAndUpdate(
+    { username: req.body.username },
+    {
+      $pull: {
+        subjects: req.body.subject
+      }
+    }
+  )
+    .then(res1 => res.json(res1))
+    .catch(err => res.json(err))
+})
+
 module.exports = router;

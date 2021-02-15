@@ -35,7 +35,8 @@ let Student = new Schema({
     status: {
         type: String,
         required: true
-    }
+    },
+    subjects: Array
 });
 exports.default = mongoose_1.default.model('Student', Student, 'studenti');
 //# sourceMappingURL=student.js.map

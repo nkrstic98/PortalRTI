@@ -4,6 +4,9 @@ import {AlertService} from '../../services/alert.service';
 import {Subject} from '../../models/subject';
 import {SubjectService} from '../../services/subject.service';
 import {first} from 'rxjs/operators';
+import {Student} from '../../models/student';
+import {StudentService} from '../../services/student.service';
+import student from '../../../../backend/src/model/student';
 
 @Component({
   selector: 'app-subject-management',
@@ -17,13 +20,20 @@ export class SubjectManagementComponent implements OnInit {
   subjects: Subject[];
   filteredSubjects: Subject[];
 
+  students: Student[];
+  enrolledStudents: String[];
+
+  enrollSubject = "";
+
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private studentService: StudentService
   ) {
     this.module = "";
     this.semester = null;
+    this.enrolledStudents = [];
   }
 
   ngOnInit(): void {
@@ -32,6 +42,13 @@ export class SubjectManagementComponent implements OnInit {
       .subscribe(subjects => {
         this.subjects = subjects.sort((a, b) => a.sifra.localeCompare(b.sifra));
         this.filteredSubjects = this.subjects;
+      })
+
+    this.studentService.getAllStudents()
+      .pipe(first())
+      .subscribe(students => {
+        this.students = students
+          .sort((a, b) => a.index.localeCompare(b.index));
       })
   }
 
@@ -60,5 +77,73 @@ export class SubjectManagementComponent implements OnInit {
           this.filteredSubjects = this.subjects
         }
       );
+  }
+
+  //-----------------------------------------------------------------------------------------
+
+  chooseSubject(sifra) {
+    this.enrolledStudents = [];
+    this.enrollSubject = sifra;
+  }
+
+  addStudent(index) {
+    if(this.enrolledStudents.find(value => value == index) != undefined) {
+      this.enrolledStudents = this.enrolledStudents.filter(value => value != index);
+      console.log(this.enrolledStudents);
+    }
+    else {
+      this.enrolledStudents.push(index);
+      console.log(this.enrolledStudents);
+    }
+  }
+
+  cancelEnroll() {
+    this.enrolledStudents = [];
+    console.log(this.enrolledStudents);
+  }
+
+  isAdded(index): Boolean {
+    if(this.enrolledStudents.find(value => value == index) != undefined) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  alreadyEnrolled(s: Student): Boolean {
+    if(s.subjects.find(value => value == this.enrollSubject)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  enrollStudents() {
+    this.enrolledStudents.forEach(index => {
+      let student = this.students.find(value => value.index == index)
+      console.log(student);
+      student.subjects.push(this.enrollSubject);
+      this.studentService.update(student)
+        .pipe(first())
+        .subscribe(value => {
+          console.log("Uspesan apdejt");
+        })
+    })
+
+    this.alertService.success("Uspešno ste ažurirali listu studenata", {autoClose: true});
+  }
+
+  removeAllStudents() {
+    this.students.forEach(student => {
+      student.subjects = student.subjects.filter(subject => subject != this.enrollSubject);
+      console.log(student);
+      this.studentService.removeSubject(student.username, this.enrollSubject)
+        .pipe(first())
+        .subscribe()
+    })
+
+    this.alertService.warn("Uspešno ste uklonili sve studente sa predmeta", {autoClose: true});
   }
 }
