@@ -51,6 +51,9 @@ let Worker = new Schema({
     status: {
         type: String,
         required: true
+    },
+    workerImage: {
+        type: String
     }
 });
 exports.default = mongoose_1.default.model('Worker', Worker, 'zaposleni');

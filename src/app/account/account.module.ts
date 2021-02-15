@@ -8,6 +8,7 @@ import {ChangePassComponent} from './change-pass/change-pass.component';
 import { AccountComponent } from './account.component';
 import { RegisterStudentComponent } from './register-student/register-student.component';
 import { RegisterWorkerComponent } from './register-worker/register-worker.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { RegisterWorkerComponent } from './register-worker/register-worker.compo
     CommonModule,
     AccountRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class AccountModule { }

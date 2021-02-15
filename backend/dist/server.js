@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const app = express_1.default();
+app.use('/uploads', express_1.default.static('uploads'));
 app.use(cors_1.default());
 app.use(body_parser_1.default.json());
 mongoose_1.default.connect('mongodb://localhost:27017/rti_database');

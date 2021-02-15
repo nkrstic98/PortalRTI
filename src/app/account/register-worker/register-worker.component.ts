@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../services/account.service';
 import {AlertService} from '../../services/alert.service';
 import {first} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-register-worker',
@@ -24,6 +25,8 @@ export class RegisterWorkerComponent implements OnInit {
   status = '';
   email = '';
 
+  workerImage: File = null;
+
   submitted: boolean;
   teacher: boolean;
 
@@ -31,7 +34,8 @@ export class RegisterWorkerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -67,7 +71,7 @@ export class RegisterWorkerComponent implements OnInit {
       status: this.status
     }
 
-    this.accountService.registerWorker(worker)
+    this.accountService.registerWorker(worker, this.workerImage)
       .pipe(first())
       .subscribe({
         next: worker => {
@@ -109,4 +113,8 @@ export class RegisterWorkerComponent implements OnInit {
     }
   }
 
+  onFileSelected(event) {
+    console.log(event);
+    this.workerImage = <File>event.target.files[0];
+  }
 }

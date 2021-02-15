@@ -48,6 +48,9 @@ let Worker = new Schema({
   status: {
     type: String,
     required: true
+  },
+  workerImage: {
+    type: String
   }
 });
 
