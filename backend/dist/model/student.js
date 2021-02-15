@@ -1,10 +1,14 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const Schema = mongoose_1.default.Schema;
+const mongoose = __importStar(require("mongoose"));
+const Schema = mongoose.Schema;
 let Student = new Schema({
     username: {
         type: String,
@@ -36,7 +40,9 @@ let Student = new Schema({
         type: String,
         required: true
     },
-    subjects: Array
+    subjects: {
+        Array
+    }
 });
-exports.default = mongoose_1.default.model('Student', Student, 'studenti');
+exports.default = mongoose.model('Student', Student, 'studenti');
 //# sourceMappingURL=student.js.map

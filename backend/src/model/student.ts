@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -33,7 +33,9 @@ let Student = new Schema({
     type: String,
     required: true
   },
-  subjects: Array
+  subjects: {
+    Array
+  }
 });
 
 export default mongoose.model('Student', Student, 'studenti');
