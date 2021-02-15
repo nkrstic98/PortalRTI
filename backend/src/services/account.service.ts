@@ -5,16 +5,19 @@ import Student from '../model/student';
 
 const router = express.Router();
 
+const sharp = require("sharp");
 const multer = require("multer");
+const fs = require('fs');
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, './uploads/');
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, file.originalname);
+//   }
+// });
+const storage = multer.memoryStorage()
 
 const fileFilter = (req, file, cb) => {
   // reject a file
@@ -27,9 +30,9 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
   storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
+  // limits: {
+  //   fileSize: 1024 * 1024 * 5
+  // },
   fileFilter: fileFilter
 });
 
@@ -136,9 +139,17 @@ router.route('/registerStudent').post((req, res, next) => {
   );
 })
 
-router.post('/registerWorker', upload.single('workerImage'), (req, res, next) => {
+router.post('/registerWorker', upload.single('workerImage'), async (req, res, next) => {
   console.log(req.body);
   console.log(req.file);
+
+  fs.access('./uploads/worker_images', (err) => {
+    if(err) {
+      fs.mkdirSync('./uploads/worker_images')
+    }
+  })
+
+  await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/worker_images/' + req.file.originalname)
 
   Worker.findOne(
     {'username': req.body.username},
