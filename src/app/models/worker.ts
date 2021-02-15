@@ -11,6 +11,7 @@ export class Worker {
   title: string;
   office: string;
   status: string;
+  workerImage: string;
 
   constructor(init?:Partial<Worker>) {
     Object.assign(this, init);

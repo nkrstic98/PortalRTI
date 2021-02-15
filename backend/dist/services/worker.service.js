@@ -85,8 +85,6 @@ router.route('/:username').get((req, res, next) => {
         .catch(err => next(err));
 });
 router.post('/update', upload.single('workerImage'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-    console.log(req.file);
-    console.log(req.body);
     fs.access('./uploads/worker_images', (err) => {
         if (err) {
             fs.mkdirSync('./uploads/worker_images');
