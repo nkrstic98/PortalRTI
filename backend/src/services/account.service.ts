@@ -42,7 +42,7 @@ router.route('/login').post((req, res) => {
 
   User.findOne(
     {'username':username, 'password':password},
-    (err, user) => {
+    (err: any, user: any) => {
       if(err) {
         console.log(err);
       }
@@ -61,7 +61,7 @@ router.route('/changePass').put((req, res) => {
 
   User.findOne(
     {'username':req.body.username},
-    (err, user) => {
+    (err: any, user: { save: () => Promise<any>; }) => {
       if(user) {
         Object.assign(user, userParam);
 
@@ -77,7 +77,7 @@ router.route('/changePass').put((req, res) => {
   if(req.body.type == 1) {
     Worker.findOne(
       {'username': req.body.username},
-      (err, worker) => {
+      (err: any, worker: { save: () => void; }) => {
         if(worker) {
           Object.assign(worker, {password:req.body.password});
 
@@ -93,7 +93,7 @@ router.route('/changePass').put((req, res) => {
   if(req.body.type == 2) {
     Student.findOne(
       {'username': req.body.username},
-      (err, student) => {
+      (err: any, student: { save: () => void; }) => {
         if(student) {
           Object.assign(student, {password:req.body.password});
 
@@ -110,7 +110,7 @@ router.route('/changePass').put((req, res) => {
 router.route('/registerStudent').post((req, res, next) => {
   Student.findOne(
     {'username': req.body.username},
-    (err, student) => {
+    (err: any, student: any) => {
       try{
         if(student) {
           throw 'Korisničko ime "' + req.body.username + '" je zauzeto';

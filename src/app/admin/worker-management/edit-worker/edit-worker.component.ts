@@ -14,6 +14,8 @@ export class EditWorkerComponent implements OnInit {
   myWorker: Worker;
   workerEdit: string;
 
+  workerImage: File = null;
+
   password = '';
   office = '';
 
@@ -40,6 +42,10 @@ export class EditWorkerComponent implements OnInit {
       })
   }
 
+  onFileSelected(event) {
+    this.workerImage = <File>event.target.files[0];
+  }
+
   edit() {
     this.submitted = true;
     this.alertService.clear();
@@ -52,7 +58,7 @@ export class EditWorkerComponent implements OnInit {
       this.myWorker.office = this.office;
     }
 
-    this.workerService.update(this.myWorker)
+    this.workerService.update(this.myWorker, this.workerImage)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -86,5 +92,4 @@ export class EditWorkerComponent implements OnInit {
         break;
     }
   }
-
 }

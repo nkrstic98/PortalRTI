@@ -74,7 +74,7 @@
 
       </div>
 
-      <div class="form-row">
+      <div class="form-row d-flex justify-content-center align-items-end flex-wrap">
 
         <div class="form-group col">
           <label for="address">Adresa</label>
@@ -91,6 +91,13 @@
         <div class="form-group col">
           <label for="website">Adresa web sajta</label>
           <input type="text" id="website" class="form-control" name="website" [(ngModel)]="myWorker.website" />
+        </div>
+
+        <div class="form-group col">
+          <label for="workerImage" class="custom-file-label">Slika</label>
+          <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"
+                 (change)="onFileSelected($event)"
+          />
         </div>
 
       </div>

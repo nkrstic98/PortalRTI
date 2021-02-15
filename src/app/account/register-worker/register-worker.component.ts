@@ -114,7 +114,7 @@ export class RegisterWorkerComponent implements OnInit {
   }
 
   onFileSelected(event) {
-    console.log(event);
+    //console.log(event);
     this.workerImage = <File>event.target.files[0];
   }
 }
