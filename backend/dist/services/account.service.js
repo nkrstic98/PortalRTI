@@ -122,12 +122,14 @@ router.route('/registerStudent').post((req, res, next) => {
 });
 router.post('/registerWorker', upload.single('workerImage'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     console.log(req.body);
+    // @ts-ignore
     console.log(req.file);
     fs.access('./uploads/worker_images', (err) => {
         if (err) {
             fs.mkdirSync('./uploads/worker_images');
         }
     });
+    // @ts-ignore
     yield sharp(req.file.buffer).resize({ width: 300, height: 300 }).toFile('./uploads/worker_images/' + req.file.originalname);
     worker_1.default.findOne({ 'username': req.body.username }, (err, worker) => {
         if (err) {

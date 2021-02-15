@@ -19,7 +19,7 @@ const fs = require('fs');
 // });
 const storage = multer.memoryStorage()
 
-const fileFilter = (req, file, cb) => {
+const fileFilter = (req: any, file: { mimetype: string; }, cb: (arg0: any, arg1: boolean) => void) => {
   // reject a file
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
@@ -141,14 +141,16 @@ router.route('/registerStudent').post((req, res, next) => {
 
 router.post('/registerWorker', upload.single('workerImage'), async (req, res, next) => {
   console.log(req.body);
+  // @ts-ignore
   console.log(req.file);
 
-  fs.access('./uploads/worker_images', (err) => {
+  fs.access('./uploads/worker_images', (err: any) => {
     if(err) {
       fs.mkdirSync('./uploads/worker_images')
     }
   })
 
+  // @ts-ignore
   await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/worker_images/' + req.file.originalname)
 
   Worker.findOne(

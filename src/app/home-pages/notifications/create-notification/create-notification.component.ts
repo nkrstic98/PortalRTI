@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {AlertService} from '../../services/alert.service';
-import {NotificationService} from '../../services/notification.service';
+import {AlertService} from '../../../services/alert.service';
+import {NotificationService} from '../../../services/notification.service';
 import {first} from 'rxjs/operators';
 
 @Component({

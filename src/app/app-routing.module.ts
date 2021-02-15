@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {ContactComponent} from './contact/contact.component';
-import {NotificationsComponent} from './notifications/notifications.component';
-import {WorkersComponent} from './workers/workers.component';
-import {WorkersDetailsComponent} from './workers/workers-details/workers-details.component';
+import {HomeComponent} from './home-pages/home/home.component';
+import {ContactComponent} from './home-pages/contact/contact.component';
+import {NotificationsComponent} from './home-pages/notifications/notifications.component';
+import {WorkersComponent} from './home-pages/workers/workers.component';
+import {WorkersDetailsComponent} from './home-pages/workers/workers-details/workers-details.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);

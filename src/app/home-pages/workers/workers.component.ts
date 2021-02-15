@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Worker} from '../models/worker';
+import {Worker} from '../../models/worker';
 import {Router} from '@angular/router';
-import {AlertService} from '../services/alert.service';
-import {WorkerService} from '../services/worker.service';
+import {AlertService} from '../../services/alert.service';
+import {WorkerService} from '../../services/worker.service';
 import {first} from 'rxjs/operators';
 
 @Component({
