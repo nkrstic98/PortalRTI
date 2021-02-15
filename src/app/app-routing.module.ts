@@ -58,7 +58,7 @@ const routes: Routes = [
       ]
     }
   },
-  { path: 'workers/workerDetails/:fullname', component: WorkersDetailsComponent, data: {
+  { path: 'workers/workerDetails/:username', component: WorkersDetailsComponent, data: {
       title: 'WorkerDetails',
       breadcrumb: [
         {
@@ -70,7 +70,7 @@ const routes: Routes = [
           url: 'workers'
         },
         {
-          label: '{{fullname}}',
+          label: 'Detalji o zaposlenom',
           url: ''
         }
       ]

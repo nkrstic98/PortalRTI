@@ -1,1 +1,83 @@
-<p>workers-details works!</p>
+<div class="container">
+  <div class="main-body">
+
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                src="http://localhost:4000/uploads/worker_images/{{teacher.image}}"
+                alt="{{teacher.username}}"
+                height="150px"
+                width="150px"
+                class="rounded-circle"
+              >
+              <div class="mt-3">
+                <h4>{{teacher.firstname}} {{teacher.lastname}}</h4>
+                <p class="text-secondary mb-1 text-uppercase">{{teacher.title}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">E-mail</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{teacher.email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row d-flex justify-content-center align-items-center flex-wrap">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Kancelarija</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{teacher.office}}
+              </div>
+            </div>
+            <hr/>
+            <div class="row d-flex justify-content-center align-items-center flex-wrap">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Broj telefona</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{teacher.phone}}
+              </div>
+            </div>
+            <hr/>
+            <div class="row d-flex justify-content-center align-items-center flex-wrap">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Website</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                <a href="{{teacher.website}}">{{teacher.website}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="main-body" *ngIf="teacher.biography != ''">
+    <div class="row-gutters-sm">
+      <div class="col-md-12 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="col-sm-9 text-secondary">
+              {{teacher.biography}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
