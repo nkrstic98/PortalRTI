@@ -24,7 +24,6 @@ import { ScienceProjectsComponent } from './home-pages/science-projects/science-
 import { ProjectsComponent } from './home-pages/projects/projects.component';
 import { SubjectsListComponent } from './home-pages/subjects-list/subjects-list.component';
 import { SubjectComponent } from './subject/subject.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
@@ -61,4 +60,5 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -6,13 +6,14 @@ import {FormsModule} from '@angular/forms';
 import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { ProfileTeacherComponent } from './profile-teacher/profile-teacher.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { SubjectTeacherComponent } from './subject-teacher/subject-teacher.component';
 
 
 @NgModule({
   exports: [
     MatSidenavModule
   ],
-  declarations: [ProfileTeacherComponent],
+  declarations: [ProfileTeacherComponent, SubjectTeacherComponent],
   imports: [
     CommonModule,
     TeacherRoutingModule,
