@@ -6,6 +6,8 @@ import {NotificationsComponent} from './home-pages/notifications/notifications.c
 import {WorkersComponent} from './home-pages/workers/workers.component';
 import {WorkersDetailsComponent} from './home-pages/workers/workers-details/workers-details.component';
 import {SubjectsComponent} from './home-pages/subjects/subjects.component';
+import {ScienceResearchComponent} from './home-pages/science-research/science-research.component';
+import {ScienceProjectsComponent} from './home-pages/science-projects/science-projects.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -92,7 +94,36 @@ const routes: Routes = [
       ]
     }
   },
-
+  {
+    path: 'science/research', component: ScienceResearchComponent, data: {
+      title: 'ScienceResearch',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Nauka - Istraživanja',
+          url: ''
+        }
+      ]
+    }
+  },
+  {
+    path: 'science/projects', component: ScienceProjectsComponent, data: {
+      title: 'ScienceProjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Nauka - Projekti',
+          url: ''
+        }
+      ]
+    }
+  },
   { path: '**', redirectTo: '/' }
 ];
 

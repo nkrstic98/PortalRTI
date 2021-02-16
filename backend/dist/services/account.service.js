@@ -124,7 +124,7 @@ router.post('/registerWorker', upload.single('workerImage'), (req, res, next) =>
     console.log(req.body);
     // @ts-ignore
     console.log(req.file);
-    if (req.body.image != "") {
+    if (req.file != null) {
         fs.access('./uploads/worker_images', (err) => {
             if (err) {
                 fs.mkdirSync('./uploads/worker_images');
