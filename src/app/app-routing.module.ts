@@ -8,6 +8,7 @@ import {WorkersDetailsComponent} from './home-pages/workers/workers-details/work
 import {SubjectsComponent} from './home-pages/subjects/subjects.component';
 import {ScienceResearchComponent} from './home-pages/science-research/science-research.component';
 import {ScienceProjectsComponent} from './home-pages/science-projects/science-projects.component';
+import {ProjectsComponent} from './home-pages/projects/projects.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -19,37 +20,8 @@ const routes: Routes = [
   { path: 'account', loadChildren: accountModule },
   { path: 'admin', loadChildren: adminModule },
   { path: 'teacher', loadChildren: teacherModule },
-  { path: 'contact', component: ContactComponent, data:
-    {
-      title: 'Contact',
-      breadcrumb: [
-        {
-          label: 'Početna',
-          url: '/'
-        },
-        {
-          label: 'Kontakt',
-          url: ''
-        }
-      ]
-    }
-  },
-  { path: 'notifications', component: NotificationsComponent, data: {
-    title: 'Notifications',
-      breadcrumb: [
-        {
-          label: 'Početna',
-          url: '/'
-        },
-        {
-          label: 'Obaveštenja',
-          url: ''
-        }
-      ]
-    }
-  },
   { path: 'workers', component: WorkersComponent, data: {
-    title: 'Workers',
+      title: 'Workers',
       breadcrumb: [
         {
           label: 'Početna',
@@ -80,6 +52,20 @@ const routes: Routes = [
       ]
     }
   },
+  { path: 'notifications', component: NotificationsComponent, data: {
+    title: 'Notifications',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Obaveštenja',
+          url: ''
+        }
+      ]
+    }
+  },
   { path: 'studies/:studies_type/:program', component: SubjectsComponent, data: {
     title: 'Studies',
       breadcrumb: [
@@ -89,6 +75,21 @@ const routes: Routes = [
         },
         {
           label: '{{program}}',
+          url: ''
+        }
+      ]
+    }
+  },
+  {
+    path: 'projects', component: ProjectsComponent, data: {
+      title: 'Projects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Projekti',
           url: ''
         }
       ]
@@ -123,6 +124,21 @@ const routes: Routes = [
         }
       ]
     }
+  },
+  { path: 'contact', component: ContactComponent, data:
+      {
+        title: 'Contact',
+        breadcrumb: [
+          {
+            label: 'Početna',
+            url: '/'
+          },
+          {
+            label: 'Kontakt',
+            url: ''
+          }
+        ]
+      }
   },
   { path: '**', redirectTo: '/' }
 ];
