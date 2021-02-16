@@ -32,9 +32,9 @@ const upload = multer({
     fileFilter: fileFilter
 });
 router.post('/create', upload.single('notifImage'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-    console.log(req.body);
-    // @ts-ignore
-    console.log(req.file);
+    // console.log(req.body);
+    // // @ts-ignore
+    // console.log(req.file);
     if (req.file != null) {
         fs.access('./uploads/notifications', (err) => {
             if (err) {

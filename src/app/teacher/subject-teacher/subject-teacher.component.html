@@ -3,9 +3,9 @@
   <div class="row mt-3">
     <div class="col-sm-4"></div>
     <div class="col-sm-4 text-center" style="font-family: Arial">
-      <select class="custom-select">
+      <select class="custom-select" (change)="chooseSubject()" [(ngModel)]="mySubject">
         <option selected value="" disabled>Izaberi predmet</option>
-        <option value="1">Broj indeksa</option>
+        <option value="SI4PIA">SI4PIA - Programiranje internet aplikacija</option>
         <option value="2">Prezime</option>
       </select>
     </div>

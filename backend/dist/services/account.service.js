@@ -121,9 +121,9 @@ router.route('/registerStudent').post((req, res, next) => {
     });
 });
 router.post('/registerWorker', upload.single('workerImage'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
-    console.log(req.body);
-    // @ts-ignore
-    console.log(req.file);
+    // console.log(req.body);
+    // // @ts-ignore
+    // console.log(req.file);
     if (req.file != null) {
         fs.access('./uploads/worker_images', (err) => {
             if (err) {

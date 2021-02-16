@@ -30,7 +30,9 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="bg-white">
-      <router-outlet></router-outlet>
+      <div *ngIf="subject != null">
+        {{subject.sifra}} - {{subject.naziv}}
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 

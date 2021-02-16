@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user';
+import {Subject} from '../models/subject';
+import {TeacherService} from '../services/teacher.service';
 
 @Component({
   selector: 'app-subject',
@@ -9,11 +11,22 @@ import {User} from '../models/user';
 export class SubjectComponent implements OnInit {
   user: User;
 
-  constructor() { }
+  subject: Subject;
 
-  ngOnInit(): void {
+  constructor(
+    private teacherService: TeacherService
+  ) {
     this.user = JSON.parse(localStorage.getItem('user'));
-    console.log(this.user);
+    // console.log(this.user);
+
+    this.teacherService.subject.subscribe(subject => {
+      this.subject = subject;
+      // console.log(this.subject);
+    });
+
   }
 
+  ngOnInit(): void {
+
+  }
 }
