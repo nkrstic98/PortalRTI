@@ -140,9 +140,9 @@ router.route('/registerStudent').post((req, res, next) => {
 })
 
 router.post('/registerWorker', upload.single('workerImage'), async (req, res, next) => {
-  console.log(req.body);
-  // @ts-ignore
-  console.log(req.file);
+  // console.log(req.body);
+  // // @ts-ignore
+  // console.log(req.file);
 
   if(req.file != null) {
 

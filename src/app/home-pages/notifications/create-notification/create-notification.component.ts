@@ -14,6 +14,8 @@ export class CreateNotificationComponent implements OnInit {
   category = '';
   text = '';
 
+  image: File = null;
+
   submitted: boolean;
 
   constructor(
@@ -30,13 +32,22 @@ export class CreateNotificationComponent implements OnInit {
 
     this.alertService.clear();
 
+    let image_name;
+    if(this.image != null) {
+      image_name = this.image.name;
+    }
+    else {
+      image_name = "";
+    }
+
     let notif = {
       title: this.title,
       category: this.category,
-      text: this.text
+      text: this.text,
+      image: image_name
     }
 
-    this.notifService.create(notif)
+    this.notifService.create(notif, this.image)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -46,6 +57,14 @@ export class CreateNotificationComponent implements OnInit {
           this.alertService.error(err.message);
         }
       });
+    this.title = '';
+    this.category = '';
+    this.text = '';
+    this.submitted = false;
+  }
+
+  onFileSelected(event) {
+    this.image = <File>event.target.files[0];
   }
 
 }

@@ -35,7 +35,7 @@ export class NotificationsComponent implements OnInit {
           value.time = myDate.toDateString() + ", " + myDate.getHours() + ":" + myDate.getMinutes();
         })
 
-        this.filteredNotifications = this.myNotifications;
+        this.filteredNotifications = this.myNotifications.sort((a, b) => b.time.localeCompare(a.time));
       });
   }
 

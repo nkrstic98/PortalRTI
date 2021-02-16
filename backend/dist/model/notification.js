@@ -26,6 +26,9 @@ let Notification = new Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    image: {
+        type: String
     }
 });
 exports.default = mongoose.model('Notification', Notification, 'obavestenja');

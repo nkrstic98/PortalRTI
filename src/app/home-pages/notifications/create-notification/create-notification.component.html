@@ -37,10 +37,20 @@
             <div class="form-group col">
               <label for="txt">Tekst</label>
               <textarea id="txt" [(ngModel)]="text" name="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && text == '' }" rows="6">
-          </textarea>
+              </textarea>
               <div *ngIf="submitted && text == ''" class="invalid-feedback">
                 <div *ngIf="text == ''">Tekst obaveštenja je obavezno polje</div>
               </div>
+            </div>
+          </div>
+
+          <div class="form-row p-1">
+            <div class="form-group col">
+              <label for="workerImage" class="custom-file-label">{{image != null ? image.name : "Slika"}}</label>
+              <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"
+                     (change)="onFileSelected($event)"
+
+              />
             </div>
           </div>
 

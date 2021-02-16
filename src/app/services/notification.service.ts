@@ -12,8 +12,16 @@ export class NotificationService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  create(notification) {
-    return this.http.post(`${this.uri}/create`, notification);
+  create(notification, image) {
+    let fd = new FormData();
+    fd.append('title', notification.title);
+    fd.append('category', notification.category);
+    fd.append('text', notification.text);
+    fd.append('image', notification.image);
+    fd.append('notifImage', image);
+
+
+    return this.http.post(`${this.uri}/create`, fd);
   }
 
   getAll(){

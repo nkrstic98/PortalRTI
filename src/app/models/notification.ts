@@ -3,5 +3,6 @@ export class Notification {
   text: string;
   category: string;
   creationTime: Date;
-  time: String;
+  time: string;
+  image: string;
 }
