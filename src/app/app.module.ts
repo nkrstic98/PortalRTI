@@ -23,6 +23,9 @@ import { ScienceResearchComponent } from './home-pages/science-research/science-
 import { ScienceProjectsComponent } from './home-pages/science-projects/science-projects.component';
 import { ProjectsComponent } from './home-pages/projects/projects.component';
 import { SubjectsListComponent } from './home-pages/subjects-list/subjects-list.component';
+import { SubjectComponent } from './subject/subject.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { SubjectsListComponent } from './home-pages/subjects-list/subjects-list.
     ScienceResearchComponent,
     ScienceProjectsComponent,
     ProjectsComponent,
-    SubjectsListComponent
+    SubjectsListComponent,
+    SubjectComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,8 @@ import { SubjectsListComponent } from './home-pages/subjects-list/subjects-list.
     HttpClientModule,
     NgDynamicBreadcrumbModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

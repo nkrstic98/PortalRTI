@@ -1,0 +1,37 @@
+<ng-container>
+
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened class="example-sidenav bg-dark">
+      <nav class="navbar text-center d-flex justify-content-center align-items-center flex-wrap mt-5">
+        <ul class="navbar-nav mt-5">
+          <li class="nav-item mb-3" *ngIf="user.type == 2">
+            <a class="btn btn-light btn-block" role="button">Obaveštenja</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="btn btn-light btn-block" role="button">O predmetu</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="btn btn-light btn-block" role="button">Predavanja</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="btn btn-light btn-block" role="button">Vežbe</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="btn btn-light btn-block" role="button">Ispitna pitanja</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="btn btn-light btn-block" role="button">Laboratorija</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="btn btn-light btn-block" role="button">Projekat / Domaći zadaci</a>
+          </li>
+        </ul>
+      </nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="bg-white">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</ng-container>
