@@ -12,15 +12,18 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Osnovne studije</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Odsek za Računarsku tehniku i informatiku</a>
+      <a class="dropdown-item"  [routerLink]="['studies/rti/Računarska tehnika i informatika']" routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">Odsek za Računarsku tehniku i informatiku</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Odsek za Softversko inženjerstvo</a>
+      <a class="dropdown-item"  [routerLink]="['studies/si/Softversko inženjerstvo']" routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">Odsek za Softversko inženjerstvo</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Ostali odseci</a>
+      <a class="dropdown-item"  [routerLink]="['studies/oo/Ostali odseci']" routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">Ostali odseci</a>
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link" [routerLink]="['studies/master']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Master studije</a>
+    <a class="nav-link" [routerLink]="['studies/m/Master studije']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Master studije</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Projekti</a>

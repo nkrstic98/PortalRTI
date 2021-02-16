@@ -78,15 +78,15 @@ const routes: Routes = [
       ]
     }
   },
-  { path: 'studies/master', component: SubjectsComponent, data: {
-    title: 'MasterStudies',
+  { path: 'studies/:studies_type/:program', component: SubjectsComponent, data: {
+    title: 'Studies',
       breadcrumb: [
         {
           label: 'Početna',
           url: '/'
         },
         {
-          label: 'Master studije',
+          label: '{{program}}',
           url: ''
         }
       ]
