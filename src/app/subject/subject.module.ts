@@ -2,14 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SubjectRoutingModule } from './subject-routing.module';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {SubjectComponent} from './subject.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SubjectComponent
+  ],
+  exports: [
+    SubjectComponent
+  ],
   imports: [
     CommonModule,
-    SubjectRoutingModule
+    SubjectRoutingModule,
+    MatSidenavModule
   ]
 })
 export class SubjectModule { }

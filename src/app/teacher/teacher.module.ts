@@ -7,7 +7,7 @@ import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { ProfileTeacherComponent } from './profile-teacher/profile-teacher.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { SubjectTeacherComponent } from './subject-teacher/subject-teacher.component';
-
+import {SubjectModule} from '../subject/subject.module';
 
 @NgModule({
   exports: [
@@ -18,7 +18,8 @@ import { SubjectTeacherComponent } from './subject-teacher/subject-teacher.compo
     CommonModule,
     TeacherRoutingModule,
     FormsModule,
-    NgDynamicBreadcrumbModule
+    NgDynamicBreadcrumbModule,
+    SubjectModule
   ]
 })
 export class TeacherModule { }
