@@ -5,10 +5,10 @@ import {ContactComponent} from './home-pages/contact/contact.component';
 import {NotificationsComponent} from './home-pages/notifications/notifications.component';
 import {WorkersComponent} from './home-pages/workers/workers.component';
 import {WorkersDetailsComponent} from './home-pages/workers/workers-details/workers-details.component';
-import {SubjectsComponent} from './home-pages/subjects/subjects.component';
 import {ScienceResearchComponent} from './home-pages/science-research/science-research.component';
 import {ScienceProjectsComponent} from './home-pages/science-projects/science-projects.component';
 import {ProjectsComponent} from './home-pages/projects/projects.component';
+import {SubjectsListComponent} from './home-pages/subjects-list/subjects-list.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -66,7 +66,7 @@ const routes: Routes = [
       ]
     }
   },
-  { path: 'studies/:studies_type/:program', component: SubjectsComponent, data: {
+  { path: 'studies/:studies_type/:program', component: SubjectsListComponent, data: {
     title: 'Studies',
       breadcrumb: [
         {

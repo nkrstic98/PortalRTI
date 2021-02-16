@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from '../../models/subject';
+import {FormControl} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {SubjectService} from '../../services/subject.service';
 import {first} from 'rxjs/operators';
-import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-subjects',
-  templateUrl: './subjects.component.html',
-  styleUrls: ['./subjects.component.css']
+  selector: 'app-subjects-list',
+  templateUrl: './subjects-list.component.html',
+  styleUrls: ['./subjects-list.component.css']
 })
-export class SubjectsComponent implements OnInit {
+export class SubjectsListComponent implements OnInit {
   subjects: Subject[];
   filteredSubjects: Subject[];
   selected = new FormControl(0);
@@ -47,4 +47,5 @@ export class SubjectsComponent implements OnInit {
     this.filteredSubjects = this.subjects.filter(value => value.odseci.find(value => value.semestar == semestar + 1));
     this.selected.setValue(semestar);
   }
+
 }
