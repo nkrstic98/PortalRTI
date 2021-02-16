@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ScienceResearchComponent } from './home-pages/science-research/science-research.component';
 import { ScienceProjectsComponent } from './home-pages/science-projects/science-projects.component';
+import { ProjectsComponent } from './home-pages/projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ScienceProjectsComponent } from './home-pages/science-projects/science-
     TeacherComponent,
     SubjectsComponent,
     ScienceResearchComponent,
-    ScienceProjectsComponent
+    ScienceProjectsComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
