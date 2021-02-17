@@ -13,6 +13,7 @@ import {SubjectsListComponent} from './home-pages/subjects-list/subjects-list.co
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
 const teacherModule = () => import('./teacher/teacher.module').then(x => x.TeacherModule);
+const subjectModule = () => import('./subject/subject.module').then(x => x.SubjectModule);
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: accountModule },
   { path: 'admin', loadChildren: adminModule },
   { path: 'teacher', loadChildren: teacherModule },
+  { path: 'subjects', loadChildren: subjectModule },
   { path: 'workers', component: WorkersComponent, data: {
       title: 'Workers',
       breadcrumb: [

@@ -5,18 +5,13 @@
     <div class="col-sm-4 text-center" style="font-family: Arial">
       <select class="custom-select" (change)="chooseSubject()" [(ngModel)]="mySubject">
         <option selected value="" disabled>Izaberi predmet</option>
-        <option value="SI4PIA">SI4PIA - Programiranje internet aplikacija</option>
-        <option value="2">Prezime</option>
+        <option  *ngFor="let s of subjects" value="{{s.sifra}}">{{s.sifra}} - {{s.naziv}}</option>
       </select>
     </div>
     <div class="col-sm-4"></div>
   </div>
-
-  <hr/>
-
-  <div class="row mt-5 text-center">
-    <app-subject></app-subject>
-  </div>
-
-
 </div>
+
+<hr/>
+
+<app-subject *ngIf="mySubject != ''"></app-subject>

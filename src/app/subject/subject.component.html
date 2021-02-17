@@ -1,39 +1,55 @@
-<ng-container>
-
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened class="example-sidenav bg-dark">
-      <nav class="navbar text-center d-flex justify-content-center align-items-center flex-wrap mt-5">
-        <ul class="navbar-nav mt-5">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <nav class="navbar mt-4">
+        <ul class="navbar-nav">
           <li class="nav-item mb-3" *ngIf="user.type == 2">
-            <a class="btn btn-light btn-block" role="button">Obaveštenja</a>
+            <a class="btn btn-block text-dark" [ngClass]="{ 'btn-info' : page == 1 }" (click)="changePage(1)"
+
+            >
+              Obaveštenja
+            </a>
           </li>
           <li class="nav-item mb-3">
-            <a class="btn btn-light btn-block" role="button">O predmetu</a>
+            <a class="btn btn-outline-info btn-block" role="button" [ngClass]="{ 'btn-info' : page == 2 }" (click)="changePage(2)"
+
+            >O predmetu</a>
           </li>
           <li class="nav-item mb-3">
-            <a class="btn btn-light btn-block" role="button">Predavanja</a>
+            <a class="btn btn-outline-info btn-block" role="button" [ngClass]="{ 'btn-info' : page == 3 }" (click)="changePage(3)"
+
+            >
+              Predavanja
+            </a>
           </li>
           <li class="nav-item mb-3">
-            <a class="btn btn-light btn-block" role="button">Vežbe</a>
+            <a class="btn btn-outline-info btn-block" role="button" [ngClass]="{ 'btn-info' : page == 4 }" (click)="changePage(4)" >
+              Vežbe
+            </a>
           </li>
           <li class="nav-item mb-3">
-            <a class="btn btn-light btn-block" role="button">Ispitna pitanja</a>
+            <input type="checkbox" class="custom-checkbox float-right" matTooltip="Uključi/isključi prikazivanje stranice" matTooltipPosition="right" />
+            <a class="btn btn-outline-info btn-block" role="button" [ngClass]="{ 'btn-info' : page == 5 }" (click)="changePage(5)" >
+              Ispitna pitanja
+            </a>
           </li>
           <li class="nav-item mb-3">
-            <a class="btn btn-light btn-block" role="button">Laboratorija</a>
+            <input type="checkbox" class="custom-checkbox float-right" matTooltip="Uključi/isključi prikazivanje stranice" matTooltipPosition="right" />
+            <a class="btn btn-outline-info btn-block" role="button" [ngClass]="{ 'btn-info' : page == 6 }" (click)="changePage(6)" >
+              Laboratorija
+            </a>
           </li>
           <li class="nav-item mb-3">
-            <a class="btn btn-light btn-block" role="button">Projekat / Domaći zadaci</a>
+            <input type="checkbox" class="custom-checkbox float-right" matTooltip="Uključi/isključi prikazivanje stranice" matTooltipPosition="right" />
+            <a class="btn btn-outline-info btn-block" role="button" [ngClass]="{ 'btn-info' : page == 7 }" (click)="changePage(7)" >
+              Projekat / Domaći
+            </a>
           </li>
         </ul>
       </nav>
-    </mat-sidenav>
-
-    <mat-sidenav-content class="bg-white">
-      <div *ngIf="subject != null">
-        {{subject.sifra}} - {{subject.naziv}}
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-
-</ng-container>
+    </div>
+    <div class="col-sm-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

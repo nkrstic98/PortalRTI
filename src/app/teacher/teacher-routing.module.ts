@@ -4,6 +4,8 @@ import {TeacherComponent} from './teacher.component';
 import {ProfileTeacherComponent} from './profile-teacher/profile-teacher.component';
 import {SubjectTeacherComponent} from './subject-teacher/subject-teacher.component';
 
+const subjectModule = () => import('../subject/subject.module').then(x => x.SubjectModule);
+
 const routes: Routes = [
   {
     path: '', component: TeacherComponent,
@@ -12,7 +14,7 @@ const routes: Routes = [
         path: 'profile', component: ProfileTeacherComponent
       },
       {
-        path: 'subjects', component: SubjectTeacherComponent
+        path: 'subjects', component: SubjectTeacherComponent, loadChildren: subjectModule
       }
     ]
   }
