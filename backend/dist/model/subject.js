@@ -44,7 +44,8 @@ let Subject = new Schema({
     info_lab: String,
     info_polaganje: String,
     propozicije: String,
-    obavestenja: Array
+    obavestenja: Array,
+    fajlovi_predavanja: Array
 });
 exports.default = mongoose.model('Subject', Subject, 'predmeti');
 //# sourceMappingURL=subject.js.map

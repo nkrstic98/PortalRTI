@@ -14,6 +14,8 @@ export class Subject {
   info_polaganje: string;
   propozicije: string;
   obavestenja: Information[];
+
+  fajlovi_predavanja: string[];
 }
 
 export class Odsek {

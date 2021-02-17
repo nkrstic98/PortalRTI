@@ -5,6 +5,16 @@ import User from '../model/user';
 
 const router = express.Router();
 
+const sharp = require("sharp");
+const multer = require("multer");
+const fs = require('fs');
+
+const storage = multer.memoryStorage();
+
+const upload = multer({
+  storage: storage
+});
+
 router.route('/').get((req, res, next) => {
   Subject.find()
     .then(notif => res.json(notif))
@@ -49,6 +59,84 @@ router.route('/edit').post((req, res, next) => {
   Subject.findOneAndUpdate({sifra:req.body.sifra}, req.body)
     .then(() => res.json({}))
     .catch(err => next(err));
+})
+
+router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
+  // console.log(req.files);
+  // console.log(req.body);
+
+  if(req.files != null) {
+    fs.access('./uploads/' + req.body.dir, err => {
+      if(err) {
+        fs.mkdirSync('./uploads/' + req.body.dir);
+      }
+    })
+
+    let fileNames = [];
+
+    for(let i = 0; i < req.files.length; i++) {
+      fileNames.push(req.files[i].originalname);
+      await sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
+    }
+
+    // console.log(fileNames);
+
+    //U zavisnosti od destinacionog foldera, dodaju se elementi u razlicite nizove
+    switch(req.body.destination_array)
+    {
+      case 'fajlovi_predavanja':
+        Subject.findOneAndUpdate(
+          {sifra: req.body.subject},
+          {
+            $addToSet: {
+              fajlovi_predavanja : fileNames
+            }
+          }
+        )
+          .then(res1 => res.json(res1))
+          .catch(err => res.json(err))
+        break;
+
+      case 'fajlovi_vezbe' :
+        Subject.findOneAndUpdate(
+          {sifra: req.body.subject},
+          {
+            $addToSet: {
+              fajlovi_vezbe : fileNames
+            }
+          }
+        )
+          .then(res1 => res.json(res1))
+          .catch(err => res.json(err))
+        break;
+
+      case 'fajlovi_lab' :
+        Subject.findOneAndUpdate(
+          {sifra: req.body.subject},
+          {
+            $addToSet: {
+              fajlovi_lab : fileNames
+            }
+          }
+        )
+          .then(res1 => res.json(res1))
+          .catch(err => res.json(err))
+        break;
+
+      case 'fajlovi_projekat':
+        Subject.findOneAndUpdate(
+          {sifra: req.body.subject},
+          {
+            $addToSet: {
+              fajlovi_projekat : fileNames
+            }
+          }
+        )
+          .then(res1 => res.json(res1))
+          .catch(err => res.json(err))
+        break;
+    }
+  }
 })
 
 module.exports = router;

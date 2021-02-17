@@ -33,4 +33,8 @@ export class SubjectService {
   getSubject(subject) {
     return this.http.get(`${this.uri}/${subject}`);
   }
+
+  uploadDocuments(formData) {
+    return this.http.post(`${this.uri}/upload`, formData);
+  }
 }
