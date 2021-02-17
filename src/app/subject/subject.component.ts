@@ -26,6 +26,7 @@ export class SubjectComponent implements OnInit {
 
     this.teacherService.subject.subscribe(subject => {
       this.subject = subject;
+      localStorage.setItem('subject', JSON.stringify(this.subject));
       // console.log(this.subject);
       if(this.user.type == 2) {
         this.page = 1;

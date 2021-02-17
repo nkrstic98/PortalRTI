@@ -33,9 +33,9 @@ export class SubjectTeacherComponent implements OnInit {
   }
 
   chooseSubject() {
-    console.log(this.mySubject);
+    // console.log(this.mySubject);
     this.teacherService.getSubject(this.mySubject);
-    console.log(this.router);
-    this.router.navigate(['teacher/subjects/' + this.mySubject + '/about']);
+    // console.log(this.router);
+    this.router.navigate(['teacher/subjects/' + this.mySubject + '/edit_about']);
   }
 }
