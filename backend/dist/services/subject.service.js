@@ -17,7 +17,14 @@ const router = express_1.default.Router();
 const sharp = require("sharp");
 const multer = require("multer");
 const fs = require('fs');
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/lectures');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
 const upload = multer({
     storage: storage
 });
@@ -59,66 +66,70 @@ router.route('/edit').post((req, res, next) => {
 router.post('/upload', upload.array('uploads[]'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     console.log(req.files);
     console.log(req.body);
-    if (req.files != null) {
-        fs.access('./uploads/' + req.body.dir, err => {
-            if (err) {
-                fs.mkdirSync('./uploads/' + req.body.dir);
-            }
-        });
-        let fileInfo = [];
-        let file;
-        for (let i = 0; i < req.files.length; i++) {
-            file = {
-                filename: req.files[i].originalname,
-                type: req.files[i].mimetype,
-                date: Date.now(),
-                size: req.files[i].size / 1024,
-                author: req.body.teacher
-            };
-            fileInfo.push(file);
-            yield sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
-        }
-        console.log(fileInfo);
-        //U zavisnosti od destinacionog foldera, dodaju se elementi u razlicite nizove
-        switch (req.body.destination_array) {
-            case 'fajlovi_predavanja':
-                subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                    $addToSet: {
-                        fajlovi_predavanja: fileInfo
-                    }
-                })
-                    .then(res1 => res.json(res1))
-                    .catch(err => res.json(err));
-                break;
-            case 'fajlovi_vezbe':
-                subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                    $addToSet: {
-                        fajlovi_vezbe: fileNames
-                    }
-                })
-                    .then(res1 => res.json(res1))
-                    .catch(err => res.json(err));
-                break;
-            case 'fajlovi_lab':
-                subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                    $addToSet: {
-                        fajlovi_lab: fileNames
-                    }
-                })
-                    .then(res1 => res.json(res1))
-                    .catch(err => res.json(err));
-                break;
-            case 'fajlovi_projekat':
-                subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                    $addToSet: {
-                        fajlovi_projekat: fileNames
-                    }
-                })
-                    .then(res1 => res.json(res1))
-                    .catch(err => res.json(err));
-                break;
-        }
+    // if(req.files != null) {
+    // fs.access('./uploads/' + req.body.dir, err => {
+    //   if(err) {
+    //     fs.mkdirSync('./uploads/' + req.body.dir);
+    //   }
+    // })
+    let creationTime = Date.now();
+    let date = new Date(creationTime);
+    let savedDate = date.toLocaleDateString();
+    let fileInfo = [];
+    let file;
+    for (let i = 0; i < req.files.length; i++) {
+        file = {
+            filename: req.files[i].originalname,
+            type: req.files[i].originalname.substr(req.files[i].originalname.lastIndexOf('.') + 1),
+            date: savedDate,
+            size: (req.files[i].size / 1024).toFixed(),
+            author: req.body.teacher,
+            authorName: req.body.authorName
+        };
+        fileInfo.push(file);
+        // await sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
     }
+    console.log(fileInfo);
+    //U zavisnosti od destinacionog foldera, dodaju se elementi u razlicite nizove
+    switch (req.body.destination_array) {
+        case 'fajlovi_predavanja':
+            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+                $addToSet: {
+                    fajlovi_predavanja: fileInfo
+                }
+            })
+                .then(res1 => res.json(res1))
+                .catch(err => res.json(err));
+            break;
+        case 'fajlovi_vezbe':
+            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+                $addToSet: {
+                    fajlovi_vezbe: fileNames
+                }
+            })
+                .then(res1 => res.json(res1))
+                .catch(err => res.json(err));
+            break;
+        case 'fajlovi_lab':
+            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+                $addToSet: {
+                    fajlovi_lab: fileNames
+                }
+            })
+                .then(res1 => res.json(res1))
+                .catch(err => res.json(err));
+            break;
+        case 'fajlovi_projekat':
+            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+                $addToSet: {
+                    fajlovi_projekat: fileNames
+                }
+            })
+                .then(res1 => res.json(res1))
+                .catch(err => res.json(err));
+            break;
+    }
+    // }
 }));
 module.exports = router;
 //# sourceMappingURL=subject.service.js.map

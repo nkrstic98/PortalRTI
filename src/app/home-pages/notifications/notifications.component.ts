@@ -32,7 +32,7 @@ export class NotificationsComponent implements OnInit {
 
         this.myNotifications.forEach(value => {
           let myDate = new Date(value.creationTime);
-          value.time = myDate.toDateString() + ", " + myDate.getHours() + ":" + myDate.getMinutes();
+          value.time = myDate.toLocaleDateString() + ", " + myDate.getHours() + ":" + myDate.getMinutes();
         })
 
         this.filteredNotifications = this.myNotifications.sort((a, b) => b.time.localeCompare(a.time));
