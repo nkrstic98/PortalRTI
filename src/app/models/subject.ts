@@ -15,7 +15,7 @@ export class Subject {
   propozicije: string;
   obavestenja: Information[];
 
-  fajlovi_predavanja: string[];
+  fajlovi_predavanja: FileInfo[];
 }
 
 export class Odsek {
@@ -29,4 +29,13 @@ export class Information {
   tekst: string;
   datum: Date;
   fajlovi: string[];
+}
+
+export class FileInfo {
+  filename: string;
+  type: string;
+  date: Number;
+  size: Number;
+  author: string;
+  authorName: string;
 }

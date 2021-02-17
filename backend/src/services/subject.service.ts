@@ -9,7 +9,14 @@ const sharp = require("sharp");
 const multer = require("multer");
 const fs = require('fs');
 
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/lectures');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
 
 const upload = multer({
   storage: storage
@@ -65,12 +72,16 @@ router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
   console.log(req.files);
   console.log(req.body);
 
-  if(req.files != null) {
-    fs.access('./uploads/' + req.body.dir, err => {
-      if(err) {
-        fs.mkdirSync('./uploads/' + req.body.dir);
-      }
-    })
+  // if(req.files != null) {
+    // fs.access('./uploads/' + req.body.dir, err => {
+    //   if(err) {
+    //     fs.mkdirSync('./uploads/' + req.body.dir);
+    //   }
+    // })
+
+    let creationTime = Date.now();
+    let date = new Date(creationTime);
+    let savedDate = date.toLocaleDateString();
 
     let fileInfo = [];
 
@@ -78,15 +89,16 @@ router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
     for(let i = 0; i < req.files.length; i++) {
       file = {
         filename: req.files[i].originalname,
-        type: req.files[i].mimetype,
-        date: Date.now(),
-        size: req.files[i].size / 1024,
-        author: req.body.teacher
+        type: req.files[i].originalname.substr(req.files[i].originalname.lastIndexOf('.') + 1),
+        date: savedDate,
+        size: (req.files[i].size / 1024).toFixed(),
+        author: req.body.teacher,
+        authorName: req.body.authorName
       }
 
       fileInfo.push(file);
 
-      await sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
+      // await sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
     }
 
     console.log(fileInfo);
@@ -146,7 +158,7 @@ router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
           .catch(err => res.json(err))
         break;
     }
-  }
+  // }
 })
 
 module.exports = router;
