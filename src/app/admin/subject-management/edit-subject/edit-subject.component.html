@@ -85,54 +85,57 @@
         </div>
       </div>
 
-      <hr/>
+      <div *ngIf="user.type == 1">
 
-      <div class="form-group row">
-        <label for="cilj" class="col-4 col-form-label">Cilj</label>
-        <div class="col-6">
+        <hr/>
+
+        <div class="form-group row">
+          <label for="cilj" class="col-4 col-form-label">Cilj</label>
+          <div class="col-6">
           <textarea id="cilj" name="cilj" cols="40" rows="4" class="form-control"
                     [(ngModel)]="subject.cilj"
           ></textarea>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="ishod" class="col-4 col-form-label">Ishod</label>
-        <div class="col-6">
+        <div class="form-group row">
+          <label for="ishod" class="col-4 col-form-label">Ishod</label>
+          <div class="col-6">
           <textarea id="ishod" name="ishod" cols="40" rows="4" class="form-control"
                     [(ngModel)]="subject.ishod"
           ></textarea>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="info_lab" class="col-4 col-form-label">Informacije o laboratorijskim vežbama</label>
-        <div class="col-6">
-          <textarea id="info_lab" name="info=lab" cols="40" rows="4" class="form-control"
-                    [(ngModel)]="subject.info_lab"
-          ></textarea>
-        </div>
-      </div>
+        <!--      <div class="form-group row">-->
+        <!--        <label for="info_lab" class="col-4 col-form-label">Informacije o laboratorijskim vežbama</label>-->
+        <!--        <div class="col-6">-->
+        <!--          <textarea id="info_lab" name="info=lab" cols="40" rows="4" class="form-control"-->
+        <!--                    [(ngModel)]="subject.info_lab"-->
+        <!--          ></textarea>-->
+        <!--        </div>-->
+        <!--      </div>-->
 
-      <div class="form-group row">
-        <label for="info_polaganje" class="col-4 col-form-label">Način polaganja</label>
-        <div class="col-6">
+        <div class="form-group row">
+          <label for="info_polaganje" class="col-4 col-form-label">Način polaganja</label>
+          <div class="col-6">
           <textarea id="info_polaganje" name="info?polaganje" cols="40" rows="4" class="form-control"
                     [(ngModel)]="subject.info_polaganje"
           ></textarea>
+          </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="propozicije" class="col-4 col-form-label">Propozicije</label>
-        <div class="col-6">
+        <div class="form-group row">
+          <label for="propozicije" class="col-4 col-form-label">Propozicije</label>
+          <div class="col-6">
            <textarea id="propozicije" name="propozicije" cols="40" rows="4" class="form-control"
                      [(ngModel)]="subject.propozicije"
            ></textarea>
+          </div>
         </div>
       </div>
 
-      <div class="form-group row text-center">
+      <div class="form-group row text-center mt-4">
         <div class="col">
           <button class="btn btn-primary" (click)="editSubject()">Ažuriraj predmet</button>
         </div>

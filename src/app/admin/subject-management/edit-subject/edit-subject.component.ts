@@ -5,6 +5,8 @@ import {SubjectService} from '../../../services/subject.service';
 import {AlertService} from '../../../services/alert.service';
 import {first} from 'rxjs/operators';
 import {TeacherService} from '../../../services/teacher.service';
+import {User} from '../../../models/user';
+import {WorkerService} from '../../../services/worker.service';
 
 @Component({
   selector: 'app-edit-subject',
@@ -15,7 +17,9 @@ export class EditSubjectComponent implements OnInit {
   subject: Subject;
   subjectId: String;
 
-  submitted: Boolean;
+  submitted: Boolean
+
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +29,8 @@ export class EditSubjectComponent implements OnInit {
     private teacherService: TeacherService
   ) {
     this.teacherService.subject.subscribe(subject => this.subject = subject);
+
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit(): void {
