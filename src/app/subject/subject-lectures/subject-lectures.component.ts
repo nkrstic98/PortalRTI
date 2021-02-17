@@ -39,6 +39,7 @@ export class SubjectLecturesComponent implements OnInit {
 
     formData.append('subject', this.route.snapshot.params['sifra']);
     formData.append('destination_array', 'fajlovi_predavanja');
+    formData.append('teacher', JSON.parse(localStorage.getItem('user')).username);
 
     this.subjectService.uploadDocuments(formData)
       .pipe(first())

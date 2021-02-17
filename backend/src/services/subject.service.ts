@@ -62,8 +62,8 @@ router.route('/edit').post((req, res, next) => {
 })
 
 router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
-  // console.log(req.files);
-  // console.log(req.body);
+  console.log(req.files);
+  console.log(req.body);
 
   if(req.files != null) {
     fs.access('./uploads/' + req.body.dir, err => {
@@ -72,14 +72,24 @@ router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
       }
     })
 
-    let fileNames = [];
+    let fileInfo = [];
 
+    let file;
     for(let i = 0; i < req.files.length; i++) {
-      fileNames.push(req.files[i].originalname);
+      file = {
+        filename: req.files[i].originalname,
+        type: req.files[i].mimetype,
+        date: Date.now(),
+        size: req.files[i].size / 1024,
+        author: req.body.teacher
+      }
+
+      fileInfo.push(file);
+
       await sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
     }
 
-    // console.log(fileNames);
+    console.log(fileInfo);
 
     //U zavisnosti od destinacionog foldera, dodaju se elementi u razlicite nizove
     switch(req.body.destination_array)
@@ -89,7 +99,7 @@ router.post('/upload', upload.array('uploads[]'), async (req, res, next) => {
           {sifra: req.body.subject},
           {
             $addToSet: {
-              fajlovi_predavanja : fileNames
+              fajlovi_predavanja : fileInfo
             }
           }
         )
