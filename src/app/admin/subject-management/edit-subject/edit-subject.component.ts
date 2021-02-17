@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SubjectService} from '../../../services/subject.service';
 import {AlertService} from '../../../services/alert.service';
 import {first} from 'rxjs/operators';
+import {TeacherService} from '../../../services/teacher.service';
 
 @Component({
   selector: 'app-edit-subject',
@@ -20,8 +21,11 @@ export class EditSubjectComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private subjectService: SubjectService,
-    private alertService: AlertService
-  ) { }
+    private alertService: AlertService,
+    private teacherService: TeacherService
+  ) {
+    this.teacherService.subject.subscribe(subject => this.subject = subject);
+  }
 
   ngOnInit(): void {
     this.subjectId = this.route.snapshot.params['sifra'];

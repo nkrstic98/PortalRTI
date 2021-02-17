@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class SubjectComponent implements OnInit {
   page: Number;
-  links = [ 'notifications', 'about', 'lectures', 'excercises', 'exams', 'labs', 'projects' ];
+  links = [ 'notifications', 'edit_about', 'lectures', 'excercises', 'exams', 'labs', 'projects' ];
 
   user: User;
   subject: Subject;

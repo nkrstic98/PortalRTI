@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {SubjectAboutComponent} from './subject-about/subject-about.component';
 import {SubjectLecturesComponent} from './subject-lectures/subject-lectures.component';
+import {EditSubjectComponent} from '../admin/subject-management/edit-subject/edit-subject.component';
 
 const routes: Routes = [
   {
-    path: ':subject/about', component: SubjectAboutComponent
+    path: ':sifra/edit_about', component: EditSubjectComponent
   },
   {
-    path: ':subject/lectures', component: SubjectLecturesComponent
+    path: ':sifra/lectures', component: SubjectLecturesComponent
   }
 ];
 
