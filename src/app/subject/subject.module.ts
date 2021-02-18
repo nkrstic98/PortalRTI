@@ -7,6 +7,7 @@ import {SubjectComponent} from './subject.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { SubjectAboutComponent } from './subject-about/subject-about.component';
 import { SubjectLecturesComponent } from './subject-lectures/subject-lectures.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SubjectLecturesComponent } from './subject-lectures/subject-lectures.co
     CommonModule,
     SubjectRoutingModule,
     MatSidenavModule,
-    MatTooltipModule
+    MatTooltipModule,
+    DragDropModule
   ]
 })
 export class SubjectModule { }

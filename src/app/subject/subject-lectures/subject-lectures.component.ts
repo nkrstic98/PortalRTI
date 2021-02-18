@@ -7,7 +7,7 @@ import subject from '../../../../backend/src/model/subject';
 import {FileInfo, Subject} from '../../models/subject';
 import {User} from '../../models/user';
 import {WorkerService} from '../../services/worker.service';
-import {worker} from 'cluster';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-subject-lectures',
@@ -98,5 +98,10 @@ export class SubjectLecturesComponent implements OnInit {
           this.alertService.error('Greška prilikom brisanja dokumenata', {autoClose: true});
         }
       })
+  }
+
+  drop(event: CdkDragDrop<FileInfo[]>) {
+    moveItemInArray(this.dbFiles, event.previousIndex, event.currentIndex);
+    console.log(this.dbFiles);
   }
 }
