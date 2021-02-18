@@ -8,13 +8,15 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { SubjectAboutComponent } from './subject-about/subject-about.component';
 import { SubjectLecturesComponent } from './subject-lectures/subject-lectures.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SubjectExercisesComponent } from './subject-exercises/subject-exercises.component';
 
 
 @NgModule({
   declarations: [
     SubjectComponent,
     SubjectAboutComponent,
-    SubjectLecturesComponent
+    SubjectLecturesComponent,
+    SubjectExercisesComponent
   ],
   exports: [
     SubjectComponent

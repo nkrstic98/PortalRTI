@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {SubjectService} from '../../services/subject.service';
-import {first} from 'rxjs/operators';
-import {AlertService} from '../../services/alert.service';
-import subject from '../../../../backend/src/model/subject';
 import {FileInfo, Subject} from '../../models/subject';
 import {User} from '../../models/user';
+import {ActivatedRoute} from '@angular/router';
+import {SubjectService} from '../../services/subject.service';
+import {AlertService} from '../../services/alert.service';
 import {WorkerService} from '../../services/worker.service';
+import {first} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-subject-lectures',
-  templateUrl: './subject-lectures.component.html',
-  styleUrls: ['./subject-lectures.component.css']
+  selector: 'app-subject-exercises',
+  templateUrl: './subject-exercises.component.html',
+  styleUrls: ['./subject-exercises.component.css']
 })
-export class SubjectLecturesComponent implements OnInit {
+export class SubjectExercisesComponent implements OnInit {
 
   filesToUpload: Array<File> = [];
 
@@ -43,7 +42,7 @@ export class SubjectLecturesComponent implements OnInit {
     this.subjectService.getSubject(this.route.snapshot.params['sifra'])
       .pipe(first())
       .subscribe((subject: Subject) => {
-        this.dbFiles = subject.fajlovi_predavanja;
+        this.dbFiles = subject.fajlovi_vezbe;
       })
   }
 
@@ -60,10 +59,10 @@ export class SubjectLecturesComponent implements OnInit {
       // console.log("form data variable " + formData.getAll('uploads[]'));
     }
 
-    formData.append('dir', 'lectures');
+    formData.append('dir', 'exercises');
 
     formData.append('subject', this.route.snapshot.params['sifra']);
-    formData.append('destination_array', 'fajlovi_predavanja');
+    formData.append('destination_array', 'fajlovi_vezbe');
     formData.append('teacher', this.user.username);
 
     formData.append('authorName', this.authorName);
@@ -82,7 +81,7 @@ export class SubjectLecturesComponent implements OnInit {
   }
 
   delete(file) {
-    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'lectures', 'fajlovi_predavanja')
+    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'exercises', 'fajlovi_vezbe')
       .pipe(first())
       .subscribe({
         next: value => {
@@ -101,7 +100,7 @@ export class SubjectLecturesComponent implements OnInit {
   }
 
   changeFileOrder() {
-    this.subjectService.reorderDocuments(this.dbFiles, this.route.snapshot.params['sifra'], 'fajlovi_predavanja')
+    this.subjectService.reorderDocuments(this.dbFiles, this.route.snapshot.params['sifra'], 'fajlovi_vezbe')
       .pipe(first())
       .subscribe({
         next: value => {
@@ -113,4 +112,5 @@ export class SubjectLecturesComponent implements OnInit {
         }
       })
   }
+
 }

@@ -134,7 +134,7 @@ router.route('/deleteFile').post((req, res, next) => {
         .catch(err => res.json(err));
 });
 router.post('/reorderFiles', (req, res, next) => {
-    console.log(req.body);
+    // console.log(req.body);
     subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
         $pull: {
             [`${req.body.dest}`]: {

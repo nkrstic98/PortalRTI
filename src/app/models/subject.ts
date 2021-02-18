@@ -16,6 +16,7 @@ export class Subject {
   obavestenja: Information[];
 
   fajlovi_predavanja: FileInfo[];
+  fajlovi_vezbe: FileInfo[];
 }
 
 export class Odsek {
