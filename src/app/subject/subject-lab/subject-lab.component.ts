@@ -7,28 +7,42 @@ import {AlertService} from '../../services/alert.service';
 import {WorkerService} from '../../services/worker.service';
 import {first} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Subscription} from 'rxjs';
+import {TextEditorService} from '../../services/text-editor.service';
 
 @Component({
-  selector: 'app-subject-exams',
-  templateUrl: './subject-exams.component.html',
-  styleUrls: ['./subject-exams.component.css']
+  selector: 'app-subject-lab',
+  templateUrl: './subject-lab.component.html',
+  styleUrls: ['./subject-lab.component.css']
 })
-export class SubjectExamsComponent implements OnInit {
-  user: User;
-  authorName: string;
+export class SubjectLabComponent implements OnInit {
 
   filesToUpload: Array<File> = [];
 
-  dbFiles : Array<FileInfo> = [];
+  subject: Subject;
+
+  user: User;
+
+  authorName: string;
+
+  subscription: Subscription;
+
+  labInfo : string;
 
   constructor(
     private route: ActivatedRoute,
     private subjectService: SubjectService,
     private alertService: AlertService,
-    private workerService: WorkerService
+    private workerService: WorkerService,
+    private textEditorService: TextEditorService
   ) { }
 
   ngOnInit(): void {
+    this.subscription = this.textEditorService.text.subscribe(text => {
+      this.labInfo = text;
+      console.log("Apdejtovan tekst: " + this.labInfo);
+    });
+
     this.user = JSON.parse(localStorage.getItem('user'));
 
     this.workerService.get(this.user.username)
@@ -40,8 +54,13 @@ export class SubjectExamsComponent implements OnInit {
     this.subjectService.getSubject(this.route.snapshot.params['sifra'])
       .pipe(first())
       .subscribe((subject: Subject) => {
-        this.dbFiles = subject.fajlovi_ispit;
+        this.subject = subject;
+        this.textEditorService.changeText(subject.info_lab);
       })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   fileChangeEvent(event) {
@@ -59,10 +78,10 @@ export class SubjectExamsComponent implements OnInit {
       // console.log("form data variable " + formData.getAll('uploads[]'));
     }
 
-    formData.append('dir', 'exams');
+    formData.append('dir', 'lab');
 
     formData.append('subject', this.route.snapshot.params['sifra']);
-    formData.append('destination_array', 'fajlovi_ispit');
+    formData.append('destination_array', 'fajlovi_lab');
     formData.append('teacher', this.user.username);
     formData.append('authorName', this.authorName);
 
@@ -78,11 +97,10 @@ export class SubjectExamsComponent implements OnInit {
         }
       })
   }
-
   delete(file) {
     this.alertService.clear();
 
-    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'exams', 'fajlovi_ispit')
+    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'lab', 'fajlovi_lab')
       .pipe(first())
       .subscribe({
         next: value => {
@@ -96,14 +114,14 @@ export class SubjectExamsComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<FileInfo[]>) {
-    moveItemInArray(this.dbFiles, event.previousIndex, event.currentIndex);
-    console.log(this.dbFiles);
+    moveItemInArray(this.subject.fajlovi_lab, event.previousIndex, event.currentIndex);
+    console.log(this.subject.fajlovi_lab);
   }
 
   changeFileOrder() {
     this.alertService.clear();
 
-    this.subjectService.reorderDocuments(this.dbFiles, this.route.snapshot.params['sifra'], 'fajlovi_ispit')
+    this.subjectService.reorderDocuments(this.subject.fajlovi_lab, this.route.snapshot.params['sifra'], 'fajlovi_lab')
       .pipe(first())
       .subscribe({
         next: value => {
@@ -112,6 +130,21 @@ export class SubjectExamsComponent implements OnInit {
         },
         error: err => {
           this.alertService.error('Greška prilikom organizovanja fajlova', {autoClose: true});
+        }
+      })
+  }
+
+  saveLabInfo() {
+    this.subject.info_lab = this.labInfo;
+    this.subjectService.editSubject(this.subject)
+      .pipe(first())
+      .subscribe({
+        next: value => {
+          this.alertService.warn('Uspešno ste ažurirali informacije o laboratorijskim vežbama', {autoClose: true});
+          this.ngOnInit();
+        },
+        error: err => {
+          this.alertService.error('Greška prilikom ažuriranja informacija. Pokušsajte ponovo!', {autoClose: true});
         }
       })
   }

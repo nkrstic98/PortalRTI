@@ -25,7 +25,9 @@ export class SubjectComponent implements OnInit {
     private subjectService: SubjectService,
     private alertService: AlertService
   ) {
+  }
 
+  ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     // console.log(this.user);
 
@@ -40,11 +42,6 @@ export class SubjectComponent implements OnInit {
         this.page = 2;
       }
     });
-
-  }
-
-  ngOnInit(): void {
-
   }
 
   changePage(val) {
