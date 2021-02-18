@@ -40,7 +40,7 @@ export class SubjectLabComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.textEditorService.text.subscribe(text => {
       this.labInfo = text;
-      console.log("Apdejtovan tekst: " + this.labInfo);
+      // console.log("Apdejtovan tekst: " + this.labInfo);
     });
 
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -140,11 +140,11 @@ export class SubjectLabComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: value => {
-          this.alertService.warn('Uspešno ste ažurirali informacije o laboratorijskim vežbama', {autoClose: true});
+          this.alertService.success('Uspešno ste ažurirali informacije o laboratorijskim vežbama', {autoClose: true});
           this.ngOnInit();
         },
         error: err => {
-          this.alertService.error('Greška prilikom ažuriranja informacija. Pokušsajte ponovo!', {autoClose: true});
+          this.alertService.error('Greška prilikom ažuriranja informacija. Pokušajte ponovo!', {autoClose: true});
         }
       })
   }

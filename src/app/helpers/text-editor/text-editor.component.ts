@@ -19,27 +19,23 @@ export class TextEditorComponent implements OnInit {
     spellcheck: true,
     height: '15rem',
     minHeight: '5rem',
-    placeholder: 'Enter text here...',
+    placeholder: 'Ovde pišite tekst...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
-      ['bold']
-    ],
-    customClasses: [
-      {
-        name: "quote",
-        class: "quote",
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: "titleText",
-        class: "titleText",
-        tag: "h1",
-      },
+      [
+        'justifyLeft',
+        'justifyCenter',
+        'justifyRight',
+        'justifyFull'
+      ],
+      [
+        'backgroundColor',
+        'customClasses',
+        'insertImage',
+        'insertVideo'
+      ]
     ]
   };
 
