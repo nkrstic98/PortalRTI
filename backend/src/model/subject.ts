@@ -40,7 +40,14 @@ let Subject = new Schema({
   obavestenja: Array,
 
   fajlovi_predavanja: Array,
-  fajlovi_vezbe: Array
+  fajlovi_vezbe: Array,
+  fajlovi_ispit: Array,
+  fajlovi_lab: Array,
+  fajlovi_projekat: Array,
+
+  prikazi_ispit: Boolean,
+  prikazi_lab: Boolean,
+  prikazi_projekat: Boolean
 });
 
 export default mongoose.model('Subject', Subject, 'predmeti');

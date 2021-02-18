@@ -17,6 +17,13 @@ export class Subject {
 
   fajlovi_predavanja: FileInfo[];
   fajlovi_vezbe: FileInfo[];
+  fajlovi_ispit: FileInfo[];
+  fajlovi_lab: FileInfo[];
+  fajlovi_projekat: FileInfo[];
+
+  prikazi_ispit: boolean;
+  prikazi_lab: boolean;
+  prikazi_projekat: boolean;
 }
 
 export class Odsek {
