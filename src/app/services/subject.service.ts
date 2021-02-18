@@ -42,4 +42,8 @@ export class SubjectService {
 
     return this.http.post(`${this.uri}/upload/${JSON.stringify(directory)}`, formData);
   }
+
+  deleteDocument(file, subject, location, dst) {
+    return this.http.post(`${this.uri}/deleteFile`, {file: file, subject: subject, location: location, dst: dst});
+  }
 }

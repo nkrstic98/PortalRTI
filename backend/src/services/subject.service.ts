@@ -185,4 +185,66 @@ router.post('/upload/:directory', upload.array('uploads[]'), async (req, res, ne
   // }
 })
 
+router.route('/deleteFile').post((req, res, next) => {
+  fs.unlink('./uploads/subjects/' + req.body.subject + '/' + req.body.location + '/' + req.body.file.filename, (err) => {
+    if(err) throw err;
+    console.log('Fajl obrisan');
+  })
+
+  switch(req.body.dst)
+  {
+    case 'fajlovi_predavanja':
+      Subject.findOneAndUpdate(
+        {sifra: req.body.subject},
+        {
+          $pull: {
+            fajlovi_predavanja : req.body.file
+          }
+        }
+      )
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err))
+      break;
+
+    case 'fajlovi_vezbe' :
+      Subject.findOneAndUpdate(
+        {sifra: req.body.subject},
+        {
+          $pull: {
+            fajlovi_vezbe : req.body.file
+          }
+        }
+      )
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err))
+      break;
+
+    case 'fajlovi_lab' :
+      Subject.findOneAndUpdate(
+        {sifra: req.body.subject},
+        {
+          $pull: {
+            fajlovi_lab : req.body.file
+          }
+        }
+      )
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err))
+      break;
+
+    case 'fajlovi_projekat':
+      Subject.findOneAndUpdate(
+        {sifra: req.body.subject},
+        {
+          $pull: {
+            fajlovi_projekat : req.body.file
+          }
+        }
+      )
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err))
+      break;
+  }
+})
+
 module.exports = router;

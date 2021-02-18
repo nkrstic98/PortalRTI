@@ -87,6 +87,16 @@ export class SubjectLecturesComponent implements OnInit {
   }
 
   delete(file) {
-
+    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'lectures', 'fajlovi_predavanja')
+      .pipe(first())
+      .subscribe({
+        next: value => {
+          this.alertService.warn('Uspešno ste obirsali dokument', {autoClose: true});
+          this.ngOnInit();
+        },
+        error: err => {
+          this.alertService.error('Greška prilikom brisanja dokumenata', {autoClose: true});
+        }
+      })
   }
 }
