@@ -51,6 +51,8 @@ export class SubjectExercisesComponent implements OnInit {
   }
 
   upload() {
+    this.alertService.clear();
+
     let formData = new FormData();
     let files: Array<File> = this.filesToUpload;
 
@@ -81,6 +83,8 @@ export class SubjectExercisesComponent implements OnInit {
   }
 
   delete(file) {
+    this.alertService.clear();
+
     this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'exercises', 'fajlovi_vezbe')
       .pipe(first())
       .subscribe({
@@ -100,6 +104,8 @@ export class SubjectExercisesComponent implements OnInit {
   }
 
   changeFileOrder() {
+    this.alertService.clear();
+
     this.subjectService.reorderDocuments(this.dbFiles, this.route.snapshot.params['sifra'], 'fajlovi_vezbe')
       .pipe(first())
       .subscribe({
