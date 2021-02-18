@@ -19,7 +19,27 @@ const multer = require("multer");
 const fs = require('fs');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/lectures');
+        let directory = JSON.parse(req.params.directory);
+        let dir = './uploads/subjects/' + directory.subject;
+        try {
+            if (!fs.existsSync('./uploads')) {
+                fs.mkdirSync('./uploads');
+            }
+            if (!fs.existsSync('./uploads/subjects')) {
+                fs.mkdirSync('./uploads/subjects');
+            }
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+            dir = dir + '/' + directory.dir;
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+        }
+        catch (err) {
+            console.error(err);
+        }
+        cb(null, dir);
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -63,7 +83,7 @@ router.route('/edit').post((req, res, next) => {
         .then(() => res.json({}))
         .catch(err => next(err));
 });
-router.post('/upload', upload.array('uploads[]'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+router.post('/upload/:directory', upload.array('uploads[]'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
     console.log(req.files);
     console.log(req.body);
     // if(req.files != null) {

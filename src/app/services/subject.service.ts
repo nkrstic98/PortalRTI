@@ -35,6 +35,11 @@ export class SubjectService {
   }
 
   uploadDocuments(formData) {
-    return this.http.post(`${this.uri}/upload`, formData);
+    let directory = {
+      subject: formData.get('subject'),
+      dir: formData.get('dir')
+    }
+
+    return this.http.post(`${this.uri}/upload/${JSON.stringify(directory)}`, formData);
   }
 }
