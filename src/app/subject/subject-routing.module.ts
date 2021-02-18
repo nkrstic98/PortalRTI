@@ -5,6 +5,7 @@ import {EditSubjectComponent} from '../admin/subject-management/edit-subject/edi
 import {SubjectExercisesComponent} from './subject-exercises/subject-exercises.component';
 import {SubjectExamsComponent} from './subject-exams/subject-exams.component';
 import {SubjectLabComponent} from './subject-lab/subject-lab.component';
+import {SubjectProjectComponent} from './subject-project/subject-project.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: ':sifra/labs', component: SubjectLabComponent
+  },
+  {
+    path: ':sifra/projects', component: SubjectProjectComponent
   }
 ];
 

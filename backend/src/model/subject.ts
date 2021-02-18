@@ -36,6 +36,7 @@ let Subject = new Schema({
   ishod: String,
   info_lab: String,
   info_polaganje: String,
+  info_projekat: String,
   propozicije: String,
   obavestenja: Array,
 

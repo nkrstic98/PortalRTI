@@ -12,6 +12,7 @@ export class Subject {
   ishod: string;
   info_lab: string;
   info_polaganje: string;
+  info_projekat: string;
   propozicije: string;
   obavestenja: Information[];
 

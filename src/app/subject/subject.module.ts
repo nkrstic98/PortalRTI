@@ -13,6 +13,7 @@ import { SubjectExamsComponent } from './subject-exams/subject-exams.component';
 import {FormsModule} from '@angular/forms';
 import { SubjectLabComponent } from './subject-lab/subject-lab.component';
 import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
+import { SubjectProjectComponent } from './subject-project/subject-project.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
     SubjectLecturesComponent,
     SubjectExercisesComponent,
     SubjectExamsComponent,
-    SubjectLabComponent
+    SubjectLabComponent,
+    SubjectProjectComponent
   ],
   exports: [
     SubjectComponent

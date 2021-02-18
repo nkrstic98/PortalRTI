@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {FileInfo, Subject} from '../../models/subject';
 import {User} from '../../models/user';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {SubjectService} from '../../services/subject.service';
 import {AlertService} from '../../services/alert.service';
 import {WorkerService} from '../../services/worker.service';
+import {TextEditorService} from '../../services/text-editor.service';
 import {first} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Subscription} from 'rxjs';
-import {TextEditorService} from '../../services/text-editor.service';
 
 @Component({
-  selector: 'app-subject-lab',
-  templateUrl: './subject-lab.component.html',
-  styleUrls: ['./subject-lab.component.css']
+  selector: 'app-subject-project',
+  templateUrl: './subject-project.component.html',
+  styleUrls: ['./subject-project.component.css']
 })
-export class SubjectLabComponent implements OnInit {
+export class SubjectProjectComponent implements OnInit {
 
   filesToUpload: Array<File> = [];
 
@@ -27,7 +27,7 @@ export class SubjectLabComponent implements OnInit {
 
   subscription: Subscription;
 
-  labInfo : string;
+  projectInfo : string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +39,7 @@ export class SubjectLabComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.textEditorService.text.subscribe(text => {
-      this.labInfo = text;
+      this.projectInfo = text;
       // console.log("Apdejtovan tekst: " + this.labInfo);
     });
 
@@ -55,7 +55,7 @@ export class SubjectLabComponent implements OnInit {
       .pipe(first())
       .subscribe((subject: Subject) => {
         this.subject = subject;
-        this.textEditorService.changeText(subject.info_lab);
+        this.textEditorService.changeText(subject.info_projekat);
       })
   }
 
@@ -78,10 +78,10 @@ export class SubjectLabComponent implements OnInit {
       // console.log("form data variable " + formData.getAll('uploads[]'));
     }
 
-    formData.append('dir', 'lab');
+    formData.append('dir', 'projects');
 
     formData.append('subject', this.route.snapshot.params['sifra']);
-    formData.append('destination_array', 'fajlovi_lab');
+    formData.append('destination_array', 'fajlovi_projekat');
     formData.append('teacher', this.user.username);
     formData.append('authorName', this.authorName);
 
@@ -101,7 +101,7 @@ export class SubjectLabComponent implements OnInit {
   delete(file) {
     this.alertService.clear();
 
-    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'lab', 'fajlovi_lab')
+    this.subjectService.deleteDocument(file, this.route.snapshot.params['sifra'], 'projects', 'fajlovi_projekat')
       .pipe(first())
       .subscribe({
         next: value => {
@@ -122,7 +122,7 @@ export class SubjectLabComponent implements OnInit {
   changeFileOrder() {
     this.alertService.clear();
 
-    this.subjectService.reorderDocuments(this.subject.fajlovi_lab, this.route.snapshot.params['sifra'], 'fajlovi_lab')
+    this.subjectService.reorderDocuments(this.subject.fajlovi_lab, this.route.snapshot.params['sifra'], 'fajlovi_projekat')
       .pipe(first())
       .subscribe({
         next: value => {
@@ -135,13 +135,13 @@ export class SubjectLabComponent implements OnInit {
       })
   }
 
-  saveLabInfo() {
-    this.subject.info_lab = this.labInfo;
+  saveProjectInfo() {
+    this.subject.info_projekat = this.projectInfo;
     this.subjectService.editSubject(this.subject)
       .pipe(first())
       .subscribe({
         next: value => {
-          this.alertService.success('Uspešno ste ažurirali informacije o laboratorijskim vežbama', {autoClose: true});
+          this.alertService.success('Uspešno ste ažurirali informacije o projektima', {autoClose: true});
           this.ngOnInit();
         },
         error: err => {
@@ -149,4 +149,5 @@ export class SubjectLabComponent implements OnInit {
         }
       })
   }
+
 }
