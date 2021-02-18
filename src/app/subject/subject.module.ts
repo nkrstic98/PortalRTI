@@ -10,6 +10,7 @@ import { SubjectLecturesComponent } from './subject-lectures/subject-lectures.co
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SubjectExercisesComponent } from './subject-exercises/subject-exercises.component';
 import { SubjectExamsComponent } from './subject-exams/subject-exams.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SubjectExamsComponent } from './subject-exams/subject-exams.component';
     SubjectRoutingModule,
     MatSidenavModule,
     MatTooltipModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule
   ]
 })
 export class SubjectModule { }
