@@ -9,6 +9,7 @@ import { SubjectAboutComponent } from './subject-about/subject-about.component';
 import { SubjectLecturesComponent } from './subject-lectures/subject-lectures.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SubjectExercisesComponent } from './subject-exercises/subject-exercises.component';
+import { SubjectExamsComponent } from './subject-exams/subject-exams.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SubjectExercisesComponent } from './subject-exercises/subject-exercises
     SubjectComponent,
     SubjectAboutComponent,
     SubjectLecturesComponent,
-    SubjectExercisesComponent
+    SubjectExercisesComponent,
+    SubjectExamsComponent
   ],
   exports: [
     SubjectComponent
