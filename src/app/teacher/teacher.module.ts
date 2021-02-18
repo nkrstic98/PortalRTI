@@ -8,18 +8,21 @@ import { ProfileTeacherComponent } from './profile-teacher/profile-teacher.compo
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { SubjectTeacherComponent } from './subject-teacher/subject-teacher.component';
 import {SubjectModule} from '../subject/subject.module';
+import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
+import { AddNewsComponent } from './add-news/add-news.component';
 
 @NgModule({
   exports: [
     MatSidenavModule
   ],
-  declarations: [ProfileTeacherComponent, SubjectTeacherComponent],
+  declarations: [ProfileTeacherComponent, SubjectTeacherComponent, AddNewsComponent],
   imports: [
     CommonModule,
     TeacherRoutingModule,
     FormsModule,
     NgDynamicBreadcrumbModule,
-    SubjectModule
+    SubjectModule,
+    TextEditorModule
   ]
 })
 export class TeacherModule { }
