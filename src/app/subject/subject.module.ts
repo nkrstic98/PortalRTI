@@ -14,6 +14,8 @@ import {FormsModule} from '@angular/forms';
 import { SubjectLabComponent } from './subject-lab/subject-lab.component';
 import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
 import { SubjectProjectComponent } from './subject-project/subject-project.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatLabel} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { SubjectProjectComponent } from './subject-project/subject-project.compo
     MatTooltipModule,
     DragDropModule,
     FormsModule,
-    TextEditorModule
+    TextEditorModule,
+    MatDatepickerModule
   ]
 })
 export class SubjectModule { }

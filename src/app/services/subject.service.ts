@@ -50,4 +50,13 @@ export class SubjectService {
   reorderDocuments(fileList, subject, dest) {
     return this.http.post(`${this.uri}/reorderFiles`, {fileList: fileList, subject: subject, dest: dest});
   }
+
+  uploadNotificationFiles(formData) {
+    let directory = {
+      subject: formData.get('subject'),
+      dir: formData.get('dir')
+    }
+
+    return this.http.post(`${this.uri}/uploadNotification/${JSON.stringify(directory)}`, formData);
+  }
 }

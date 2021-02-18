@@ -14,7 +14,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const subject_1 = __importDefault(require("../model/subject"));
 const router = express_1.default.Router();
-const sharp = require("sharp");
 const multer = require("multer");
 const fs = require('fs');
 const storage = multer.diskStorage({
@@ -165,5 +164,6 @@ router.post('/reorderFiles', (req, res, next) => {
     //   //   .then(res1 => res.json(res1))
     //   //   .catch(err => res.json(err))
 });
+router.post('/uploadNotification/:directory', upload.array('uploads[]'), (req, res, next) => { });
 module.exports = router;
 //# sourceMappingURL=subject.service.js.map

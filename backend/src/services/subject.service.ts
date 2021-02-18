@@ -5,7 +5,6 @@ import User from '../model/user';
 
 const router = express.Router();
 
-const sharp = require("sharp");
 const multer = require("multer");
 const fs = require('fs');
 
@@ -200,5 +199,7 @@ router.post('/reorderFiles', (req, res, next) => {
   //   //   .then(res1 => res.json(res1))
   //   //   .catch(err => res.json(err))
 })
+
+router.post('/uploadNotification/:directory', upload.array('uploads[]'), (req, res, next) => {});
 
 module.exports = router;

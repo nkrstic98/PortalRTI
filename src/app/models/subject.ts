@@ -14,6 +14,7 @@ export class Subject {
   info_polaganje: string;
   info_projekat: string;
   propozicije: string;
+
   obavestenja: Information[];
 
   fajlovi_predavanja: FileInfo[];
@@ -37,7 +38,8 @@ export class Information {
   naslov: string;
   tekst: string;
   datum: Date;
-  fajlovi: string[];
+  fajlovi: string[]
+  autor: string;
 }
 
 export class FileInfo {
