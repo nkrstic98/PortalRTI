@@ -104,4 +104,18 @@ export class SubjectLecturesComponent implements OnInit {
     moveItemInArray(this.dbFiles, event.previousIndex, event.currentIndex);
     console.log(this.dbFiles);
   }
+
+  changeFileOrder() {
+    this.subjectService.reorderDocuments(this.dbFiles, this.route.snapshot.params['sifra'], 'fajlovi_predavanja')
+      .pipe(first())
+      .subscribe({
+        next: value => {
+          this.alertService.warn('Uspešno ste ažurirali prikaz fajlova', {autoClose: true});
+          this.ngOnInit();
+        },
+        error: err => {
+          this.alertService.error('Greška prilikom organizovanja fajlova', {autoClose: true});
+        }
+      })
+  }
 }

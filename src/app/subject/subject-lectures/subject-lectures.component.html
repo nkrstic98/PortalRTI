@@ -1,15 +1,19 @@
 <div class="container-fluid">
 
   <div class="row mt-3" *ngIf="user.type == 1">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-3" style="font-family: Arial">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-4" style="font-family: Arial">
       <label for="cin" class="custom-file-label">{{filesToUpload.length == 0 ? 'Izaberite fajlove' : 'Broj fajlova za upload: ' + filesToUpload.length}}</label>
       <input class="custom-file-input" id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" multiple />
     </div>
     <div class="col-sm-1">
       <button type="button" class="btn btn btn-success" (click)="upload()">Upload</button>
     </div>
-    <div class="col-sm-4"></div>
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-info" (click)="changeFileOrder()">Potvrdi izabrani redosled</button>
+    </div>
   </div>
 
   <div class="row mt-3">

@@ -46,4 +46,8 @@ export class SubjectService {
   deleteDocument(file, subject, location, dst) {
     return this.http.post(`${this.uri}/deleteFile`, {file: file, subject: subject, location: location, dst: dst});
   }
+
+  reorderDocuments(fileList, subject, dest) {
+    return this.http.post(`${this.uri}/reorderFiles`, {fileList: fileList, subject: subject, dest: dest});
+  }
 }

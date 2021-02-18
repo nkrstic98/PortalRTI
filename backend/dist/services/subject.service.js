@@ -110,45 +110,13 @@ router.post('/upload/:directory', upload.array('uploads[]'), (req, res, next) =>
         // await sharp(req.files[i].buffer).toFile('./uploads/' + req.body.dir + '/' + req.files[i].originalname);
     }
     console.log(fileInfo);
-    //U zavisnosti od destinacionog foldera, dodaju se elementi u razlicite nizove
-    switch (req.body.destination_array) {
-        case 'fajlovi_predavanja':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $addToSet: {
-                    fajlovi_predavanja: fileInfo
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-        case 'fajlovi_vezbe':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $addToSet: {
-                    fajlovi_vezbe: fileNames
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-        case 'fajlovi_lab':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $addToSet: {
-                    fajlovi_lab: fileNames
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-        case 'fajlovi_projekat':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $addToSet: {
-                    fajlovi_projekat: fileNames
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-    }
+    subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+        $addToSet: {
+            [`${req.body.destination_array}`]: fileInfo
+        }
+    })
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err));
     // }
 }));
 router.route('/deleteFile').post((req, res, next) => {
@@ -157,44 +125,45 @@ router.route('/deleteFile').post((req, res, next) => {
             throw err;
         console.log('Fajl obrisan');
     });
-    switch (req.body.dst) {
-        case 'fajlovi_predavanja':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $pull: {
-                    fajlovi_predavanja: req.body.file
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-        case 'fajlovi_vezbe':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $pull: {
-                    fajlovi_vezbe: req.body.file
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-        case 'fajlovi_lab':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $pull: {
-                    fajlovi_lab: req.body.file
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-        case 'fajlovi_projekat':
-            subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
-                $pull: {
-                    fajlovi_projekat: req.body.file
-                }
-            })
-                .then(res1 => res.json(res1))
-                .catch(err => res.json(err));
-            break;
-    }
+    subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+        $pull: {
+            [`${req.body.dst}`]: req.body.file
+        }
+    })
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err));
+});
+router.post('/reorderFiles', (req, res, next) => {
+    console.log(req.body);
+    subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+        $pull: {
+            [`${req.body.dest}`]: {
+                $in: req.body.fileList
+            }
+        }
+    }, { multi: true })
+        .then(res1 => {
+        subject_1.default.findOneAndUpdate({ sifra: req.body.subject }, {
+            $addToSet: {
+                [`${req.body.dest}`]: req.body.fileList
+            }
+        })
+            .then(res1 => res.json(res1))
+            .catch(err => res.json(err));
+    })
+        .catch(err => res.json(err));
+    // .then(res1 => res.json(res1))
+    // .catch(err => res.json(err))
+    // Subject.findOneAndUpdate(
+    //   //   {sifra: req.body.subject},
+    //   //   {
+    //   //     $addToSet: {
+    //   //       [`${req.body.dest}`] : req.body.fileList
+    //   //     }
+    //   //   }
+    //   // )
+    //   //   .then(res1 => res.json(res1))
+    //   //   .catch(err => res.json(err))
 });
 module.exports = router;
 //# sourceMappingURL=subject.service.js.map

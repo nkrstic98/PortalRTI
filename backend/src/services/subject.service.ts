@@ -127,61 +127,16 @@ router.post('/upload/:directory', upload.array('uploads[]'), async (req, res, ne
 
     console.log(fileInfo);
 
-    //U zavisnosti od destinacionog foldera, dodaju se elementi u razlicite nizove
-    switch(req.body.destination_array)
+  Subject.findOneAndUpdate(
+    {sifra: req.body.subject},
     {
-      case 'fajlovi_predavanja':
-        Subject.findOneAndUpdate(
-          {sifra: req.body.subject},
-          {
-            $addToSet: {
-              fajlovi_predavanja : fileInfo
-            }
-          }
-        )
-          .then(res1 => res.json(res1))
-          .catch(err => res.json(err))
-        break;
-
-      case 'fajlovi_vezbe' :
-        Subject.findOneAndUpdate(
-          {sifra: req.body.subject},
-          {
-            $addToSet: {
-              fajlovi_vezbe : fileNames
-            }
-          }
-        )
-          .then(res1 => res.json(res1))
-          .catch(err => res.json(err))
-        break;
-
-      case 'fajlovi_lab' :
-        Subject.findOneAndUpdate(
-          {sifra: req.body.subject},
-          {
-            $addToSet: {
-              fajlovi_lab : fileNames
-            }
-          }
-        )
-          .then(res1 => res.json(res1))
-          .catch(err => res.json(err))
-        break;
-
-      case 'fajlovi_projekat':
-        Subject.findOneAndUpdate(
-          {sifra: req.body.subject},
-          {
-            $addToSet: {
-              fajlovi_projekat : fileNames
-            }
-          }
-        )
-          .then(res1 => res.json(res1))
-          .catch(err => res.json(err))
-        break;
+      $addToSet: {
+        [`${req.body.destination_array}`] : fileInfo
+      }
     }
+  )
+    .then(res1 => res.json(res1))
+    .catch(err => res.json(err))
   // }
 })
 
@@ -191,60 +146,59 @@ router.route('/deleteFile').post((req, res, next) => {
     console.log('Fajl obrisan');
   })
 
-  switch(req.body.dst)
-  {
-    case 'fajlovi_predavanja':
-      Subject.findOneAndUpdate(
-        {sifra: req.body.subject},
-        {
-          $pull: {
-            fajlovi_predavanja : req.body.file
-          }
-        }
-      )
-        .then(res1 => res.json(res1))
-        .catch(err => res.json(err))
-      break;
+  Subject.findOneAndUpdate(
+    {sifra: req.body.subject},
+    {
+      $pull: {
+        [`${req.body.dst}`] : req.body.file
+      }
+    }
+  )
+    .then(res1 => res.json(res1))
+    .catch(err => res.json(err))
+})
 
-    case 'fajlovi_vezbe' :
-      Subject.findOneAndUpdate(
-        {sifra: req.body.subject},
-        {
-          $pull: {
-            fajlovi_vezbe : req.body.file
-          }
-        }
-      )
-        .then(res1 => res.json(res1))
-        .catch(err => res.json(err))
-      break;
+router.post('/reorderFiles', (req, res, next) => {
 
-    case 'fajlovi_lab' :
-      Subject.findOneAndUpdate(
-        {sifra: req.body.subject},
-        {
-          $pull: {
-            fajlovi_lab : req.body.file
-          }
-        }
-      )
-        .then(res1 => res.json(res1))
-        .catch(err => res.json(err))
-      break;
+  // console.log(req.body);
 
-    case 'fajlovi_projekat':
-      Subject.findOneAndUpdate(
-        {sifra: req.body.subject},
-        {
-          $pull: {
-            fajlovi_projekat : req.body.file
-          }
+  Subject.findOneAndUpdate(
+    {sifra: req.body.subject},
+    {
+      $pull: {
+        [`${req.body.dest}`] : {
+          $in : req.body.fileList
         }
-      )
-        .then(res1 => res.json(res1))
-        .catch(err => res.json(err))
-      break;
-  }
+      }
+    },
+    { multi: true }
+  )
+    .then(res1 => {
+      Subject.findOneAndUpdate(
+          {sifra: req.body.subject},
+          {
+            $addToSet: {
+              [`${req.body.dest}`] : req.body.fileList
+            }
+          }
+        )
+          .then(res1 => res.json(res1))
+          .catch(err => res.json(err))
+    })
+    .catch(err => res.json(err))
+    // .then(res1 => res.json(res1))
+    // .catch(err => res.json(err))
+
+  // Subject.findOneAndUpdate(
+  //   //   {sifra: req.body.subject},
+  //   //   {
+  //   //     $addToSet: {
+  //   //       [`${req.body.dest}`] : req.body.fileList
+  //   //     }
+  //   //   }
+  //   // )
+  //   //   .then(res1 => res.json(res1))
+  //   //   .catch(err => res.json(err))
 })
 
 module.exports = router;
