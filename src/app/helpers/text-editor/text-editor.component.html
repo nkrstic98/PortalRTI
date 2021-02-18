@@ -1,7 +1,1 @@
-<div class="container">
-  <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
-  <h5 class="html-header">HTML Output</h5>
-  <div class="html">
-    {{ htmlContent }}
-  </div>
-</div>
+<angular-editor  (ngModelChange)="changeText($event)" [(ngModel)]="htmlContent" [config]="config"></angular-editor>
