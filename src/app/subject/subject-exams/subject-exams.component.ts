@@ -20,6 +20,7 @@ export class SubjectExamsComponent implements OnInit {
   filesToUpload: Array<File> = [];
 
   dbFiles : Array<FileInfo> = [];
+  subject: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class SubjectExamsComponent implements OnInit {
       .pipe(first())
       .subscribe((subject: Subject) => {
         this.dbFiles = subject.fajlovi_ispit;
+        this.subject = subject.sifra;
       })
   }
 

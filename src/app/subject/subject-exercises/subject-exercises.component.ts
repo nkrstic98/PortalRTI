@@ -18,6 +18,7 @@ export class SubjectExercisesComponent implements OnInit {
   filesToUpload: Array<File> = [];
 
   dbFiles : Array<FileInfo> = [];
+  subject: string;
 
   user: User;
 
@@ -43,6 +44,7 @@ export class SubjectExercisesComponent implements OnInit {
       .pipe(first())
       .subscribe((subject: Subject) => {
         this.dbFiles = subject.fajlovi_vezbe;
+        this.subject = subject.sifra;
       })
   }
 
