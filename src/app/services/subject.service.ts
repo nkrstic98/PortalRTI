@@ -59,4 +59,8 @@ export class SubjectService {
 
     return this.http.post(`${this.uri}/uploadNotification/${JSON.stringify(directory)}`, formData);
   }
+
+  deleteNotificationFile(subject, file) {
+    return this.http.post(`${this.uri}/deleteNotificationFile`, {subject: subject, file: file})
+  }
 }

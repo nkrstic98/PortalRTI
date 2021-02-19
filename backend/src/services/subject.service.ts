@@ -202,4 +202,11 @@ router.post('/reorderFiles', (req, res, next) => {
 
 router.post('/uploadNotification/:directory', upload.array('uploads[]'), (req, res, next) => {});
 
+router.route('/deleteNotificationFile').post((req, res, next) => {
+  fs.unlink('./uploads/subjects/' + req.body.subject + '/notifications/' + req.body.file, (err) => {
+    if(err) throw err;
+    console.log('Fajl obrisan');
+  })
+})
+
 module.exports = router;

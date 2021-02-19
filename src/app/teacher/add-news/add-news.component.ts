@@ -15,6 +15,7 @@ import {ActivatedRoute} from '@angular/router';
 export class AddNewsComponent implements OnInit {
 
   info: Information = {
+    id: null,
     naslov: "",
     tekst: "",
     datum: null,
@@ -92,6 +93,7 @@ export class AddNewsComponent implements OnInit {
           let subject: Subject;
 
           subject = s;
+          this.info.id = subject.obavestenja.length + 1;
           subject.obavestenja.push(this.info);
 
           this.subjectService.editSubject(subject)

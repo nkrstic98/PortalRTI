@@ -15,6 +15,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
+import { EditNewsComponent } from './edit-news/edit-news.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   exports: [
@@ -23,7 +25,8 @@ import {MatInputModule} from '@angular/material/input';
   declarations: [
     ProfileTeacherComponent,
     SubjectTeacherComponent,
-    AddNewsComponent
+    AddNewsComponent,
+    EditNewsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +38,8 @@ import {MatInputModule} from '@angular/material/input';
     MatDatepickerModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatTooltipModule
   ]
 })
 export class TeacherModule { }

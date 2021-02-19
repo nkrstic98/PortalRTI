@@ -4,6 +4,7 @@ import {TeacherComponent} from './teacher.component';
 import {ProfileTeacherComponent} from './profile-teacher/profile-teacher.component';
 import {SubjectTeacherComponent} from './subject-teacher/subject-teacher.component';
 import {AddNewsComponent} from './add-news/add-news.component';
+import {EditNewsComponent} from './edit-news/edit-news.component';
 
 const subjectModule = () => import('../subject/subject.module').then(x => x.SubjectModule);
 
@@ -19,6 +20,9 @@ const routes: Routes = [
       },
       {
         path: 'addNews', component: AddNewsComponent
+      },
+      {
+        path: 'editNews', component: EditNewsComponent
       }
     ]
   }

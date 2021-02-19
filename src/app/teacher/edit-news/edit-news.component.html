@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6" style="font-family: Arial">
+      <select class="custom-select" (change)="chooseSubject($event)">
+        <option selected value="">Obaveštenja: Svi predmeti</option>
+        <option  *ngFor="let s of this.mySubjects" value="{{s.sifra}}">Obaveštenja: {{s.sifra}} - {{s.naziv}}</option>
+      </select>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <br/>
+
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3 text-right" style="font-family: Arial">
+      <button class="btn btn-primary" matTooltip="Prethodno obaveštenje" matTooltipPosition="above" (click)="prevPage()" [disabled]="!prevE"> << </button>
+    </div>
+    <div class="col-sm-3 text-left" style="font-family: Arial">
+      <button class="btn btn-primary" matTooltip="Sledeće obaveštenje" matTooltipPosition="above" (click)="nextPage()" [disabled]="!nextE"> >> </button>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <hr/>
+
+  <div class="row" *ngIf="this.filteredInfo.length != 0">
+    <div class="col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-center mx-auto mt-1">
+
+      <div class="card rounded shadow shadow-lg">
+
+        <div class="card-header">
+          <span style="font-size: 25px">{{filteredInfo[page].subject}}</span>
+          <button class="btn btn-outline-danger float-right">&times;</button>
+        </div>
+
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="name">Naslov</label>
+              <input type="text" id="name" class="form-control" name="title" [(ngModel)]="filteredInfo[page].info.naslov"
+                     [ngClass]="{ 'is-invalid': submitted && filteredInfo[page].info.naslov == '' }" />
+              <div *ngIf="submitted && filteredInfo[page].info.naslov == ''" class="invalid-feedback">
+                <div *ngIf="filteredInfo[page].info.naslov == ''">Naslov obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+
+              <mat-form-field [ngClass]="{ 'is-invalid': submitted && filteredInfo[page].info.datum == null }">
+                <mat-label>Izaberite datum</mat-label>
+                <!-- #docregion toggle -->
+                <input matInput [matDatepicker]="picker" [(ngModel)]="filteredInfo[page].info.datum">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <!-- #enddocregion toggle -->
+              </mat-form-field>
+
+              <div *ngIf="submitted && filteredInfo[page].info.datum == null" class="invalid-feedback">
+                <div *ngIf="filteredInfo[page].info.datum == null">Datum je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="txt">Unesite tekst vesti</label>
+              <app-text-editor id="txt" [ngClass]="{ 'is-invalid': submitted && filteredInfo[page].info.tekst == null }"></app-text-editor>
+              <div *ngIf="submitted && filteredInfo[page].info.tekst == null" class="invalid-feedback">
+                <div *ngIf="filteredInfo[page].info.tekst == null">Tekst obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row pl-2 pr-2">
+            <div class="form-group col">
+              <label for="cin" class="custom-file-label">{{filesToUpload.length == 0 ? 'Izaberite fajlove' : 'Broj fajlova za upload: ' + filesToUpload.length}}</label>
+              <input class="custom-file-input" id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" multiple />
+            </div>
+          </div>
+
+          <div class="form-row d-flex flex-row justify-content-center">
+            <button class="btn btn-primary" (click)="edit()">Ažuriraj vest</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" *ngIf="filteredInfo.length == 0">
+    <div class="col-sm-12 text-center">
+      <h4>Nema obaveštenja vezanih za ovaj predmet</h4>
+    </div>
+  </div>
+
+</div>

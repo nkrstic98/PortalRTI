@@ -35,6 +35,7 @@ export class Odsek {
 }
 
 export class Information {
+  id: Number;
   naslov: string;
   tekst: string;
   datum: Date;
