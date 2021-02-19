@@ -39,7 +39,15 @@
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['contact']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Kontakt</a>
   </li>
-  <li class="nav-item" *ngIf="user">
-    <a class="nav-link" href="#" style="font-weight: bold;">Moji predmeti</a>
+  <li class="nav-item dropdown" *ngIf="user">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Moji predmeti</a>
+    <div class="dropdown-menu">
+      <div *ngFor="let sub of mySubjects">
+        <a class="dropdown-item"
+           [routerLink]="['subjects/' + sub.sifra + '/lectures']" routerLinkActive="active" (click)="goToSubject(sub.sifra)"
+           [routerLinkActiveOptions]="{ exact: true }">{{sub.sifra}} - {{sub.naziv}}</a>
+        <div class="dropdown-divider" *ngIf="sub.sifra != mySubjects[mySubjects.length - 1].sifra"></div>
+      </div>
+    </div>
   </li>
 </ul>

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user';
 import {AccountService} from '../../services/account.service';
+import {SubjectService} from '../../services/subject.service';
+import {StudentService} from '../../services/student.service';
+import {Subject} from '../../models/subject';
+import {first} from 'rxjs/operators';
+import {TeacherService} from '../../services/teacher.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header-default',
@@ -10,12 +16,35 @@ import {AccountService} from '../../services/account.service';
 export class HeaderDefaultComponent implements OnInit {
 
   user: User;
+  mySubjects: Subject[] = [];
 
-  constructor(private accountService: AccountService) {
+  constructor(
+    private accountService: AccountService,
+    private subjectService: SubjectService,
+    private studentService: StudentService,
+    private teacherService: TeacherService,
+    private router: Router
+  ) {
     this.accountService.user.subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
+    this.studentService.get(this.user.username)
+      .pipe(first())
+      .subscribe(st => {
+        st.subjects.forEach(sub => {
+          this.subjectService.getSubject(sub)
+            .pipe(first())
+            .subscribe((val: Subject) => {
+              this.mySubjects.push(val);
+            })
+        })
+      })
   }
 
+  goToSubject(sifra) {
+    this.teacherService.getSubject(sifra);
+    localStorage.setItem('subject', sifra);
+    this.router.navigate(['subjects/' + sifra + '/notifications']);
+  }
 }

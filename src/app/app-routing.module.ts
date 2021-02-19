@@ -9,6 +9,7 @@ import {ScienceResearchComponent} from './home-pages/science-research/science-re
 import {ScienceProjectsComponent} from './home-pages/science-projects/science-projects.component';
 import {ProjectsComponent} from './home-pages/projects/projects.component';
 import {SubjectsListComponent} from './home-pages/subjects-list/subjects-list.component';
+import {SubjectComponent} from './subject/subject.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: accountModule },
   { path: 'admin', loadChildren: adminModule },
   { path: 'teacher', loadChildren: teacherModule },
-  { path: 'subjects', loadChildren: subjectModule },
+  { path: 'subjects', component: SubjectComponent, loadChildren: subjectModule },
   { path: 'workers', component: WorkersComponent, data: {
       title: 'Workers',
       breadcrumb: [

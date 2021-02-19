@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user';
 import {Subject} from '../models/subject';
 import {TeacherService} from '../services/teacher.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SubjectService} from '../services/subject.service';
 import {first} from 'rxjs/operators';
 import {AlertService} from '../services/alert.service';
@@ -15,6 +15,7 @@ import {AlertService} from '../services/alert.service';
 export class SubjectComponent implements OnInit {
   page: Number;
   links = [ 'notifications', 'edit_about', 'lectures', 'exercises', 'exams', 'labs', 'projects' ];
+  links_student = [ 'notifications', 'about', 'lectures', 'exercises', 'exams', 'labs', 'projects' ];
 
   user: User;
   subject: Subject;
@@ -23,17 +24,19 @@ export class SubjectComponent implements OnInit {
     private router: Router,
     private teacherService: TeacherService,
     private subjectService: SubjectService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
+    this.teacherService.getSubject(localStorage.getItem('subject'));
+
     this.user = JSON.parse(localStorage.getItem('user'));
-    // console.log(this.user);
 
     this.teacherService.subject.subscribe(subject => {
       this.subject = subject;
-      localStorage.setItem('subject', JSON.stringify(this.subject));
+      // localStorage.setItem('subject', JSON.stringify(this.subject));
       // console.log(this.subject);
       if(this.user.type == 2) {
         this.page = 1;
@@ -46,7 +49,12 @@ export class SubjectComponent implements OnInit {
 
   changePage(val) {
     this.page = val;
-    this.router.navigate(['teacher/subjects/' + this.subject.sifra + '/' + this.links[val - 1]]);
+    if(this.user.type == 1) {
+      this.router.navigate(['teacher/subjects/' + this.subject.sifra + '/' + this.links[val - 1]]);
+    }
+    else {
+      this.router.navigate(['subjects/' + this.subject.sifra + '/' + this.links_student[val - 1]]);
+    }
   }
 
   togglePageShow(page) {

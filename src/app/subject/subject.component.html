@@ -4,7 +4,7 @@
       <nav class="navbar mt-4">
         <ul class="navbar-nav">
           <li class="nav-item mb-3" *ngIf="user.type == 2">
-            <a class="btn btn-block text-dark" [ngClass]="{ 'btn-info' : page == 1 }" (click)="changePage(1)">
+            <a class="btn btn-outline-info btn-block" [ngClass]="{ 'btn-info' : page == 1 }" (click)="changePage(1)">
               Obaveštenja
             </a>
           </li>
