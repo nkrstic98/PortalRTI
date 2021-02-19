@@ -39,7 +39,7 @@ export class Information {
   naslov: string;
   tekst: string;
   datum: Date;
-  fajlovi: string[]
+  fajlovi: string[];
   autor: string;
 }
 

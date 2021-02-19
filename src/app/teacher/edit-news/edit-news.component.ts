@@ -24,12 +24,12 @@ export class EditNewsComponent implements OnInit {
   subjectInfo : Array<{
     subject: string;
     info: Information;
-  }>;
+  }> = [];
 
   filteredInfo: Array<{
     subject: string;
     info: Information;
-  }>;
+  }> = [];
 
   mySubjects: Subject[];
 
@@ -76,7 +76,18 @@ export class EditNewsComponent implements OnInit {
 
         this.filteredInfo = this.subjectInfo;
 
-        this.textEditorService.changeText(this.filteredInfo[0].info.tekst);
+        if(this.filteredInfo.length > 0) {
+          this.textEditorService.changeText(this.filteredInfo[0].info.tekst);
+        }
+
+        this.page = 0;
+        this.prevE = false;
+        if (this.filteredInfo.length > 1) {
+          this.nextE = true;
+        }
+        else {
+          this.nextE = false;
+        }
       })
 
   }
@@ -131,7 +142,32 @@ export class EditNewsComponent implements OnInit {
               this.alertService.success('Uspešno ste ažurirali vest!', {autoClose: true});
             },
             error: () => {
-              this.alertService.error('Greška prilikom upload-a dokumenata', {autoClose: true});
+              this.alertService.error('Greška prilikom ažuriranja vesti', {autoClose: true});
+            }
+          })
+      })
+  }
+
+  delete() {
+    this.subjectService.getSubject(this.filteredInfo[this.page].subject)
+      .pipe(first())
+      .subscribe((subject: Subject) => {
+        for(let i = 0; i < this.filteredInfo[this.page].info.fajlovi.length; i++) {
+          this.subjectService.deleteNotificationFile(this.filteredInfo[this.page].subject, this.filteredInfo[this.page].info.fajlovi[i])
+            .pipe(first())
+            .subscribe()
+        }
+
+        subject.obavestenja = [];
+        this.subjectService.editSubject(subject)
+          .pipe(first())
+          .subscribe({
+            next: () => {
+              this.alertService.success('Uspešno ste obirsali vest!', {autoClose: true});
+              this.ngOnInit();
+            },
+            error: () => {
+              this.alertService.error('Greška prilikom brisanja vesti', {autoClose: true});
             }
           })
       })
@@ -171,8 +207,9 @@ export class EditNewsComponent implements OnInit {
     }
     else {
       this.page--;
-      if(this.page == 0) {}
-      this.prevE = false;
+      if(this.page == 0) {
+        this.prevE = false;
+      }
     }
 
     this.nextE = true;

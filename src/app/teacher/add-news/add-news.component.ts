@@ -14,14 +14,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AddNewsComponent implements OnInit {
 
-  info: Information = {
-    id: null,
-    naslov: "",
-    tekst: "",
-    datum: null,
-    fajlovi: [],
-    autor: JSON.parse(localStorage.getItem('user')).username
-  }
+  info: Information;
 
   filesToUpload: Array<File> = [];
   subjects: Subject[];
@@ -38,11 +31,22 @@ export class AddNewsComponent implements OnInit {
     private subjectService: SubjectService,
     private textEditorService: TextEditorService,
     private alertService: AlertService
-  ) {
-    this.subscription = this.textEditorService.text.subscribe(value => this.info.tekst = value);
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.submitted = false;
+
+    this.info = {
+      id: null,
+      naslov: "",
+      tekst: "",
+      datum: null,
+      fajlovi: [],
+      autor: JSON.parse(localStorage.getItem('user')).username
+    }
+
+    this.subscription = this.textEditorService.text.subscribe(value => this.info.tekst = value);
+
     this.subjectService.getAll()
       .pipe(first())
       .subscribe(value => {
@@ -111,6 +115,7 @@ export class AddNewsComponent implements OnInit {
 
     if(!this.uploadError) {
       this.alertService.success('Uspešno ste dodali vest!', {autoClose: true});
+      this.ngOnInit();
     }
   }
 }
