@@ -6,25 +6,161 @@ import {SubjectExercisesComponent} from './subject-exercises/subject-exercises.c
 import {SubjectExamsComponent} from './subject-exams/subject-exams.component';
 import {SubjectLabComponent} from './subject-lab/subject-lab.component';
 import {SubjectProjectComponent} from './subject-project/subject-project.component';
+import {SubjectAboutComponent} from './subject-about/subject-about.component';
+import {SubjectInformationComponent} from './subject-information/subject-information.component';
 
 const routes: Routes = [
   {
-    path: ':sifra/edit_about', component: EditSubjectComponent
+    path: ':sifra/notifications', component: SubjectInformationComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Obaveštenja',
+          url: ''
+        }
+      ]
+    }
   },
   {
-    path: ':sifra/lectures', component: SubjectLecturesComponent
+    path: ':sifra/about', component: SubjectAboutComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'O predmetu',
+          url: ''
+        }
+      ]
+    }
   },
   {
-    path: ':sifra/exercises', component: SubjectExercisesComponent
+    path: ':sifra/edit_about', component: EditSubjectComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Ažuriranje informacija o predmetu',
+          url: ''
+        }
+      ]
+    }
   },
   {
-    path: ':sifra/exams', component: SubjectExamsComponent
+    path: ':sifra/lectures', component: SubjectLecturesComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Predavanja',
+          url: ''
+        }
+      ]
+    }
   },
   {
-    path: ':sifra/labs', component: SubjectLabComponent
+    path: ':sifra/exercises', component: SubjectExercisesComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Vežbe',
+          url: ''
+        }
+      ]
+    }
   },
   {
-    path: ':sifra/projects', component: SubjectProjectComponent
+    path: ':sifra/exams', component: SubjectExamsComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Ispitni rokovi',
+          url: ''
+        }
+      ]
+    }
+  },
+  {
+    path: ':sifra/labs', component: SubjectLabComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Laboratorijske vežbe',
+          url: ''
+        }
+      ]
+    }
+  },
+  {
+    path: ':sifra/projects', component: SubjectProjectComponent, data: {
+      title: 'Subjects',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: '{{sifra}}',
+          url: ''
+        },
+        {
+          label: 'Projekti i domaći zadaci',
+          url: ''
+        }
+      ]
+    }
   }
 ];
 
