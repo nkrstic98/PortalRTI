@@ -1,13 +1,16 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12" *ngFor="let si of subjectInfo">
+  <div class="row" *ngFor="let si of subjectInfo">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-8">
       <h5 [ngClass]="{ 'text-danger' : paint(si.datum) }">{{si.naslov}}</h5>
       <h6>{{getDate(si.datum)}}</h6>
       <p [innerHTML]="si.tekst"></p>
       <div *ngFor="let f of si.fajlovi">
         <a href="http://localhost:4000/uploads/subjects/{{subject}}/notifications/{{f}}">{{f}}</a>
       </div>
-
+    </div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-12">
       <hr *ngIf="si != subjectInfo[subjectInfo.length - 1]"/>
     </div>
   </div>

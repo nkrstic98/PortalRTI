@@ -26,9 +26,6 @@ export class SubjectInformationComponent implements OnInit {
         let aDate = new Date(a.datum);
         let bDate = new Date(b.datum);
 
-        console.log(aDate);
-        console.log(bDate);
-
         return aDate.toLocaleDateString().localeCompare(bDate.toLocaleDateString());
       })
     });
@@ -42,9 +39,6 @@ export class SubjectInformationComponent implements OnInit {
   paint(date) {
     let myDate = new Date(date);
     let compareDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-
-    console.log(myDate);
-    console.log(compareDate);
 
     return myDate.getTime() > compareDate.getTime();
   }

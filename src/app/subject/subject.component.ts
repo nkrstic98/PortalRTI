@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user';
 import {Subject} from '../models/subject';
 import {TeacherService} from '../services/teacher.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {SubjectService} from '../services/subject.service';
 import {first} from 'rxjs/operators';
 import {AlertService} from '../services/alert.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-subject',
@@ -20,6 +21,8 @@ export class SubjectComponent implements OnInit {
   user: User;
   subject: Subject;
 
+  subscription: Subscription;
+
   constructor(
     private router: Router,
     private teacherService: TeacherService,
@@ -27,9 +30,24 @@ export class SubjectComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute
   ) {
+    // this.subscription = router.events.subscribe((event) => {
+    //   if(event instanceof NavigationStart) {
+    //     if(this.user.type == 2) {
+    //       this.page = 1;
+    //       this.changePage(0);
+    //     }
+    //     else {
+    //       this.page = 2;
+    //       this.changePage(1);
+    //     }
+    //   }
+    // })
   }
 
   ngOnInit(): void {
+    this.page = JSON.parse(localStorage.getItem('page'));
+    console.log(this.page);
+
     this.teacherService.getSubject(localStorage.getItem('subject'));
 
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -38,21 +56,33 @@ export class SubjectComponent implements OnInit {
       this.subject = subject;
       // localStorage.setItem('subject', JSON.stringify(this.subject));
       // console.log(this.subject);
-      if(this.user.type == 2) {
-        this.page = 1;
-      }
-      else {
-        this.page = 2;
+      if(this.page == null) {
+        if(this.user.type == 2) {
+          this.page = 1;
+          localStorage.setItem('page', JSON.stringify(this.page));
+          // this.changePage(0);
+        }
+        else {
+          this.page = 2;
+          localStorage.setItem('page', JSON.stringify(this.page));
+          // this.changePage(1);
+        }
       }
     });
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('page');
   }
 
   changePage(val) {
     this.page = val;
     if(this.user.type == 1) {
+      localStorage.setItem('page', JSON.stringify(val));
       this.router.navigate(['teacher/subjects/' + this.subject.sifra + '/' + this.links[val - 1]]);
     }
     else {
+      localStorage.setItem('page', JSON.stringify(val));
       this.router.navigate(['subjects/' + this.subject.sifra + '/' + this.links_student[val - 1]]);
     }
   }

@@ -118,7 +118,7 @@ const routes: Routes = [
           url: ''
         },
         {
-          label: 'Ispitni rokovi',
+          label: 'Ispitna pitanja',
           url: ''
         }
       ]
