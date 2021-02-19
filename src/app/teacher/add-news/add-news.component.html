@@ -19,14 +19,17 @@
           <div class="form-row">
             <div class="form-group col">
 
-              <mat-form-field [ngClass]="{ 'is-invalid': submitted && info.datum == null }">
-                <mat-label>Izaberite datum</mat-label>
-                <!-- #docregion toggle -->
-                <input matInput [matDatepicker]="picker" [(ngModel)]="info.datum">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <!-- #enddocregion toggle -->
-              </mat-form-field>
+<!--              <mat-form-field [ngClass]="{ 'is-invalid': submitted && info.datum == null }">-->
+<!--                <mat-label>Izaberite datum</mat-label>-->
+<!--                &lt;!&ndash; #docregion toggle &ndash;&gt;-->
+<!--                <input matInput [matDatepicker]="picker" [(ngModel)]="info.datum">-->
+<!--                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--                <mat-datepicker #picker></mat-datepicker>-->
+<!--                &lt;!&ndash; #enddocregion toggle &ndash;&gt;-->
+<!--              </mat-form-field>-->
+
+              <label for="example-date-input">Datum</label>
+              <input class="form-control" type="date" id="example-date-input" [(ngModel)]="info.datum">
 
               <div *ngIf="submitted && info.datum == null" class="invalid-feedback">
                 <div *ngIf="info.datum == null">Datum je obavezno polje</div>

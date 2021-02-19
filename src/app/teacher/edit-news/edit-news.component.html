@@ -50,14 +50,8 @@
           <div class="form-row">
             <div class="form-group col">
 
-              <mat-form-field [ngClass]="{ 'is-invalid': submitted && filteredInfo[page].info.datum == null }">
-                <mat-label>Izaberite datum</mat-label>
-                <!-- #docregion toggle -->
-                <input matInput [matDatepicker]="picker" [(ngModel)]="filteredInfo[page].info.datum">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <!-- #enddocregion toggle -->
-              </mat-form-field>
+              <label for="example-date-input">Datum</label>
+              <input class="form-control" type="date" id="example-date-input" [(ngModel)]="filteredInfo[page].info.datum">
 
               <div *ngIf="submitted && filteredInfo[page].info.datum == null" class="invalid-feedback">
                 <div *ngIf="filteredInfo[page].info.datum == null">Datum je obavezno polje</div>

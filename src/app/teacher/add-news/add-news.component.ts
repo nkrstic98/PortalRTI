@@ -14,7 +14,14 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AddNewsComponent implements OnInit {
 
-  info: Information;
+  info: Information = {
+    id: null,
+    naslov: "",
+    tekst: "",
+    datum: null,
+    fajlovi: [],
+    autor: JSON.parse(localStorage.getItem('user')).username
+  }
 
   filesToUpload: Array<File> = [];
   subjects: Subject[];
@@ -36,15 +43,6 @@ export class AddNewsComponent implements OnInit {
   ngOnInit(): void {
     this.submitted = false;
 
-    this.info = {
-      id: null,
-      naslov: "",
-      tekst: "",
-      datum: null,
-      fajlovi: [],
-      autor: JSON.parse(localStorage.getItem('user')).username
-    }
-
     this.subscription = this.textEditorService.text.subscribe(value => this.info.tekst = value);
 
     this.subjectService.getAll()
@@ -63,6 +61,9 @@ export class AddNewsComponent implements OnInit {
   }
 
   upload() {
+    console.log(this.info);
+    //return;
+
     this.submitted = true;
 
     this.alertService.clear();
@@ -103,7 +104,15 @@ export class AddNewsComponent implements OnInit {
           this.subjectService.editSubject(subject)
             .pipe(first())
             .subscribe({
-              next: () => {},
+              next: () => {
+                this.info.id = null;
+                this.info.naslov = "";
+                this.info.datum = null;
+                this.info.fajlovi = [];
+                this.textEditorService.changeText(null);
+                this.submitted = false;
+                this.filesToUpload = [];
+              },
               error: () => {
                 this.uploadError = true;
                 this.alertService.error('Desila se greška prilikom ažuriranja predmeta ' + value, {autoClose: true});
@@ -115,7 +124,6 @@ export class AddNewsComponent implements OnInit {
 
     if(!this.uploadError) {
       this.alertService.success('Uspešno ste dodali vest!', {autoClose: true});
-      this.ngOnInit();
     }
   }
 }
