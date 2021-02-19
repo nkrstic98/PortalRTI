@@ -24,22 +24,24 @@ export class HeaderDefaultComponent implements OnInit {
     private studentService: StudentService,
     private teacherService: TeacherService,
     private router: Router
-  ) {
-    this.accountService.user.subscribe(user => this.user = user);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.studentService.get(this.user.username)
-      .pipe(first())
-      .subscribe(st => {
-        st.subjects.forEach(sub => {
-          this.subjectService.getSubject(sub)
-            .pipe(first())
-            .subscribe((val: Subject) => {
-              this.mySubjects.push(val);
-            })
+    this.accountService.user.subscribe(user => this.user = user);
+
+    if(this.user != null) {
+      this.studentService.get(this.user.username)
+        .pipe(first())
+        .subscribe(st => {
+          st.subjects.forEach(sub => {
+            this.subjectService.getSubject(sub)
+              .pipe(first())
+              .subscribe((val: Subject) => {
+                this.mySubjects.push(val);
+              })
+          })
         })
-      })
+    }
   }
 
   goToSubject(sifra) {

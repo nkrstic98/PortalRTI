@@ -38,7 +38,7 @@ export class Information {
   id: Number;
   naslov: string;
   tekst: string;
-  datum: Date;
+  datum: string;
   fajlovi: string[];
   autor: string;
 }
