@@ -16,6 +16,7 @@ import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
 import { SubjectProjectComponent } from './subject-project/subject-project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatLabel} from '@angular/material/form-field';
+import { SubjectInformationComponent } from './subject-information/subject-information.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {MatLabel} from '@angular/material/form-field';
     SubjectExercisesComponent,
     SubjectExamsComponent,
     SubjectLabComponent,
-    SubjectProjectComponent
+    SubjectProjectComponent,
+    SubjectInformationComponent
   ],
   exports: [
     SubjectComponent
