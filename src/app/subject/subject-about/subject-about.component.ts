@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SubjectService} from '../../services/subject.service';
 import {first} from 'rxjs/operators';
 import subject from '../../../../backend/src/model/subject';
+import {TeacherService} from '../../services/teacher.service';
 
 @Component({
   selector: 'app-subject-about',
@@ -11,22 +12,17 @@ import subject from '../../../../backend/src/model/subject';
   styleUrls: ['./subject-about.component.css']
 })
 export class SubjectAboutComponent implements OnInit {
+  semestri = [ "I Semestar", "II Semestar", "III Semestar", "IV Semestar", "V Semestar", "VI Semestar", "VII Semestar", "VII Semestar" ];
+
   subject: Subject;
 
+
   constructor(
-    private route: ActivatedRoute,
-    private subjectService: SubjectService
+    private teacherService: TeacherService
   ) { }
 
   ngOnInit(): void {
-    let s = this.route.snapshot.params['subject'];
-    console.log(s);
-    this.subjectService.getSubject(s)
-      .pipe(first())
-      .subscribe((subject: Subject) => {
-        this.subject = subject;
-        console.log(this.subject);
-      })
+    this.teacherService.subject.subscribe(val => this.subject = val);
   }
 
 }

@@ -1,1 +1,50 @@
-<p>subject-about works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="text-center font-weight-bold">
+            <td colspan="3">{{subject.sifra}} - {{subject.naziv}} ({{subject.espb}} ESPB)</td>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr *ngFor="let od of subject.odseci">
+            <td class="text-uppercase font-weight-bold">{{od.modul}} <span class="text-lowercase">odsek</span></td>
+            <td class="text-uppercase">{{od.tip}} <span class="text-lowercase">predmet</span></td>
+            <td>{{semestri[od.semestar - 1]}}</td>
+          </tr>
+          <tr>
+            <td rowspan="3" class="align-middle">Fond časova</td>
+            <td>Predavanja</td>
+            <td>{{subject.predavanja}}</td>
+          </tr>
+          <tr>
+            <td>Vežbe</td>
+            <td>{{subject.vezbe}}</td>
+          </tr>
+          <tr>
+            <td>DON</td>
+            <td>{{subject.don}}</td>
+          </tr>
+          <tr>
+            <td class="align-middle">Cilj</td>
+            <td colspan="2">{{subject.cilj}}</td>
+          </tr>
+          <tr>
+            <td class="align-middle">Ishod</td>
+            <td colspan="2">{{subject.ishod}}</td>
+          </tr>
+          <tr>
+            <td class="align-middle">Propozicije</td>
+            <td colspan="2">{{subject.propozicije}}</td>
+          </tr>
+          <tr>
+            <td class="align-middle">Polaganje</td>
+            <td colspan="2">{{subject.info_polaganje}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+</div>
