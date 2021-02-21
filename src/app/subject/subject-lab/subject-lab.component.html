@@ -16,11 +16,13 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="user.type == 2">
     <div class="col-sm-10">
       <ul class="list-group">
-        <li class="list-group-item text-center">Informacije o laboratorijskim vežbama</li>
-        <li class="list-group-item">{{subject.info_lab}}</li>
+        <li class="list-group-item text-center font-weight-bold">Informacije o laboratorijskim vežbama</li>
+        <li class="list-group-item">
+          <div [innerHTML]="subject.info_lab"></div>
+        </li>
       </ul>
     </div>
   </div>
