@@ -4,25 +4,24 @@
 
       <div class="card rounded shadow shadow-lg">
         <h5 class="card-header" *ngIf="user == null">Registrujte se na RTI Portal</h5>
-        <h5 class="card-header" *ngIf="user.type == 0">Registrujte studenta na RTI Portal</h5>
+        <h5 class="card-header" *ngIf=" user != null && user.type == 0">Registrujte studenta na RTI Portal</h5>
 
         <div class="card-body">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()" method="post">
 
             <div class="form-row">
               <div class="form-group col">
                 <label for="name">Ime</label>
-                <input type="text" id="name" formControlName="firstname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
-                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-                  <div *ngIf="f.firstname.errors.required">Ime je obavezno polje</div>
+                <input type="text" id="name" [(ngModel)]="firstname" class="form-control" [ngClass]="{ 'is-invalid': submitted && firstname == '' }" />
+                <div *ngIf="submitted && firstname == ''" class="invalid-feedback">
+                  <div>Ime je obavezno polje</div>
                 </div>
               </div>
 
               <div class="form-group col">
                 <label for="lname">Prezime</label>
-                <input type="text" id="lname" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
-                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                  <div *ngIf="f.lastname.errors.required">Prezime je obavezno polje</div>
+                <input type="text" id="lname" [(ngModel)]="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && lastname == '' }" />
+                <div *ngIf="submitted && lastname == ''" class="invalid-feedback">
+                  <div>Prezime je obavezno polje</div>
                 </div>
               </div>
 
@@ -32,21 +31,21 @@
 
               <div class="form-group col">
                 <label for="un">Korisničko ime (studentska e-mail adresa)</label>
-                <input type="text" id="un" formControlName="username" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && f.username.errors }" ngModel pattern="([a-z][a-z](\d){6}(d|m|p)@student.etf.rs)" />
-                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                  <div *ngIf="f.username.errors.required">Korisničko ime je obavezno polje</div>
+                <input type="text" id="un" [(ngModel)]="username" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && username == '' }" pattern="([a-z][a-z](\d){6}(d|m|p)@student.etf.rs)" />
+                <div *ngIf="submitted && username == ''" class="invalid-feedback">
+                  <div>Korisničko ime je obavezno polje</div>
                 </div>
-                <div *ngIf="!f.username.errors && !patternUsername && submitted" class="invalid-feedback">
+                <div *ngIf="username != '' && !patternUsername && submitted" class="invalid-feedback">
                   <div>Vrednost je u pogrešnom formatu</div>
                 </div>
               </div>
 
               <div class="form-group col">
                 <label for="pwd">Lozinka</label>
-                <input type="password" id="pwd" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">Lozinka je obavezno polje</div>
+                <input type="password" id="pwd" [(ngModel)]="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && password == '' }" />
+                <div *ngIf="submitted && password == ''" class="invalid-feedback">
+                  <div>Lozinka je obavezno polje</div>
                 </div>
               </div>
 
@@ -56,24 +55,25 @@
 
               <div class="form-group col">
                 <label for="index">Broj indeksa (u formatu GGGG/BBBB)</label>
-                <input type="text" id="index" formControlName="index" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && f.index.errors }" ngModel pattern="(\d\d\d\d\/\d\d\d\d)" />
-                <div *ngIf="submitted && f.index.errors" class="invalid-feedback">
-                  <div *ngIf="f.index.errors.required">Broj indeksa je obavezno polje</div>
+                <input type="text" id="index" class="form-control"
+                       [(ngModel)]="index"
+                       [ngClass]="{ 'is-invalid': submitted && index == '' }" pattern="(\d\d\d\d\/\d\d\d\d)" />
+                <div *ngIf="submitted && index == ''" class="invalid-feedback">
+                  <div>Broj indeksa je obavezno polje</div>
                 </div>
-                <div *ngIf="!f.index.errors && !patternIndex && submitted" class="invalid-feedback">
+                <div *ngIf="index != '' && !patternIndex && submitted" class="invalid-feedback">
                   <div>Vrednost je u pogrešnom formatu</div>
                 </div>
               </div>
 
               <div class="form-group col">
                 <label for="type">Tip studija</label>
-                <select id="type" formControlName="type" class="form-control custom-select" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                <select id="type" [(ngModel)]="sType" class="form-control custom-select" [ngClass]="{ 'is-invalid': submitted && sType == '' }">
                   <option value="" disabled>Izaberite tip studija</option>
-                  <option *ngFor="let type of studiesType" [ngValue]="type">{{type}}</option>
+                  <option *ngFor="let type of studiesType" value="{{type}}">{{type}}</option>
                 </select>
-                <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
-                  <div *ngIf="f.type.errors.required">Tip studija je obavezno polje</div>
+                <div *ngIf="submitted && sType == ''" class="invalid-feedback">
+                  <div>Tip studija je obavezno polje</div>
                 </div>
               </div>
 
@@ -83,24 +83,22 @@
 
               <div class="form-group col">
                 <label for="status">Status studenta</label>
-                <select id="status" formControlName="status" class="form-control custom-select" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
-                  <option value="" disabled>Izaberite svoj status</option>
+                <select id="status" [(ngModel)]="status" class="form-control custom-select" [ngClass]="{ 'is-invalid': submitted && status == '' }">
+                  <option value="" disabled>Izaberite status studenta</option>
                   <option *ngFor="let status of studentStatus" [ngValue]="status">{{status}}</option>
                 </select>
-                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
-                  <div *ngIf="f.status.errors.required">Status studenta je obavezno polje</div>
+                <div *ngIf="submitted && status == ''" class="invalid-feedback">
+                  <div>Status studenta je obavezno polje</div>
                 </div>
               </div>
 
               <div class="col d-flex flex-column justify-content-end mx-auto">
                 <div class="form-group">
-                  <button class="btn btn-primary float-right">Registracija</button>
+                  <button class="btn btn-primary float-right" (click)="register()">Registracija</button>
                 </div>
               </div>
 
             </div>
-
-          </form>
         </div>
       </div>
 
