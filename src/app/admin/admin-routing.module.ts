@@ -12,6 +12,7 @@ import {CreateNotificationComponent} from './create-notification/create-notifica
 import {SubjectManagementComponent} from './subject-management/subject-management.component';
 import {AddSubjectComponent} from './subject-management/add-subject/add-subject.component';
 import {EditSubjectComponent} from './subject-management/edit-subject/edit-subject.component';
+import {ScheduleManagementComponent} from './schedule-management/schedule-management.component';
 
 const routes: Routes = [
   {
@@ -180,6 +181,21 @@ const routes: Routes = [
             },
             {
               label: 'Obaveštenja',
+              url: ''
+            }
+          ]
+        }
+      },
+      {
+        path: 'schedule', component: ScheduleManagementComponent, data: {
+          title: 'Schedule',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Plan angažovanja',
               url: ''
             }
           ]
