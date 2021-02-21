@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {AlertService} from '../../../services/alert.service';
-import {NotificationService} from '../../../services/notification.service';
+import {AlertService} from '../../services/alert.service';
+import {NotificationService} from '../../services/notification.service';
 import {first} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {TextEditorService} from '../../services/text-editor.service';
 
 @Component({
   selector: 'app-create-notification',
@@ -18,13 +20,17 @@ export class CreateNotificationComponent implements OnInit {
 
   submitted: boolean;
 
+  subscription: Subscription;
+
   constructor(
     private router: Router,
     private alertService: AlertService,
-    private notifService: NotificationService
+    private notifService: NotificationService,
+    private textEditorService: TextEditorService
   ) { }
 
   ngOnInit(): void {
+    this.subscription = this.textEditorService.text.subscribe(value => this.text = value);
   }
 
   create() {
@@ -59,7 +65,7 @@ export class CreateNotificationComponent implements OnInit {
       });
     this.title = '';
     this.category = '';
-    this.text = '';
+    this.textEditorService.changeText(null);
     this.submitted = false;
   }
 

@@ -13,6 +13,9 @@ import { EditWorkerComponent } from './worker-management/edit-worker/edit-worker
 import { SubjectManagementComponent } from './subject-management/subject-management.component';
 import { AddSubjectComponent } from './subject-management/add-subject/add-subject.component';
 import { EditSubjectComponent } from './subject-management/edit-subject/edit-subject.component';
+import { ScheduleManagementComponent } from './schedule-management/schedule-management.component';
+import {CreateNotificationComponent} from './create-notification/create-notification.component';
+import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
 
 
 @NgModule({
@@ -25,13 +28,16 @@ import { EditSubjectComponent } from './subject-management/edit-subject/edit-sub
     EditWorkerComponent,
     SubjectManagementComponent,
     AddSubjectComponent,
-    EditSubjectComponent
+    EditSubjectComponent,
+    ScheduleManagementComponent,
+    CreateNotificationComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    NgDynamicBreadcrumbModule
+    NgDynamicBreadcrumbModule,
+    TextEditorModule
   ]
 })
 export class AdminModule { }

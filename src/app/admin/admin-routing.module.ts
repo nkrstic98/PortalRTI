@@ -8,7 +8,7 @@ import {EditStudentComponent} from './student-management/edit-student/edit-stude
 import {WorkerManagementComponent} from './worker-management/worker-management.component';
 import {RegisterWorkerComponent} from '../account/register-worker/register-worker.component';
 import {EditWorkerComponent} from './worker-management/edit-worker/edit-worker.component';
-import {CreateNotificationComponent} from '../home-pages/notifications/create-notification/create-notification.component';
+import {CreateNotificationComponent} from './create-notification/create-notification.component';
 import {SubjectManagementComponent} from './subject-management/subject-management.component';
 import {AddSubjectComponent} from './subject-management/add-subject/add-subject.component';
 import {EditSubjectComponent} from './subject-management/edit-subject/edit-subject.component';

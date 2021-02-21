@@ -13,7 +13,6 @@ import { HeaderTeacherComponent } from './headers/header-teacher/header-teacher.
 import { ContactComponent } from './home-pages/contact/contact.component';
 import {NgDynamicBreadcrumbModule} from 'ng-dynamic-breadcrumb';
 import { NotificationsComponent } from './home-pages/notifications/notifications.component';
-import { CreateNotificationComponent } from './home-pages/notifications/create-notification/create-notification.component';
 import { WorkersComponent } from './home-pages/workers/workers.component';
 import { WorkersDetailsComponent } from './home-pages/workers/workers-details/workers-details.component';
 import { TeacherComponent } from './teacher/teacher.component';
@@ -35,7 +34,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     HeaderTeacherComponent,
     ContactComponent,
     NotificationsComponent,
-    CreateNotificationComponent,
     WorkersComponent,
     WorkersDetailsComponent,
     TeacherComponent,

@@ -36,10 +36,9 @@
           <div class="form-row">
             <div class="form-group col">
               <label for="txt">Tekst</label>
-              <textarea id="txt" [(ngModel)]="text" name="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && text == '' }" rows="6">
-              </textarea>
-              <div *ngIf="submitted && text == ''" class="invalid-feedback">
-                <div *ngIf="text == ''">Tekst obaveštenja je obavezno polje</div>
+              <app-text-editor id="txt" [ngClass]="{ 'is-invalid': submitted && text == null }"></app-text-editor>
+              <div *ngIf="submitted && text == null" class="invalid-feedback">
+                <div *ngIf="text == null">Tekst obaveštenja je obavezno polje</div>
               </div>
             </div>
           </div>
