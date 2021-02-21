@@ -14,14 +14,14 @@ import student from '../../../../backend/src/model/student';
   styleUrls: ['./subject-management.component.css']
 })
 export class SubjectManagementComponent implements OnInit {
-  module: String;
+  module: string;
   semester: Number;
 
   subjects: Subject[];
   filteredSubjects: Subject[];
 
   students: Student[];
-  enrolledStudents: String[];
+  enrolledStudents: string[];
 
   enrollSubject = "";
 
@@ -111,13 +111,15 @@ export class SubjectManagementComponent implements OnInit {
     }
   }
 
-  alreadyEnrolled(s: Student): Boolean {
-    if(s.subjects.find(value => value == this.enrollSubject)) {
-      return true;
+  alreadyEnrolled(s: Student): boolean {
+
+    for(let i = 0; i < s.subjects.length; i++) {
+      if(s.subjects[i] == this.enrollSubject) {
+        return true;
+      }
     }
-    else {
-      return false;
-    }
+
+    return false;
   }
 
   enrollStudents() {

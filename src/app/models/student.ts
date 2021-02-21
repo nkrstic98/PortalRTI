@@ -6,7 +6,7 @@ export class Student {
   firstname: string;
   lastname: string;
   status: string;
-  subjects: string[];
+  subjects: Array<string>;
 
   //inicijalizacija objekta tipa Student
   constructor(init?:Partial<Student>) {
