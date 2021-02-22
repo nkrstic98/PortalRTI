@@ -6,6 +6,8 @@ import {TextEditorService} from '../../services/text-editor.service';
 import {AlertService} from '../../services/alert.service';
 import {first} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
+import {ScheduleService} from '../../services/schedule.service';
+import {Schedule} from '../../models/schedule';
 
 @Component({
   selector: 'app-add-news',
@@ -27,6 +29,7 @@ export class AddNewsComponent implements OnInit {
   subjects: Subject[];
 
   subjectArray = [];
+  schedule: Array<Schedule> = [];
 
   subscription: Subscription;
 
@@ -37,18 +40,27 @@ export class AddNewsComponent implements OnInit {
   constructor(
     private subjectService: SubjectService,
     private textEditorService: TextEditorService,
-    private alertService: AlertService
-  ) {}
+    private alertService: AlertService,
+    private scheduleService: ScheduleService
+  ) {
+    this.subscription = this.textEditorService.text.subscribe(value => this.info.tekst = value);
+  }
 
   ngOnInit(): void {
     this.submitted = false;
 
-    this.subscription = this.textEditorService.text.subscribe(value => this.info.tekst = value);
+    this.textEditorService.changeText(null);
 
     this.subjectService.getAll()
       .pipe(first())
       .subscribe(value => {
         this.subjects = value;
+      })
+
+    this.scheduleService.getSchedule()
+      .pipe(first())
+      .subscribe((value: Schedule[]) => {
+        this.schedule = value;
       })
   }
 
@@ -58,6 +70,22 @@ export class AddNewsComponent implements OnInit {
 
   fileChangeEvent(event) {
     this.filesToUpload = <Array<File>> event.target.files;
+  }
+
+  getTeacherSubjects(): Subject[] {
+
+    let teacherSchedule: Array<Subject> = [];
+    let teacher = JSON.parse(localStorage.getItem('user'));
+
+    this.schedule.forEach(value => {
+      if(value.predavanja.find(p => p.zaposleni.find(t => t == teacher.username)) || value.vezbe.find(v => v.zaposleni.find(t => t == teacher.username))) {
+        if(teacherSchedule.find(v => v == this.subjects.find(s => s.sifra == value.predmet)) == undefined) {
+          teacherSchedule.push(this.subjects.find(s => s.sifra == value.predmet));
+        }
+      }
+    })
+
+    return teacherSchedule;
   }
 
   upload() {

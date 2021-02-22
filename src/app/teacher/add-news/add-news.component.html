@@ -51,7 +51,7 @@
             <div class="form-group col">
               <label for="cat">Izaberite predmete za koje je vezano obaveštenje</label>
               <select id="cat" class="custom-select" [(ngModel)]="subjectArray" [ngClass]="{ 'is-invalid': submitted && subjectArray.length == 0 }" multiple>
-                <option *ngFor="let s of subjects" value="{{s.sifra}}">
+                <option *ngFor="let s of getTeacherSubjects()" value="{{s.sifra}}">
                   {{s.sifra}} - {{s.naziv}}
                 </option>
               </select>

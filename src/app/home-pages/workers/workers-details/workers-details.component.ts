@@ -53,7 +53,9 @@ export class WorkersDetailsComponent implements OnInit {
 
     this.schedule.forEach(value => {
       if(value.predavanja.find(p => p.zaposleni.find(t => t == this.teacher.username)) || value.vezbe.find(v => v.zaposleni.find(t => t == this.teacher.username))) {
-        teacherSchedule.push(this.subjects.find(s => s.sifra == value.predmet));
+        if(teacherSchedule.find(v => v == this.subjects.find(s => s.sifra == value.predmet)) == undefined) {
+          teacherSchedule.push(this.subjects.find(s => s.sifra == value.predmet));
+        }
       }
     })
 

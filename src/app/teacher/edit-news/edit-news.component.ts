@@ -6,6 +6,8 @@ import {first} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {TextEditorService} from '../../services/text-editor.service';
 import {AlertService} from '../../services/alert.service';
+import {Schedule} from '../../models/schedule';
+import {ScheduleService} from '../../services/schedule.service';
 
 @Component({
   selector: 'app-edit-news',
@@ -31,7 +33,8 @@ export class EditNewsComponent implements OnInit {
     info: Information;
   }> = [];
 
-  mySubjects: Subject[];
+  mySubjects: Subject[] = [];
+  schedule: Array<Schedule> = [];
 
   user: User;
 
@@ -42,7 +45,8 @@ export class EditNewsComponent implements OnInit {
   constructor(
     private subjectService: SubjectService,
     private textEditorService: TextEditorService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private scheduleService: ScheduleService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.subscription = this.textEditorService.text.subscribe(value => this.newText = value);
@@ -51,17 +55,30 @@ export class EditNewsComponent implements OnInit {
   ngOnInit(): void {
     this.subjectInfo = [];
 
+    this.scheduleService.getSchedule()
+      .pipe(first())
+      .subscribe((value: Schedule[]) => {
+        this.schedule = value;
+      })
+
     this.subjectService.getAll()
       .pipe(first())
       .subscribe(subjects => {
-        this.mySubjects = subjects;
+
+        this.schedule.forEach(value => {
+          if(value.predavanja.find(p => p.zaposleni.find(t => t == this.user.username)) || value.vezbe.find(v => v.zaposleni.find(t => t == this.user.username))) {
+            if(this.mySubjects.find(v => v == subjects.find(s => s.sifra == value.predmet)) == undefined) {
+              this.mySubjects.push(subjects.find(s => s.sifra == value.predmet));
+            }
+          }
+        })
 
         let info;
 
-        subjects.forEach(subject => {
+        this.mySubjects.forEach(subject => {
           if (subject.obavestenja.length != 0) {
 
-            let subInfo = subject.obavestenja.filter(o => o.autor == this.user.username);
+            let subInfo = subject.obavestenja;
 
             subInfo.forEach(i => {
               info = {
@@ -88,8 +105,18 @@ export class EditNewsComponent implements OnInit {
         else {
           this.nextE = false;
         }
+
+
       })
 
+    console.log(this.subjectInfo);
+
+    console.log(this.filteredInfo);
+
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   fileChangeEvent(event) {
@@ -174,7 +201,12 @@ export class EditNewsComponent implements OnInit {
   }
 
   chooseSubject(event) {
-    this.filteredInfo = this.subjectInfo.filter(value => value.subject == event.target.value);
+    if(event.target.value != '') {
+      this.filteredInfo = this.subjectInfo.filter(value => value.subject == event.target.value);
+    }
+    else {
+      this.filteredInfo = this.subjectInfo;
+    }
     this.page = 0;
     this.prevE = false;
     if (this.filteredInfo.length > 1) {
