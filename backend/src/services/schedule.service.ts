@@ -20,17 +20,11 @@ router.route('/addSchedule').post((req, res) => {
 })
 
 router.route('/get/:subject').get((req, res) => {
-  Schedule.collection.findOne(
-    { predmet : req.params.subject },
-    (err, schedule) => {
-      if(schedule) {
-        res.json(schedule);
-      }
-      else {
-        res.json(null);
-      }
-    }
+  Schedule.find(
+    { predmet : req.params.subject }
   )
+    .then(schedule => res.json(schedule))
+    .catch(err => res.json(err));
 })
 
 router.route('/').get((req, res) => {

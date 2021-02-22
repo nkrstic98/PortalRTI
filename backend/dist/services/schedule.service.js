@@ -16,14 +16,9 @@ router.route('/addSchedule').post((req, res) => {
         .catch(error => res.json(error));
 });
 router.route('/get/:subject').get((req, res) => {
-    schedule_1.default.collection.findOne({ predmet: req.params.subject }, (err, schedule) => {
-        if (schedule) {
-            res.json(schedule);
-        }
-        else {
-            res.json(null);
-        }
-    });
+    schedule_1.default.find({ predmet: req.params.subject })
+        .then(schedule => res.json(schedule))
+        .catch(err => res.json(err));
 });
 router.route('/').get((req, res) => {
     schedule_1.default.find()
