@@ -40,7 +40,7 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.clear();
     this.userSubject.next(null);
     this.router.navigate(['/']);
   }

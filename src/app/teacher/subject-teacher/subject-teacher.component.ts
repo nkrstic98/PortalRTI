@@ -42,9 +42,15 @@ export class SubjectTeacherComponent implements OnInit {
       })
   }
 
+  ngOnDestroy() {
+    localStorage.removeItem('page');
+    localStorage.removeItem('subject');
+  }
+
   chooseSubject() {
     // console.log(this.mySubject);
     this.teacherService.getSubject(this.mySubject);
+    localStorage.setItem('subject', this.mySubject);
     // console.log(this.router);
     this.router.navigate(['teacher/subjects/' + this.mySubject + '/edit_about']);
   }

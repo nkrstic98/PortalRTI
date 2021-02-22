@@ -79,6 +79,7 @@ export class SubjectComponent implements OnInit {
 
   ngOnDestroy() {
     localStorage.removeItem('page');
+    localStorage.removeItem('subject');
   }
 
   changePage(val) {
