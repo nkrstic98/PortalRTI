@@ -47,6 +47,12 @@ export class ChangePassComponent implements OnInit {
       return;
     }
 
+    if(this.f.oldPassword.value == this.f.newPassword.value) {
+      this.alertService.error("Stara i nova lozinka ne mogu biti iste");
+      this.form.reset();
+      return;
+    }
+
     if(this.f.newPassword.value != this.f.newPasswordConfirm.value) {
       this.alertService.error("Lozinka i potvrda lozinke se ne poklapaju");
       this.form.reset();
