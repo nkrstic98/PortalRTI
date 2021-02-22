@@ -65,9 +65,7 @@ router.route('/changePass').put((req, res) => {
       if(user) {
         Object.assign(user, userParam);
 
-        user.save()
-          .then(r => res.json(r))
-          .catch(err => res.json(err));
+        user.save();
       }
       else {
         res.json(err);
@@ -75,35 +73,21 @@ router.route('/changePass').put((req, res) => {
     });
 
   if(req.body.type == 1) {
-    Worker.findOne(
+    Worker.findOneAndUpdate(
       {'username': req.body.username},
-      (err: any, worker: { save: () => void; }) => {
-        if(worker) {
-          Object.assign(worker, {password:req.body.password});
-
-          worker.save();
-        }
-        else {
-          res.json(err);
-        }
-      }
+      {password:req.body.password}
     )
+      .then(r => res.json(r))
+      .catch(err => res.json(err));
   }
 
   if(req.body.type == 2) {
-    Student.findOne(
+    Student.findOneAndUpdate(
       {'username': req.body.username},
-      (err, student) => {
-        if(student) {
-          Object.assign(student, {password:req.body.password});
-
-          student.save();
-        }
-        else {
-          res.json(err);
-        }
-      }
+      {password:req.body.password}
     )
+      .then(r => res.json(r))
+      .catch(err => res.json(err));
   }
 })
 

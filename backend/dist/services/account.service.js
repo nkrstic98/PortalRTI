@@ -64,35 +64,21 @@ router.route('/changePass').put((req, res) => {
     user_1.default.findOne({ 'username': req.body.username }, (err, user) => {
         if (user) {
             Object.assign(user, userParam);
-            user.save()
-                .then(r => res.json(r))
-                .catch(err => res.json(err));
+            user.save();
         }
         else {
             res.json(err);
         }
     });
     if (req.body.type == 1) {
-        worker_1.default.findOne({ 'username': req.body.username }, (err, worker) => {
-            if (worker) {
-                Object.assign(worker, { password: req.body.password });
-                worker.save();
-            }
-            else {
-                res.json(err);
-            }
-        });
+        worker_1.default.findOneAndUpdate({ 'username': req.body.username }, { password: req.body.password })
+            .then(r => res.json(r))
+            .catch(err => res.json(err));
     }
     if (req.body.type == 2) {
-        student_1.default.findOne({ 'username': req.body.username }, (err, student) => {
-            if (student) {
-                Object.assign(student, { password: req.body.password });
-                student.save();
-            }
-            else {
-                res.json(err);
-            }
-        });
+        student_1.default.findOneAndUpdate({ 'username': req.body.username }, { password: req.body.password })
+            .then(r => res.json(r))
+            .catch(err => res.json(err));
     }
 });
 router.route('/registerStudent').post((req, res, next) => {
