@@ -1,1 +1,160 @@
-<p>schedule-management works!</p>
+<div class="container-fluid">
+
+  <div class="row mt-3">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 text-center" style="font-family: Arial">
+      <select class="custom-select" [(ngModel)]="mojPredmet" (change)="chooseSchedule()">
+        <option selected value=null disabled>Izaberite predmet</option>
+        <option *ngFor="let p of predmetiOdseci; index as i;" [value]=i>
+          {{p.predmet.sifra}} - {{p.predmet.naziv}} ({{p.odsek}} odsek)
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center d-flex flex-column justify-content-center align-items-center mx-auto" style="font-family: Arial">
+      <table>
+        <tr>
+          <td>Broj grupa za predavanja</td>
+          <td class="pl-3">
+            <select class="custom-select" [(ngModel)]="brp" (change)="brP($event)" [disabled]="mojPredmet == null">
+              <option selected disabled value=0>Izaberite</option>
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Broj grupa za vežbe</td>
+          <td class="pl-3">
+            <select class="custom-select" [(ngModel)]="brv" (change)="brV($event)" [disabled]="mojPredmet == null">
+              <option selected disabled value=0>Izaberite</option>
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center d-flex flex-column justify-content-center align-items-center mx-auto" style="font-family: Arial">
+      <button class="btn btn-success" [disabled]="mojPredmet == null" (click)="submitSchedule()">
+        Sačuvaj plan angažovanja
+      </button>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+
+  <hr/>
+
+  <div class="row mt-3">
+    <div class="col-sm-3 text-center d-flex flex-column justify-content-center align-items-center mx-auto" *ngFor="let p of predavanja; index as i;">
+      <h3>Grupa P{{i + 1}}</h3>
+      <select class="custom-select mt-2" [(ngModel)]="predavanja[i].dan">
+        <option selected disabled value="">Izaberite dan</option>
+        <option value="Ponedeljak">Ponedeljak</option>
+        <option value="Utorak">Utorak</option>
+        <option value="Sreda">Sreda</option>
+        <option value="Četvrtak">Četvrtak</option>
+        <option value="Petak">Petak</option>
+      </select>
+
+      <br/>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary float-right mr-2"
+        data-toggle="modal"
+        data-target="#studentModal"
+        (click)="izaberiGrupu(i + 1, 'p')"
+      >
+        Dodaj zaposlene
+      </button>
+
+      <br/>
+
+      <label for="s_time">Početak predavanja</label>
+      <input type="time" id="s_time" class="form-control" [(ngModel)]="predavanja[i].pocetak" />
+
+      <br/>
+
+      <label for="f_time">Kraj predavanja</label>
+      <input type="time" id="f_time" class="form-control" [(ngModel)]="predavanja[i].kraj" />
+    </div>
+  </div>
+
+  <hr *ngIf="brv != 0">
+
+  <div class="row mt-3">
+    <div class="col-sm-3 text-center d-flex flex-column justify-content-center align-items-center mx-auto" *ngFor="let v of vezbe; index as i;">
+      <h3>Grupa V{{i + 1}}</h3>
+      <select class="custom-select mt-2" [(ngModel)]="vezbe[i].dan">
+        <option selected disabled value="">Izaberite dan</option>
+        <option value="Ponedeljak">Ponedeljak</option>
+        <option value="Utorak">Utorak</option>
+        <option value="Sreda">Sreda</option>
+        <option value="Četvrtak">Četvrtak</option>
+        <option value="Petak">Petak</option>
+      </select>
+
+      <br/>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary float-right mr-2"
+        data-toggle="modal"
+        data-target="#studentModal"
+        (click)="izaberiGrupu(i + 1, 'v')"
+      >
+        Dodaj zaposlene
+      </button>
+
+      <br/>
+
+      <label for="s_time_v">Početak termina</label>
+      <input type="time" id="s_time_v" class="form-control" [(ngModel)]="vezbe[i].pocetak" />
+
+      <br/>
+
+      <label for="f_time_v">Kraj termina</label>
+      <input type="time" id="f_time_v" class="form-control" [(ngModel)]="vezbe[i].kraj" />
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Izaberite predavače</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let s of zaposleni">
+          <div class="custom-checkbox ml-3">
+            <input class="form-check-input" type="checkbox" (change)="addTeacher(s.username)" [checked]="isAdded(s.username)">
+            <span style="font-size: large">{{s.lastname}} {{s.firstname}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary text-center" data-dismiss="modal">Dodaj</button>
+      </div>
+    </div>
+  </div>
+</div>
