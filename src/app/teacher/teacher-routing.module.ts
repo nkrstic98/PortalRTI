@@ -5,6 +5,7 @@ import {ProfileTeacherComponent} from './profile-teacher/profile-teacher.compone
 import {SubjectTeacherComponent} from './subject-teacher/subject-teacher.component';
 import {AddNewsComponent} from './add-news/add-news.component';
 import {EditNewsComponent} from './edit-news/edit-news.component';
+import {ListManagementComponent} from './list-management/list-management.component';
 
 const subjectModule = () => import('../subject/subject.module').then(x => x.SubjectModule);
 
@@ -23,6 +24,9 @@ const routes: Routes = [
       },
       {
         path: 'editNews', component: EditNewsComponent
+      },
+      {
+        path: 'lists', component: ListManagementComponent
       }
     ]
   }

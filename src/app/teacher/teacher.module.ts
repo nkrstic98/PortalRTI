@@ -17,6 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { EditNewsComponent } from './edit-news/edit-news.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ListManagementComponent } from './list-management/list-management.component';
 
 @NgModule({
   exports: [
@@ -26,7 +27,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ProfileTeacherComponent,
     SubjectTeacherComponent,
     AddNewsComponent,
-    EditNewsComponent
+    EditNewsComponent,
+    ListManagementComponent
   ],
   imports: [
     CommonModule,
