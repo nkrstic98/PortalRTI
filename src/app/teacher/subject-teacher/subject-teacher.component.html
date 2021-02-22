@@ -5,7 +5,7 @@
     <div class="col-sm-4 text-center" style="font-family: Arial">
       <select class="custom-select" (change)="chooseSubject()" [(ngModel)]="mySubject">
         <option selected value="" disabled>Izaberi predmet</option>
-        <option  *ngFor="let s of subjects" value="{{s.sifra}}">{{s.sifra}} - {{s.naziv}}</option>
+        <option  *ngFor="let s of getTeacherSubjects()" value="{{s.sifra}}">{{s.sifra}} - {{s.naziv}}</option>
       </select>
     </div>
     <div class="col-sm-4"></div>

@@ -23,6 +23,7 @@ import { ScienceProjectsComponent } from './home-pages/science-projects/science-
 import { ProjectsComponent } from './home-pages/projects/projects.component';
 import { SubjectsListComponent } from './home-pages/subjects-list/subjects-list.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     NgDynamicBreadcrumbModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatExpansionModule
   ],
   exports: [MatSidenavModule],
   providers: [],

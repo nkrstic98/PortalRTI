@@ -4,6 +4,10 @@ import {Router} from '@angular/router';
 import {AlertService} from '../../services/alert.service';
 import {WorkerService} from '../../services/worker.service';
 import {first} from 'rxjs/operators';
+import {ScheduleService} from '../../services/schedule.service';
+import {Schedule} from '../../models/schedule';
+import {SubjectService} from '../../services/subject.service';
+import {Subject} from '../../models/subject';
 
 @Component({
   selector: 'app-workers',
@@ -12,12 +16,15 @@ import {first} from 'rxjs/operators';
 })
 export class WorkersComponent implements OnInit {
 
-  workers: Worker[];
+  workers: Worker[] = [];
+  schedule: Schedule[] = [];
+  subjects: Subject[] = [];
 
   constructor(
     private router: Router,
-    private alertService: AlertService,
-    private workerService: WorkerService
+    private workerService: WorkerService,
+    private scheduleService: ScheduleService,
+    private subjectService: SubjectService
   ) { }
 
   ngOnInit(): void {
@@ -27,5 +34,30 @@ export class WorkersComponent implements OnInit {
         this.workers = workers;
         this.workers.sort((a, b) => a.firstname.localeCompare(b.firstname));
       })
+
+    this.scheduleService.getSchedule()
+      .pipe(first())
+      .subscribe((value: Schedule[]) => {
+        this.schedule = value;
+      })
+
+    this.subjectService.getAll()
+      .pipe(first())
+      .subscribe(value => {
+        this.subjects = value;
+      })
+  }
+
+  getTeacherSubjects(teacher): Subject[] {
+
+    let teacherSchedule: Array<Subject> = [];
+
+    this.schedule.forEach(value => {
+      if(value.predavanja.find(p => p.zaposleni.find(t => t == teacher)) || value.vezbe.find(v => v.zaposleni.find(t => t == teacher))) {
+        teacherSchedule.push(this.subjects.find(s => s.sifra == value.predmet));
+      }
+    })
+
+    return teacherSchedule;
   }
 }

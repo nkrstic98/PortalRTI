@@ -25,5 +25,10 @@ router.route('/get/:subject').get((req, res) => {
         }
     });
 });
+router.route('/').get((req, res) => {
+    schedule_1.default.find()
+        .then(schedule => res.json(schedule))
+        .catch(err => res.json(err));
+});
 module.exports = router;
 //# sourceMappingURL=schedule.service.js.map

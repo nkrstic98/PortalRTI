@@ -72,8 +72,25 @@
       <div class="col-md-12 mb-3">
         <div class="card">
           <div class="card-body">
-            <div class="col-sm-9 text-secondary">
+            <div class="col-sm-12">
               {{teacher.biography}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-body" *ngIf="teacher.biography != ''">
+    <div class="row-gutters-sm">
+      <div class="col-md-12 mb-3">
+        <div class="card">
+          <div class="card-header text-center">Plan angažovanja</div>
+          <div class="card-body">
+            <div class="col-sm-12 text-center">
+              <div *ngFor="let mySub of getTeacherSubjects()">
+                <p style="font-size: large">{{mySub.sifra}} - {{mySub.naziv}}</p>
+              </div>
             </div>
           </div>
         </div>

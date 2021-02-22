@@ -19,4 +19,8 @@ export class ScheduleService {
   getScheduleForSubject(subject) {
     return this.http.get(`${this.uri}/get/${subject}`);
   }
+
+  getSchedule() {
+    return this.http.get(`${this.uri}`);
+  }
 }

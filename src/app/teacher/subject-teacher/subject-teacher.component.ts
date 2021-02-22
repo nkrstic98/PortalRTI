@@ -5,6 +5,8 @@ import {Subject} from '../../models/subject';
 import {first} from 'rxjs/operators';
 import subject from '../../../../backend/src/model/subject';
 import {Router} from '@angular/router';
+import {ScheduleService} from '../../services/schedule.service';
+import {Schedule} from '../../models/schedule';
 
 @Component({
   selector: 'app-subject-teacher',
@@ -15,11 +17,13 @@ export class SubjectTeacherComponent implements OnInit {
   mySubject = "";
 
   subjects: Subject[];
+  schedule: Schedule[];
 
   constructor(
     private router: Router,
     private teacherService: TeacherService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +34,12 @@ export class SubjectTeacherComponent implements OnInit {
       .subscribe((subjects: Subject[]) => {
         this.subjects = subjects.sort((a, b) => a.sifra.localeCompare(b.sifra));
       })
+
+    this.scheduleService.getSchedule()
+      .pipe(first())
+      .subscribe((schedule: Schedule[]) => {
+        this.schedule = schedule;
+      })
   }
 
   chooseSubject() {
@@ -37,5 +47,19 @@ export class SubjectTeacherComponent implements OnInit {
     this.teacherService.getSubject(this.mySubject);
     // console.log(this.router);
     this.router.navigate(['teacher/subjects/' + this.mySubject + '/edit_about']);
+  }
+
+  getTeacherSubjects(): Subject[] {
+    let teacherSchedule: Array<Subject> = [];
+
+    let teacher = JSON.parse(localStorage.getItem('user'));
+
+    this.schedule.forEach(value => {
+      if(value.predavanja.find(p => p.zaposleni.find(t => t == teacher.username)) || value.vezbe.find(v => v.zaposleni.find(t => t == teacher.username))) {
+        teacherSchedule.push(this.subjects.find(s => s.sifra == value.predmet));
+      }
+    })
+
+    return teacherSchedule;
   }
 }

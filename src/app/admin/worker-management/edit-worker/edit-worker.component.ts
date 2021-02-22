@@ -58,6 +58,10 @@ export class EditWorkerComponent implements OnInit {
       this.myWorker.office = this.office;
     }
 
+    if(this.workerImage == undefined) {
+      this.workerImage = null
+    }
+
     this.workerService.update(this.myWorker, this.workerImage)
       .pipe(first())
       .subscribe({

@@ -4,7 +4,7 @@
       <div class="card border-primary mb-4" *ngFor="let worker of workers">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-2 mr-5">
+            <div class="col-sm-2 mr-5 col-md-2">
               <img
                 src="{{worker.image != null ? 'http://localhost:4000/uploads/worker_images/' + worker.image : '../../../assets/no_profile_pic.jpg'}}"
                 alt="{{worker.username}}"
@@ -13,11 +13,32 @@
                 class="rounded-circle"
               >
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-md-6 ml-5">
               <a routerLink="workerDetails/{{worker.username}}" style="text-decoration: none"><h2 class="card-title">{{worker.firstname}} {{worker.lastname}}</h2></a>
               <h6 class="card-subtitle mb-3 text-uppercase">{{worker.title}}</h6>
               <span class="card-text"><i class="fa fa-briefcase"></i> Kancelarija: {{worker.office}}</span> <br/>
               <span class="card-text"><i class="fa fa-envelope"></i> E-mail: {{worker.email}}</span>
+            </div>
+          </div>
+
+          <hr *ngIf="worker.title != 'istraživač' && worker.title != 'laboratorijski inženjer' && worker.title != 'laboratorijski tehničar'"/>
+
+          <div class="row"
+            *ngIf="worker.title != 'istraživač' && worker.title != 'laboratorijski inženjer' && worker.title != 'laboratorijski tehničar'"
+          >
+            <div class="col-sm-12">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Plan angažovanja
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul>
+                  <li *ngFor="let mySub of getTeacherSubjects(worker.username)">
+                    <p style="font-size: large">{{mySub.sifra}} - {{mySub.naziv}}</p>
+                  </li>
+                </ul>
+              </mat-expansion-panel>
             </div>
           </div>
         </div>

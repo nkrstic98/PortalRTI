@@ -1,5 +1,6 @@
 import express from 'express';
 import Schedule from '../model/schedule';
+import schedule from '../model/schedule';
 
 const router = express.Router();
 
@@ -30,6 +31,12 @@ router.route('/get/:subject').get((req, res) => {
       }
     }
   )
+})
+
+router.route('/').get((req, res) => {
+  Schedule.find()
+    .then(schedule => res.json(schedule))
+    .catch(err => res.json(err));
 })
 
 module.exports = router;
