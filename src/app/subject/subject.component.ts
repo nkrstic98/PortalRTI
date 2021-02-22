@@ -42,6 +42,12 @@ export class SubjectComponent implements OnInit {
     //     }
     //   }
     // })
+
+    //Kada se promeni ruta, vracamo se na prvu stranu predmeta
+    //Uvek se na pocetku prikazuje informacija sa obavestenjima
+    this.router.events.subscribe(() => {
+      this.page = JSON.parse(localStorage.getItem('page'));
+    })
   }
 
   ngOnInit(): void {

@@ -18,6 +18,8 @@ export class HeaderDefaultComponent implements OnInit {
   user: User;
   mySubjects: Subject[] = [];
 
+  links_student = [ 'notifications', 'about', 'lectures', 'exercises', 'exams', 'labs', 'projects' ];
+
   constructor(
     private accountService: AccountService,
     private subjectService: SubjectService,
@@ -47,6 +49,7 @@ export class HeaderDefaultComponent implements OnInit {
   goToSubject(sifra) {
     this.teacherService.getSubject(sifra);
     localStorage.setItem('subject', sifra);
+    localStorage.setItem('page', JSON.stringify(1));
     this.router.navigate(['subjects/' + sifra + '/notifications']);
   }
 }
