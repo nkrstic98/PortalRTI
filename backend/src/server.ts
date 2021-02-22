@@ -22,5 +22,6 @@ app.use('/students', require('./services/student.service'));
 app.use('/workers', require('./services/worker.service'));
 app.use('/notifications', require('./services/notification.service'));
 app.use('/subjects', require('./services/subject.service'));
+app.use('/schedule', require('./services/schedule.service'));
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));
