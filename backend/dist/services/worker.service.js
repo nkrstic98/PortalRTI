@@ -14,6 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const user_1 = __importDefault(require("../model/user"));
 const worker_1 = __importDefault(require("../model/worker"));
+const list_1 = __importDefault(require("../model/list"));
 const router = express_1.default.Router();
 const sharp = require("sharp");
 const multer = require("multer");
@@ -105,5 +106,14 @@ router.post('/update', upload.single('workerImage'), (req, res, next) => __await
     })
         .catch(err => next(err));
 }));
+router.route('/submitList').post((req, res, next) => {
+    list_1.default.collection.updateOne({ naziv: req.body.list.naziv }, {
+        $set: req.body.list
+    }, {
+        upsert: true
+    })
+        .then(() => res.json({}))
+        .catch(error => res.json(error));
+});
 module.exports = router;
 //# sourceMappingURL=worker.service.js.map

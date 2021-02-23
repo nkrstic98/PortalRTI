@@ -1,6 +1,8 @@
 import express from 'express';
 import User from '../model/user';
 import Worker from '../model/worker';
+import List from '../model/list';
+import Schedule from '../model/schedule';
 
 const router = express.Router();
 
@@ -107,6 +109,20 @@ router.post('/update', upload.single('workerImage'), async (req, res, next) => {
         .catch(err => next(err));
     })
     .catch(err => next(err));
+})
+
+router.route('/submitList').post((req, res, next) => {
+  List.collection.updateOne(
+    {naziv: req.body.list.naziv},
+    {
+      $set: req.body.list
+    },
+    {
+      upsert: true
+    }
+  )
+    .then(() => res.json({}))
+    .catch(error => res.json(error));
 })
 
 module.exports = router;
