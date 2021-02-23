@@ -46,19 +46,14 @@ export class ListManagementComponent implements OnInit {
     this.workerService.getLists()
       .pipe(first())
       .subscribe((value: List[]) => {
-        if(this.user.type == 1) {
-          this.spiskovi = value.filter(v => v.autor == this.user.username)
-        }
-        else {
-          this.spiskovi = value;
-          this.spiskovi.forEach(s => {
-            if(s.limit != null) {
-              if(s.limit == s.prijavljeni.length) {
-                s.spisak_otvoren = false;
-              }
+        this.spiskovi = value;
+        this.spiskovi.forEach(s => {
+          if(s.limit != null) {
+            if(s.limit == s.prijavljeni.length) {
+              s.spisak_otvoren = false;
             }
-          })
-        }
+          }
+        })
 
         this.spiskovi.forEach(s => {
           let now = Date.now();

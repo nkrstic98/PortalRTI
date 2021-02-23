@@ -34,7 +34,7 @@ let Student = new Schema({
     required: true
   },
   subjects: {
-    Array
+    type: Array
   }
 });
 

@@ -13,11 +13,11 @@
           <td class="align-middle">{{s.naziv}}</td>
           <td class="align-middle">{{s.prijavljeni.length}}</td>
           <td *ngIf="user.type == 1" class="align-middle">
-            <input class="form-check-input" type="checkbox" (change)="changeStatus(i)" [checked]="s.spisak_otvoren">
+            <input *ngIf="s.autor == user.username" class="form-check-input" type="checkbox" (change)="changeStatus(i)" [checked]="s.spisak_otvoren">
             <span *ngIf="s.spisak_otvoren">Otvoren</span>
             <span *ngIf="!s.spisak_otvoren">Zatvoren</span>
           </td>
-          <td class="align-middle">
+          <td *ngIf="user.type == 2" class="align-middle">
             <span *ngIf="user.type == 2 && s.fajlovi" class="col d-flex justify-content-center align-items-end flex-wrap">
               <label for="workerImage" class="custom-file-label">{{file != null ? file.name : "Priložite fajl"}}</label>
               <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"

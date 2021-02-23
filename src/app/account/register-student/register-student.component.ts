@@ -86,7 +86,7 @@ export class RegisterStudentComponent implements OnInit {
               'Student ' + this.firstname + ' ' + this.lastname + ' je uspešno registrovan', {keepAfterRouteChange: true, autoClose: true}
               );
 
-            this.router.navigate(['../../admin/studentManagement'], {relativeTo: this.route});
+            this.router.navigate(['../'], {relativeTo: this.route});
           }
           else {
             this.alertService.success('Uspešno ste se registrovali na portal', {keepAfterRouteChange: true, autoClose: true});
