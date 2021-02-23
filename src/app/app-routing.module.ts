@@ -11,6 +11,7 @@ import {ProjectsComponent} from './home-pages/projects/projects.component';
 import {SubjectsListComponent} from './home-pages/subjects-list/subjects-list.component';
 import {SubjectComponent} from './subject/subject.component';
 import {ListManagementComponent} from './teacher/list-management/list-management.component';
+import {RoleGuardService} from './services/role-guard.service';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -21,9 +22,9 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'account', loadChildren: accountModule },
-  { path: 'admin', loadChildren: adminModule },
-  { path: 'teacher', loadChildren: teacherModule },
-  { path: 'subjects', component: SubjectComponent, loadChildren: subjectModule },
+  { path: 'admin', loadChildren: adminModule, canActivate: [RoleGuardService], data: { expectedRole: 0 } },
+  { path: 'teacher', loadChildren: teacherModule, canActivate: [RoleGuardService], data: { expectedRole: 1 } },
+  { path: 'subjects', component: SubjectComponent, loadChildren: subjectModule, canActivate: [RoleGuardService], data: { expectedRole: 2 } },
   { path: 'workers', component: WorkersComponent, data: {
       title: 'Workers',
       breadcrumb: [

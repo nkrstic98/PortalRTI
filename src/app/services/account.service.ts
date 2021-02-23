@@ -24,6 +24,10 @@ export class AccountService {
     return this.userSubject.value;
   }
 
+  setUserValue(value) {
+    this.userSubject.next(value);
+  }
+
   login(username, password) {
     const data = {
       username: username,
@@ -38,6 +42,7 @@ export class AccountService {
         return user;
       }));
   }
+
 
   logout() {
     localStorage.clear();
