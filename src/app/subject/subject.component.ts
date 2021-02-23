@@ -30,18 +30,6 @@ export class SubjectComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute
   ) {
-    // this.subscription = router.events.subscribe((event) => {
-    //   if(event instanceof NavigationStart) {
-    //     if(this.user.type == 2) {
-    //       this.page = 1;
-    //       this.changePage(0);
-    //     }
-    //     else {
-    //       this.page = 2;
-    //       this.changePage(1);
-    //     }
-    //   }
-    // })
 
     //Kada se promeni ruta, vracamo se na prvu stranu predmeta
     //Uvek se na pocetku prikazuje informacija sa obavestenjima
@@ -78,8 +66,8 @@ export class SubjectComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    localStorage.removeItem('page');
-    localStorage.removeItem('subject');
+    // localStorage.removeItem('page');
+    // localStorage.removeItem('subject');
   }
 
   changePage(val) {

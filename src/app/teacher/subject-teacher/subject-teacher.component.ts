@@ -4,7 +4,7 @@ import {SubjectService} from '../../services/subject.service';
 import {Subject} from '../../models/subject';
 import {first} from 'rxjs/operators';
 import subject from '../../../../backend/src/model/subject';
-import {Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {ScheduleService} from '../../services/schedule.service';
 import {Schedule} from '../../models/schedule';
 
@@ -24,7 +24,14 @@ export class SubjectTeacherComponent implements OnInit {
     private teacherService: TeacherService,
     private subjectService: SubjectService,
     private scheduleService: ScheduleService
-  ) { }
+  ) {
+    // router.events.subscribe((event) => {
+    //   if(event instanceof NavigationStart) {
+    //     localStorage.removeItem('page');
+    //     localStorage.removeItem('subject');
+    //   }
+    // })
+  }
 
   ngOnInit(): void {
     this.router.navigate(['teacher/subjects']);
@@ -51,6 +58,7 @@ export class SubjectTeacherComponent implements OnInit {
     // console.log(this.mySubject);
     this.teacherService.getSubject(this.mySubject);
     localStorage.setItem('subject', this.mySubject);
+    localStorage.setItem('page', JSON.stringify(2));
     // console.log(this.router);
     this.router.navigate(['teacher/subjects/' + this.mySubject + '/edit_about']);
   }
