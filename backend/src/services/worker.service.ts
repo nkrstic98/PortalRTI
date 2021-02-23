@@ -1,8 +1,7 @@
 import express from 'express';
 import User from '../model/user';
 import Worker from '../model/worker';
-import List from '../model/list';
-import Schedule from '../model/schedule';
+import Spisak from '../model/list';
 
 const router = express.Router();
 
@@ -11,6 +10,37 @@ const multer = require("multer");
 const fs = require('fs');
 
 const storage = multer.memoryStorage()
+
+const fileStorage = multer.diskStorage({
+  destination: function(req, file, cb) {
+
+    let dir = './uploads/lists/' + req.params.naziv;
+
+    try {
+      if (!fs.existsSync('./uploads')) {
+        fs.mkdirSync('./uploads');
+      }
+
+      if (!fs.existsSync('./uploads/lists')) {
+        fs.mkdirSync('./uploads/lists');
+      }
+
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+    }catch(err) {
+      console.error(err)
+    }
+    cb(null, dir);
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+
+const fileUpload = multer({
+  storage: fileStorage
+});
 
 const fileFilter = (req: any, file: { mimetype: string; }, cb: (arg0: any, arg1: boolean) => void) => {
   // reject a file
@@ -111,17 +141,57 @@ router.post('/update', upload.single('workerImage'), async (req, res, next) => {
     .catch(err => next(err));
 })
 
+router.post('/lists',(req, res) => {
+  Spisak.find()
+    .then(lists => {
+      console.log(lists);
+      res.json(lists);
+    })
+    .catch(err => console.log(err));
+})
+
 router.route('/submitList').post((req, res, next) => {
-  List.collection.updateOne(
-    {naziv: req.body.list.naziv},
+  console.log(req.body.list);
+  Spisak.collection.insertOne(req.body.list)
+    .then(() => res.json({}))
+    .catch(error => res.json(error));
+})
+
+router.post('/updateList',(req, res, next) => {
+  console.log(req.body.lista);
+  Spisak.collection.updateOne(
+    { naziv: req.body.lista.naziv },
     {
-      $set: req.body.list
+      $set: {
+        spisak_otvoren: req.body.lista.spisak_otvoren,
+        prijavljeni: req.body.lista.prijavljeni
+      }
     },
     {
       upsert: true
     }
   )
-    .then(() => res.json({}))
+    .then(result => res.json({}))
+    .catch(error => res.json(error));
+})
+
+router.post('/signUpToList/:naziv', fileUpload.single('file'), (req, res, next) => {
+  console.log(req.body);
+
+  let spisak = JSON.parse(req.body.spisak);
+
+  Spisak.collection.updateOne(
+    { naziv: spisak.naziv },
+    {
+      $set: {
+        prijavljeni: spisak.prijavljeni
+      }
+    },
+    {
+      upsert: true
+    }
+  )
+    .then(result => res.json({}))
     .catch(error => res.json(error));
 })
 

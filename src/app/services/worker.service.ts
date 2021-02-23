@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Worker} from '../models/worker';
 import {Student} from '../models/student';
+import {List} from '../models/list';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,24 @@ export class WorkerService {
     }
 
     return this.http.post(`${this.uri}/update`, fd);
+  }
+
+  submitList(list) {
+    return this.http.post(`${this.uri}/submitList`, { list: list });
+  }
+
+  updateList(list) {
+    return this.http.post(`${this.uri}/updateList`, { lista: list });
+  }
+
+  signUpToList(fd) {
+    let naziv = JSON.parse(fd.get('spisak')).naziv;
+
+    return this.http.post(`${this.uri}/signUpToList/${naziv}`, fd);
+  }
+
+
+  getLists() {
+    return this.http.post(`${this.uri}/lists`, {});
   }
 }

@@ -10,6 +10,7 @@ import {ScienceProjectsComponent} from './home-pages/science-projects/science-pr
 import {ProjectsComponent} from './home-pages/projects/projects.component';
 import {SubjectsListComponent} from './home-pages/subjects-list/subjects-list.component';
 import {SubjectComponent} from './subject/subject.component';
+import {ListManagementComponent} from './teacher/list-management/list-management.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -142,6 +143,21 @@ const routes: Routes = [
           }
         ]
       }
+  },
+  {
+    path: 'lists', component: ListManagementComponent, data: {
+      title: 'Lists',
+      breadcrumb: [
+        {
+          label: 'Početna',
+          url: '/'
+        },
+        {
+          label: 'Spiskovi',
+          url: ''
+        }
+      ]
+    }
   },
   { path: '**', redirectTo: '/' }
 ];

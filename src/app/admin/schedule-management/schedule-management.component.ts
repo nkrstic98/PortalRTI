@@ -79,15 +79,20 @@ export class ScheduleManagementComponent implements OnInit {
 
     this.scheduleService.getScheduleForSubject(mySubject)
       .pipe(first())
-      .subscribe((value: Schedule) => {
+      .subscribe((value: Schedule[]) => {
         console.log(value);
 
-        if(value != null) {
-          this.predavanja = value.predavanja;
-          this.vezbe = value.vezbe;
+        value = value.filter(v => v.odsek == this.predmetiOdseci[this.mojPredmet].odsek);
+        let schedule: Schedule = value[0];
 
-          this.brp = value.predavanja.length;
-          this.brv = value.vezbe.length;
+        console.log()
+
+        if(schedule != null) {
+          this.predavanja = schedule.predavanja;
+          this.vezbe = schedule.vezbe;
+
+          this.brp = schedule.predavanja.length;
+          this.brv = schedule.vezbe.length;
         }
         else {
           this.predavanja = [];
@@ -169,7 +174,7 @@ export class ScheduleManagementComponent implements OnInit {
 
   isAdded(teacher) {
     if(this.tip == 'p') {
-      if(this.predavanja[this.grupa] == undefined) return;
+      if(this.predavanja != [] && this.predavanja[this.grupa] == undefined) return;
       if(this.predavanja[this.grupa].zaposleni.find(value => value == teacher) != undefined) {
         return true;
       }
@@ -178,7 +183,7 @@ export class ScheduleManagementComponent implements OnInit {
       }
     }
     else {
-      if(this.vezbe[this.grupa] == undefined) return;
+      if(this.vezbe != [] && this.vezbe[this.grupa] == undefined) return;
       if(this.vezbe[this.grupa].zaposleni.find(value => value == teacher) != undefined) {
         return true;
       }

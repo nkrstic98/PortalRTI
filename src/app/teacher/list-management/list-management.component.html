@@ -1,5 +1,42 @@
 <div class="container">
   <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <table class="table table-bordered text-center">
+        <tr>
+          <th class="align-middle">Spisak</th>
+          <th class="align-middle">Broj prijavljenih</th>
+          <th *ngIf="user.type == 1" class="align-middle">Status spiska</th>
+          <th colspan="2" *ngIf="user.type == 2" class="align-middle">Prijava</th>
+        </tr>
+        <tr *ngFor="let s of spiskovi; index as i">
+          <td class="align-middle">{{s.naziv}}</td>
+          <td class="align-middle">{{s.prijavljeni.length}}</td>
+          <td *ngIf="user.type == 1" class="align-middle">
+            <input class="form-check-input" type="checkbox" (change)="changeStatus(i)" [checked]="s.spisak_otvoren">
+            <span *ngIf="s.spisak_otvoren">Otvoren</span>
+            <span *ngIf="!s.spisak_otvoren">Zatvoren</span>
+          </td>
+          <td class="align-middle">
+            <span *ngIf="user.type == 2 && s.fajlovi" class="col d-flex justify-content-center align-items-end flex-wrap">
+              <label for="workerImage" class="custom-file-label">{{file != null ? file.name : "Priložite fajl"}}</label>
+              <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"
+                     (change)="onFileSelected($event)"
+              />
+            </span>
+          </td>
+          <td *ngIf="user.type == 2" class="align-middle">
+            <button class="btn btn-primary btn-sm" [disabled]="!s.spisak_otvoren" (click)="signUp(s)">Prijavi se</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+
+  <hr *ngIf="user.type == 1" />
+
+  <div class="row" *ngIf="user.type == 1">
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
       <div class="card">
@@ -73,9 +110,9 @@
             </div>
           </div>
 
-          </div>
         </div>
       </div>
     </div>
     <div class="col-sm-3"></div>
   </div>
+</div>

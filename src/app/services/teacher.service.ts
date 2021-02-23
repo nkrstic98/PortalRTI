@@ -9,7 +9,6 @@ import {first} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TeacherService {
-  uri = 'http://localhost:4000/workers';
 
   private predmetSubject: BehaviorSubject<Subject>;
   public subject: Observable<Subject>;
@@ -32,9 +31,5 @@ export class TeacherService {
 
   public get subjectValue(): Subject {
     return this.predmetSubject.value;
-  }
-
-  submitList(list) {
-    return this.http.post(`${this.uri}/submitList`, { list: list });
   }
 }

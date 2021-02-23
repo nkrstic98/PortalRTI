@@ -39,6 +39,9 @@
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['contact']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Kontakt</a>
   </li>
+  <li class="nav-item" *ngIf="user">
+    <a style="font-weight: bold;" class="nav-link" [routerLink]="['lists']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Spiskovi</a>
+  </li>
   <li class="nav-item dropdown" *ngIf="user">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="font-weight: bold;">Moji predmeti</a>
     <div class="dropdown-menu">
