@@ -5,6 +5,7 @@ import {first} from 'rxjs/operators';
 import * as XLSX from "xlsx";
 import {AccountService} from '../../services/account.service';
 import {AlertService} from '../../services/alert.service';
+import {Student} from '../../models/student';
 
 class StudentData {
   korime: string;
@@ -140,5 +141,61 @@ export class StudentManagementComponent implements OnInit {
       console.log(this.uploadedData);
     }
     reader.readAsBinaryString(target.files[0]);
+  }
+
+  registerStudents() {
+    let iteration = 0;
+    if(this.uploadedData.length != 0) {
+      this.alertService.warn("Studenti se učitavaju u bazu. Molim Vas sačekajte...", {autoClose: true});
+      this.uploadedData.forEach(value => {
+        let index = "20" + value.korime.substr(2, 2) + "/";
+        index += value.korime.substr(4, 4);
+
+        let tipStudija = "";
+        switch (value.korime[8])
+        {
+          case "d":
+            tipStudija = "Osnovne akademske studije";
+            break;
+
+          case "m":
+            tipStudija = "Master akademske studije";
+            break;
+
+          case "p":
+            tipStudija = "Doktorske studije";
+            break;
+        }
+
+        let student: Student = {
+          username: value.korime,
+          password: value.lozinka,
+          index: index,
+          type: tipStudija,
+          firstname: value.ime,
+          lastname: value.prezime,
+          status: "Aktivan",
+          subjects: []
+        }
+
+        this.accountService.registerStudent(student)
+          .pipe(first())
+          .subscribe({
+            next: () => {
+              iteration++;
+              if (iteration == this.uploadedData.length) {
+                this.alertService.clear();
+                this.alertService.success("Studenti su uspešno registrovani", {autoClose:true});
+                this.ngOnInit();
+              }
+            },
+            error: err => {
+              this.alertService.clear();
+              this.alertService.error("Desila se greška prilikom registracije studenata");
+              this.ngOnInit();
+            }
+          })
+      })
+    }
   }
 }
