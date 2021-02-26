@@ -130,11 +130,23 @@ export class ListManagementComponent implements OnInit {
       return;
     }
 
-    if(s.fajlovi) {
-      s.prijavljeni.push({student: this.user.username, fajl: this.file.name})
+    let existing = s.prijavljeni.find(value => value.student == this.user.username);
+
+    if(existing == undefined) {
+      if (s.fajlovi) {
+        s.prijavljeni.push({student: this.user.username, fajl: this.file.name})
+      } else {
+        s.prijavljeni.push({student: this.user.username})
+      }
     }
     else {
-      s.prijavljeni.push({student: this.user.username})
+      if(s.fajlovi) {
+        existing.fajl = this.file.name;
+      }
+      else {
+        this.alerService.warn("Već ste se prijavili na ovu listu", {autoClose: true});
+        return;
+      }
     }
 
     let fd = new FormData();

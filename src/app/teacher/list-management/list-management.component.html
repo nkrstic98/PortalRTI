@@ -19,8 +19,8 @@
           </td>
           <td *ngIf="user.type == 2" class="align-middle">
             <span *ngIf="user.type == 2 && s.fajlovi" class="col d-flex justify-content-center align-items-end flex-wrap">
-              <label for="workerImage" class="custom-file-label">{{file != null ? file.name : "Priložite fajl"}}</label>
-              <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"
+              <label for="workerImage{{i}}" class="custom-file-label">{{file != null ? file.name : "Priložite fajl"}}</label>
+              <input type="file" id="workerImage{{i}}" class="form-control custom-file" name="workerImage"
                      (change)="onFileSelected($event)"
               />
             </span>
