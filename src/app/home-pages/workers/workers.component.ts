@@ -25,9 +25,7 @@ export class WorkersComponent implements OnInit {
     private workerService: WorkerService,
     private scheduleService: ScheduleService,
     private subjectService: SubjectService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.workerService.getAllWorkers()
       .pipe(first())
       .subscribe(workers => {
@@ -46,6 +44,10 @@ export class WorkersComponent implements OnInit {
       .subscribe(value => {
         this.subjects = value;
       })
+  }
+
+  ngOnInit(): void {
+
   }
 
   getTeacherSubjects(teacher): Subject[] {
