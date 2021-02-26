@@ -1,1 +1,77 @@
-<p>edit-notifications works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3 text-right" style="font-family: Arial">
+      <button class="btn btn-primary" matTooltip="Prethodno obaveštenje" matTooltipPosition="above" (click)="prevPage()" [disabled]="!prevE"> << </button>
+    </div>
+    <div class="col-sm-3 text-left" style="font-family: Arial">
+      <button class="btn btn-primary" matTooltip="Sledeće obaveštenje" matTooltipPosition="above" (click)="nextPage()" [disabled]="!nextE"> >> </button>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-center mx-auto mt-1">
+
+      <div class="card rounded shadow shadow-lg">
+        <h5 class="card-header">Ažurirajte obaveštenje</h5>
+
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="name">Naslov</label>
+              <input type="text" id="name" class="form-control" name="title" [(ngModel)]="notifications[page].title" [ngClass]="{ 'is-invalid': submitted && notifications[page].title == '' }" />
+              <div *ngIf="submitted && notifications[page].title == ''" class="invalid-feedback">
+                <div>Naslov obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="cat">Kategorija</label>
+              <select id="cat" class="custom-select" [(ngModel)]="notifications[page].category" [ngClass]="{ 'is-invalid': submitted && notifications[page].category == '' }">
+                <option value="" selected disabled>Izaberite kategoriju obaveštenja...</option>
+                <option value="Pozivi za studentska takmičenja">Pozivi za studentska takmičenja</option>
+                <option value="Obaveštenja o konferencijama">Obaveštenja o konferencijama</option>
+                <option value="Ponude za praksu">Ponude za praksu</option>
+                <option value="Ponude za posao">Ponude za posao</option>
+              </select>
+
+              <div *ngIf="submitted && notifications[page].category == ''" class="invalid-feedback">
+                <div>Kategorija obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="txt">Tekst</label>
+              <app-text-editor id="txt" [ngClass]="{ 'is-invalid': submitted && notifications[page].text == null }"></app-text-editor>
+              <div *ngIf="submitted && notifications[page].text == null" class="invalid-feedback">
+                <div *ngIf="notifications[page].text == null">Tekst obaveštenja je obavezno polje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row p-1">
+            <div class="form-group col">
+              <label for="workerImage" class="custom-file-label">{{image != null ? image.name : "Slika"}}</label>
+              <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"
+                     (change)="onFileSelected($event)"
+
+              />
+            </div>
+          </div>
+
+          <div class="form-row d-flex flex-row justify-content-center">
+            <button class="btn btn-primary" (click)="updateNotification()">Ažuriraj obaveštenje</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

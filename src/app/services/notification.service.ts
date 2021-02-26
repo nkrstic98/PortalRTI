@@ -28,4 +28,12 @@ export class NotificationService {
     return this.http.get<Notification[]>(`${this.uri}`);
   }
 
+  update(notification, image) {
+    let fd = new FormData();
+    fd.append('notification', JSON.stringify(notification));
+    fd.append('image', image);
+
+    return this.http.post(`${this.uri}/update`, fd);
+  }
+
 }

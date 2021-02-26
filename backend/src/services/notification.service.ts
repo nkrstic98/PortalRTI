@@ -52,4 +52,29 @@ router.route('/').get((req, res, next) => {
     .catch(err => next(err));
 })
 
+router.post('/update', upload.single('image'), async (req, res, next) => {
+  let notification = JSON.parse(req.body.notification);
+
+  if(req.file != null) {
+
+    fs.access('./uploads/notifications', (err: any) => {
+      if(err) {
+        fs.mkdirSync('./uploads/notifications')
+      }
+    })
+
+    // @ts-ignore
+    await sharp(req.file.buffer).resize({width: 300, height: 300}).toFile('./uploads/notifications/' + notification.image);
+  }
+
+  console.log(notification);
+
+  Notification.findOneAndUpdate(
+    {title : notification.title},
+    notification
+  )
+    .then(notif => res.json(notif))
+    .catch(err => next(err));
+})
+
 module.exports = router;

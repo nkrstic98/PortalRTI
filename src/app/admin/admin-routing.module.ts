@@ -13,6 +13,7 @@ import {SubjectManagementComponent} from './subject-management/subject-managemen
 import {AddSubjectComponent} from './subject-management/add-subject/add-subject.component';
 import {EditSubjectComponent} from './subject-management/edit-subject/edit-subject.component';
 import {ScheduleManagementComponent} from './schedule-management/schedule-management.component';
+import {EditNotificationsComponent} from './edit-notifications/edit-notifications.component';
 
 const routes: Routes = [
   {
@@ -181,6 +182,25 @@ const routes: Routes = [
             },
             {
               label: 'Obaveštenja',
+              url: ''
+            }
+          ]
+        }
+      },
+      {
+        path: 'notifications/editNotifications', component: EditNotificationsComponent, data: {
+          title: 'NotificationsEdit',
+          breadcrumb: [
+            {
+              label: 'Početna',
+              url: 'admin/home'
+            },
+            {
+              label: 'Obaveštenja',
+              url: 'admin/notifications'
+            },
+            {
+              label: 'Izmena obaveštenja',
               url: ''
             }
           ]

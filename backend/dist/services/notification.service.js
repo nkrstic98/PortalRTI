@@ -54,5 +54,21 @@ router.route('/').get((req, res, next) => {
         .then(notif => res.json(notif))
         .catch(err => next(err));
 });
+router.post('/update', upload.single('image'), (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+    let notification = JSON.parse(req.body.notification);
+    if (req.file != null) {
+        fs.access('./uploads/notifications', (err) => {
+            if (err) {
+                fs.mkdirSync('./uploads/notifications');
+            }
+        });
+        // @ts-ignore
+        yield sharp(req.file.buffer).resize({ width: 300, height: 300 }).toFile('./uploads/notifications/' + notification.image);
+    }
+    console.log(notification);
+    notification_1.default.findOneAndUpdate({ title: notification.title }, notification)
+        .then(notif => res.json(notif))
+        .catch(err => next(err));
+}));
 module.exports = router;
 //# sourceMappingURL=notification.service.js.map

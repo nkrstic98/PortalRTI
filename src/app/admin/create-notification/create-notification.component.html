@@ -1,5 +1,16 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center">
+      <a class="btn btn-primary" [routerLink]="['editNotifications']">Izmena obaveštenja</a>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+
+  <br/>
+  <br/>
+
+  <div class="row">
     <div class="col-lg-6 col-md-8 col-sm-8 d-flex flex-column justify-content-center mx-auto mt-1">
 
       <div class="card rounded shadow shadow-lg">
@@ -27,8 +38,8 @@
                 <option value="Ponude za posao">Ponude za posao</option>
               </select>
 
-              <div *ngIf="submitted && title == ''" class="invalid-feedback">
-                <div *ngIf="title == ''">Kategorija obaveštenja je obavezno polje</div>
+              <div *ngIf="submitted && category == ''" class="invalid-feedback">
+                <div *ngIf="category == ''">Kategorija obaveštenja je obavezno polje</div>
               </div>
             </div>
           </div>
