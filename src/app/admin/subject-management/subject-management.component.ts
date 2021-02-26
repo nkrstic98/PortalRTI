@@ -77,6 +77,7 @@ export class SubjectManagementComponent implements OnInit {
             .filter(x => x.sifra != subject)
             .sort((a, b) => a.sifra.localeCompare(b.sifra))
           this.filteredSubjects = this.subjects
+          this.alertService.warn("Uspešno ste obrisali predmet");
         }
       );
   }

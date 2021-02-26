@@ -1,5 +1,6 @@
 import express from 'express';
 import Subject from '../model/subject';
+import Schedule from '../model/schedule';
 
 const router = express.Router();
 
@@ -79,10 +80,14 @@ router.route('/addSubject').post((req, res, next) => {
 
 router.route('/delete').post((req, res, next) => {
   let path = './uploads/subjects/' + req.body.sifra;
-  // removeDir(path);
+  removeDir(path);
 
   Subject.deleteOne({sifra:req.body.sifra})
-    .then(() => res.json({}))
+    .then(() => {
+      Schedule.deleteMany({predmet:req.body.sifra})
+        .then(() => res.json({}))
+        .catch(err => next(err));
+    })
     .catch((err => next(err)));
 })
 

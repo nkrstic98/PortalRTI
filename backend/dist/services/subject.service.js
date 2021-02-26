@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const subject_1 = __importDefault(require("../model/subject"));
+const schedule_1 = __importDefault(require("../model/schedule"));
 const router = express_1.default.Router();
 const multer = require("multer");
 const fs = require('fs');
@@ -74,9 +75,13 @@ router.route('/addSubject').post((req, res, next) => {
 });
 router.route('/delete').post((req, res, next) => {
     let path = './uploads/subjects/' + req.body.sifra;
-    // removeDir(path);
+    removeDir(path);
     subject_1.default.deleteOne({ sifra: req.body.sifra })
-        .then(() => res.json({}))
+        .then(() => {
+        schedule_1.default.deleteMany({ predmet: req.body.sifra })
+            .then(() => res.json({}))
+            .catch(err => next(err));
+    })
         .catch((err => next(err)));
 });
 router.route('/edit').post((req, res, next) => {

@@ -9,6 +9,7 @@ import {first} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Subscription} from 'rxjs';
 import {TextEditorService} from '../../services/text-editor.service';
+import {TeacherService} from '../../services/teacher.service';
 
 @Component({
   selector: 'app-subject-lab',
@@ -34,7 +35,8 @@ export class SubjectLabComponent implements OnInit {
     private subjectService: SubjectService,
     private alertService: AlertService,
     private workerService: WorkerService,
-    private textEditorService: TextEditorService
+    private textEditorService: TextEditorService,
+    private teacherService: TeacherService
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class SubjectLabComponent implements OnInit {
       .pipe(first())
       .subscribe((subject: Subject) => {
         this.subject = subject;
+        this.teacherService.setSubject(subject);
         this.textEditorService.changeText(subject.info_lab);
       })
   }

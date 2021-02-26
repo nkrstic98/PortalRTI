@@ -29,6 +29,10 @@ export class TeacherService {
       })
   }
 
+  setSubject(subject) {
+    this.predmetSubject.next(subject);
+  }
+
   public get subjectValue(): Subject {
     return this.predmetSubject.value;
   }

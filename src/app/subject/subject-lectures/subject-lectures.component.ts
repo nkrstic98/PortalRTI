@@ -8,6 +8,7 @@ import {FileInfo, Subject} from '../../models/subject';
 import {User} from '../../models/user';
 import {WorkerService} from '../../services/worker.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {TeacherService} from '../../services/teacher.service';
 
 @Component({
   selector: 'app-subject-lectures',
@@ -29,8 +30,10 @@ export class SubjectLecturesComponent implements OnInit {
     private route: ActivatedRoute,
     private subjectService: SubjectService,
     private alertService: AlertService,
-    private workerService: WorkerService
-  ) { }
+    private workerService: WorkerService,
+    private teacherService: TeacherService
+  ) {
+  }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -44,6 +47,7 @@ export class SubjectLecturesComponent implements OnInit {
     this.subjectService.getSubject(this.route.snapshot.params['sifra'])
       .pipe(first())
       .subscribe((subject: Subject) => {
+        this.teacherService.setSubject(subject);
         this.dbFiles = subject.fajlovi_predavanja;
         this.subject = subject.sifra;
       })
