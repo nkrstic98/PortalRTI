@@ -3,6 +3,18 @@ import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {Subscription} from 'rxjs';
 import {TextEditorService} from '../../services/text-editor.service';
 
+/**
+ * TextEditorComponent je dodat u aplikaciju posebnom instalacijom
+ *
+ * @kolkov/angular-editor
+ *
+ * Predstavlja uniformni prikaz namenske komponente za uredjivanje teksta
+ * Poseduje vise opcija i pogodan je da se koristi kada se objavljuju neke informacije
+ * koje pored informativnog karaktera, trebaju da imaju i zadatak da privuku korisnika,
+ * a i da istaknu neke detalje i da dodaju neke, koje bi bilo mnogo komplikovanije
+ * dodati koriscenjem obicnoe textview komponente
+ */
+
 @Component({
   selector: 'app-text-editor',
   templateUrl: './text-editor.component.html',

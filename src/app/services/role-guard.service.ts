@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
 import {AccountService} from './account.service';
 
+/**
+ * RoleGuard servis sluzi za sticenje ruta od nedozvoljenog pristupa korisnika
+ */
+
 @Injectable({
   providedIn: 'root'
 })

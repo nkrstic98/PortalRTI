@@ -4,6 +4,12 @@ import {Subscription} from 'rxjs';
 import {AlertService} from '../../services/alert.service';
 import {NavigationStart, Router} from '@angular/router';
 
+/**
+ * AlertComponent sluzi za prikazivanje razlicitog vida obavestenja
+ * Ta obavestenja mogu biti uspesna akcija, upozorenje, obavestenje o gresci
+ * Prateci AlertService sluzi za komunikaciju ostalih komponenti sa ovom
+ */
+
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
