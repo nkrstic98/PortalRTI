@@ -6,7 +6,16 @@
 
           <div>
             <ul class="list-group" *ngFor="let sub of filteredSubjects" style="font-size: large">
-              <li class="list-group-item">{{sub.sifra}} - {{sub.naziv}}</li>
+              <li class="list-group-item text-center align-middle">
+                <span>{{sub.sifra}} - {{sub.naziv}}</span>
+                <button *ngIf="user != null" [disabled]="mySubject(sub.sifra)"
+                        [ngClass]="{ 'btn-outline-secondary' : mySubject(sub.sifra) }"
+                        class="btn btn-sm btn-outline-primary float-right"
+                        (click)="signup(sub.sifra, sub.naziv)"
+                >
+                  Prijavi se
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -19,7 +28,12 @@
         <mat-tab *ngFor="let s of masterSemestri" label="{{s}}">
           <div>
             <ul class="list-group" *ngFor="let sub of filteredSubjects" style="font-size: large">
-              <li class="list-group-item">{{sub.sifra}} - {{sub.naziv}}</li>
+              <li class="list-group-item">
+                <div>
+                  <button class="btn btn-sm btn-outline-primary float-right">Prijavi se</button>
+                  {{sub.sifra}} - {{sub.naziv}}
+                </div>
+              </li>
             </ul>
           </div>
         </mat-tab>

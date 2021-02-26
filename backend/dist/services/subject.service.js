@@ -172,5 +172,23 @@ router.route('/deleteNotificationFile').post((req, res, next) => {
         console.log('Fajl obrisan');
     });
 });
+router.route('/studentSignup').post((req, res, next) => {
+    subject_1.default.collection.updateOne({ sifra: req.body.request.subject }, {
+        $addToSet: {
+            prijave_studenata: req.body.request
+        }
+    })
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err));
+});
+router.route('/removeStudentRequest').post((req, res, next) => {
+    subject_1.default.collection.updateOne({ sifra: req.body.request.subject }, {
+        $pull: {
+            prijave_studenata: req.body.request
+        }
+    })
+        .then(res1 => res.json(res1))
+        .catch(err => res.json(err));
+});
 module.exports = router;
 //# sourceMappingURL=subject.service.js.map

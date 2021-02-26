@@ -1,7 +1,5 @@
 import express from 'express';
 import Subject from '../model/subject';
-import Worker from '../model/worker';
-import User from '../model/user';
 
 const router = express.Router();
 
@@ -207,6 +205,32 @@ router.route('/deleteNotificationFile').post((req, res, next) => {
     if(err) throw err;
     console.log('Fajl obrisan');
   })
+})
+
+router.route('/studentSignup').post((req, res, next) => {
+  Subject.collection.updateOne(
+    {sifra:req.body.request.subject},
+    {
+      $addToSet: {
+        prijave_studenata: req.body.request
+      }
+    }
+  )
+    .then(res1 => res.json(res1))
+    .catch(err => res.json(err))
+})
+
+router.route('/removeStudentRequest').post((req, res, next) => {
+  Subject.collection.updateOne(
+    {sifra:req.body.request.subject},
+    {
+      $pull: {
+        prijave_studenata: req.body.request
+      }
+    }
+  )
+    .then(res1 => res.json(res1))
+    .catch(err => res.json(err))
 })
 
 module.exports = router;

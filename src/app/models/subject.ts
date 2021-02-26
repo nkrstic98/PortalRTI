@@ -26,6 +26,8 @@ export class Subject {
   prikazi_ispit: boolean;
   prikazi_lab: boolean;
   prikazi_projekat: boolean;
+
+  prijave_studenata: Array<StudentRequest>
 }
 
 export class Odsek {
@@ -50,4 +52,9 @@ export class FileInfo {
   size: Number;
   author: string;
   authorName: string;
+}
+
+export class StudentRequest {
+  subject: string;
+  student: string;
 }

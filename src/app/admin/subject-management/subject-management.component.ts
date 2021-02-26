@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AlertService} from '../../services/alert.service';
-import {Subject} from '../../models/subject';
+import {StudentRequest, Subject} from '../../models/subject';
 import {SubjectService} from '../../services/subject.service';
 import {first} from 'rxjs/operators';
 import {Student} from '../../models/student';
@@ -22,6 +22,8 @@ export class SubjectManagementComponent implements OnInit {
 
   students: Student[];
   enrolledStudents: string[];
+
+  studentRequests: StudentRequest[] = [];
 
   enrollSubject = "";
 
@@ -84,57 +86,75 @@ export class SubjectManagementComponent implements OnInit {
   chooseSubject(sifra) {
     this.enrolledStudents = [];
     this.enrollSubject = sifra;
+    this.studentRequests = this.subjects.find(value => value.sifra == sifra).prijave_studenata;
   }
 
-  addStudent(index) {
-    if(this.enrolledStudents.find(value => value == index) != undefined) {
-      this.enrolledStudents = this.enrolledStudents.filter(value => value != index);
-      console.log(this.enrolledStudents);
-    }
-    else {
-      this.enrolledStudents.push(index);
-      console.log(this.enrolledStudents);
-    }
-  }
+  // addStudent(index) {
+  //   if(this.enrolledStudents.find(value => value == index) != undefined) {
+  //     this.enrolledStudents = this.enrolledStudents.filter(value => value != index);
+  //     console.log(this.enrolledStudents);
+  //   }
+  //   else {
+  //     this.enrolledStudents.push(index);
+  //     console.log(this.enrolledStudents);
+  //   }
+  // }
 
   cancelEnroll() {
     this.enrolledStudents = [];
     console.log(this.enrolledStudents);
   }
 
-  isAdded(index): Boolean {
-    if(this.enrolledStudents.find(value => value == index) != undefined) {
-      return true;
+  getStudentInfo(student): string {
+    let st = this.students.find(value => value.username == student);
+
+    if(st != undefined) {
+      return st.index + " - " + st.lastname + " " + st.firstname;
     }
-    else {
-      return false;
-    }
+    else return "";
   }
 
-  alreadyEnrolled(s: Student): boolean {
+  // isAdded(index): Boolean {
+  //   if(this.enrolledStudents.find(value => value == index) != undefined) {
+  //     return true;
+  //   }
+  //   else {
+  //     return false;
+  //   }
+  // }
+  //
+  // alreadyEnrolled(s: Student): boolean {
+  //
+  //   for(let i = 0; i < s.subjects.length; i++) {
+  //     if(s.subjects[i] == this.enrollSubject) {
+  //       return true;
+  //     }
+  //   }
+  //
+  //   return false;
+  // }
 
-    for(let i = 0; i < s.subjects.length; i++) {
-      if(s.subjects[i] == this.enrollSubject) {
-        return true;
-      }
-    }
+  enrollStudents(st) {
+    let student = this.students.find(value => value.username == st)
+    console.log(student);
+    student.subjects.push(this.enrollSubject);
+    this.studentService.update(student)
+      .pipe(first())
+      .subscribe(value => {
+        console.log("Uspesan apdejt");
+        this.removeRequest(st);
+      })
 
-    return false;
+    // this.alertService.success("Uspešno ste ažurirali listu studenata", {autoClose: true});
   }
 
-  enrollStudents() {
-    this.enrolledStudents.forEach(index => {
-      let student = this.students.find(value => value.index == index)
-      console.log(student);
-      student.subjects.push(this.enrollSubject);
-      this.studentService.update(student)
-        .pipe(first())
-        .subscribe(value => {
-          console.log("Uspesan apdejt");
-        })
-    })
-
-    this.alertService.success("Uspešno ste ažurirali listu studenata", {autoClose: true});
+  removeRequest(st) {
+    let stReq = this.studentRequests.find(req => req.student == st && req.subject == this.enrollSubject);
+    this.subjectService.removeStudentRequest(stReq)
+      .pipe(first())
+      .subscribe(() => {
+        this.studentRequests = this.studentRequests.filter(req => req.student != st && req.subject != this.enrollSubject);
+      })
   }
 
   removeAllStudents() {

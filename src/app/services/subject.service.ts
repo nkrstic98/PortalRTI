@@ -63,4 +63,12 @@ export class SubjectService {
   deleteNotificationFile(subject, file) {
     return this.http.post(`${this.uri}/deleteNotificationFile`, {subject: subject, file: file})
   }
+
+  studentSignup(sr) {
+    return this.http.post(`${this.uri}/studentSignup`, { request : sr });
+  }
+
+  removeStudentRequest(request) {
+    return this.http.post(`${this.uri}/removeStudentRequest`, {request : request});
+  }
 }

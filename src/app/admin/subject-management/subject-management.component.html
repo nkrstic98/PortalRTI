@@ -61,7 +61,7 @@
               data-target="#studentModal"
               (click)="chooseSubject(s.sifra)"
             >
-              Dodaj studente
+              Studenti
             </button>
           </td>
         </tr>
@@ -82,16 +82,18 @@
         </button>
       </div>
       <div class="modal-body">
-        <div *ngFor="let s of students">
-          <div class="custom-checkbox ml-3" *ngIf="!alreadyEnrolled(s)">
-            <input class="form-check-input" type="checkbox" (change)="addStudent(s.index)" [checked]="isAdded(s.index)">
-            <span style="font-size: large">{{s.index}} - {{s.lastname}} {{s.firstname}}</span>
+        <div *ngFor="let s of studentRequests">
+          <div class="custom-checkbox ml-3 row d-flex justify-content-center align-items-center"
+               *ngIf="getStudentInfo(s.student) != ''">
+            <span class="align-middle mr-5">{{getStudentInfo(s.student)}}</span>
+            <button class="btn btn-sm btn-outline-success float-right ml-5 mr-1" (click)="enrollStudents(s.student)">&#10004;</button>
+            <button class="btn btn-sm btn-outline-danger float-right" (click)="removeRequest(s.student)">&#10006;</button>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger float-left" data-dismiss="modal" (click)="removeAllStudents()">Ispiši sve studente</button>
-        <button type="button" class="btn btn-primary float-right" (click)="enrollStudents()" data-dismiss="modal">Prijavi studente</button>
+        <button type="button" class="btn btn-primary float-right" data-dismiss="modal">Završi</button>
       </div>
     </div>
   </div>

@@ -48,7 +48,9 @@ let Subject = new Schema({
 
   prikazi_ispit: Boolean,
   prikazi_lab: Boolean,
-  prikazi_projekat: Boolean
+  prikazi_projekat: Boolean,
+
+  prijave_studenata: Array
 });
 
 export default mongoose.model('Subject', Subject, 'predmeti');

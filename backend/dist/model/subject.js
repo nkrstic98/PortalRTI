@@ -53,7 +53,8 @@ let Subject = new Schema({
     fajlovi_projekat: Array,
     prikazi_ispit: Boolean,
     prikazi_lab: Boolean,
-    prikazi_projekat: Boolean
+    prikazi_projekat: Boolean,
+    prijave_studenata: Array
 });
 exports.default = mongoose.model('Subject', Subject, 'predmeti');
 //# sourceMappingURL=subject.js.map
