@@ -16,6 +16,7 @@ import { EditSubjectComponent } from './subject-management/edit-subject/edit-sub
 import { ScheduleManagementComponent } from './schedule-management/schedule-management.component';
 import {CreateNotificationComponent} from './create-notification/create-notification.component';
 import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
+import { EditNotificationsComponent } from './edit-notifications/edit-notifications.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {TextEditorModule} from '../helpers/text-editor/text-editor.module';
     AddSubjectComponent,
     EditSubjectComponent,
     ScheduleManagementComponent,
-    CreateNotificationComponent
+    CreateNotificationComponent,
+    EditNotificationsComponent
   ],
   imports: [
     CommonModule,
