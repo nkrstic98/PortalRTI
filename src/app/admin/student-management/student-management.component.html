@@ -1,7 +1,12 @@
 <div class="container-fluid">
   <div class="row mt-4">
     <div class="col-sm-3">
-      <button class="btn btn-outline-success" [routerLink]="['addStudent']">Dodaj studenta</button>
+      <button class="btn btn-outline-success mr-3" [routerLink]="['addStudent']">Dodaj studenta</button>
+      <button class="btn btn-outline-info"
+              data-toggle="modal"
+              data-target="#studentModal"
+      >
+        Učitaj fajl sa studentima</button>
     </div>
   </div>
 
@@ -60,6 +65,66 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj studente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row d-flex flex-row justify-content-center">
+          <div class="col-sm-8">
+            <div class="row">
+              <label for="workerImage" class="custom-file-label">Učitajte XML i CSV fajl</label>
+              <input type="file" id="workerImage" class="form-control custom-file" name="workerImage"
+                     (change)="onFileChange($event)"
+              />
+            </div>
+            <br/>
+            <div class="row d-flex flex-row justify-content-center">
+              <span class="input-group-btn">
+                <button class="btn btn-success" data-dismiss="modal" (click)="registerStudents()">Dodaj studente</button>
+              </span>
+            </div>
+            <div class="row d-flex flex-row justify-content-center">
+              <span class="text-danger">
+                {{error}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <hr/>
+        <div>
+          <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th>Korisničko ime</th>
+                <th>Lozinka</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of uploadedData">
+                <td>{{s.korime}}</td>
+                <td>{{s.lozinka}}</td>
+                <td>{{s.ime}}</td>
+                <td>{{s.prezime}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
