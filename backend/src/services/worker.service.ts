@@ -101,6 +101,12 @@ router.route('/filter/:data').get((req, res, next) => {
 })
 
 router.route('/delete').post((req, res, next) => {
+  let path = './uploads/worker_images';
+  fs.unlink(path + '/' + req.body.image, (err) => {
+    if(err) throw err;
+    console.log('Fajl obrisan');
+  })
+
   Worker.deleteOne({username:req.body.username})
     .then(() => {
       User.deleteOne({username:req.body.username})
@@ -124,7 +130,12 @@ router.post('/update', upload.single('workerImage'), async (req, res, next) => {
   if(req.file != null) {
     fs.access('./uploads/worker_images', (err: any) => {
       if(err) {
-        fs.mkdirSync('./uploads/worker_images')
+        fs.access('./uploads', (err: any) => {
+          if(err) {
+            fs.mkdirSync('./uploads')
+          }
+          fs.mkdirSync('./uploads/worker_images')
+        })
       }
     })
 

@@ -27,7 +27,7 @@
           <h4 class="card-title">{{n.title}}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{n.time}}</h6>
           <hr/>
-          <img *ngIf="n.image != ''" src="http://localhost:4000/uploads/notifications/{{n.image}}" class="img-thumbnail float-right">
+          <img style="width: 150px" *ngIf="n.image != ''" src="http://localhost:4000/uploads/notifications/{{n.image}}" class="img-thumbnail float-right">
           <div [innerHTML]="n.text">
           </div>
         </div>
