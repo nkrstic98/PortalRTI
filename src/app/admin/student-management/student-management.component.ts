@@ -2,6 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import {StudentService} from '../../services/student.service';
 import {first} from 'rxjs/operators';
 
+import * as XLSX from "xlsx";
+import {AccountService} from '../../services/account.service';
+import {AlertService} from '../../services/alert.service';
+
+class StudentData {
+  korime: string;
+  lozinka: string;
+  ime: string;
+  prezime: string;
+}
+
+type AOA = StudentData[];
+
 @Component({
   selector: 'app-student-management',
   templateUrl: './student-management.component.html',
@@ -15,7 +28,15 @@ export class StudentManagementComponent implements OnInit {
   type = null;
   active = false;
 
-  constructor(private studentService: StudentService) { }
+  uploadedData: AOA = [];
+
+  error = "";
+
+  constructor(
+    private studentService: StudentService,
+    private accountService: AccountService,
+    private alertService: AlertService
+  ) { }
 
   ngOnInit(): void {
     this.studentService.getAllStudents()
@@ -65,5 +86,59 @@ export class StudentManagementComponent implements OnInit {
       .subscribe(
         () => this.students = this.students.filter(x => x.username != student)
       );
+  }
+
+  //---------------------------------------------------------------------------------
+  //XLS i CSV ucitavanje studenata
+
+  onFileChange(event) {
+    if(event.target.files.length != 1) {
+      this.error = "Moguće je uploadovati najviše 1 fajl";
+      return;
+    }
+    else {
+      this.error = "";
+    }
+
+    let ext = event.target.files[0].name.split('.').pop();
+
+    switch(ext)
+    {
+      case "xlsx":
+        this.uploadXLSX(event);
+        break;
+
+      default:
+        this.error = "Niste učitali odgovarajući tip fajla";
+        return;
+    }
+  }
+
+  /**
+   * Koristimo prethodno instaliranu XLSX biblioteku
+   * da iz fajla iscitamo vrednosti
+   *
+   * event -> parametar koji se prima kada se desi upload
+   * */
+  uploadXLSX(event) {
+    //pokreni FileReader
+    let target: DataTransfer = <DataTransfer> event.target;
+    let reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+
+      //iscitaj workbook
+      let bstr: string = e.target.result;
+      let wb: XLSX.WorkBook = XLSX.read(bstr, { type: "binary" });
+
+      //dohvati prvi sheet
+      let wsname: string = wb.SheetNames[0];
+      let ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      //sacuvaj podatke
+      this.uploadedData = <AOA>XLSX.utils.sheet_to_json(ws, { header : 0 });
+      console.log(this.uploadedData);
+    }
+    reader.readAsBinaryString(target.files[0]);
   }
 }
