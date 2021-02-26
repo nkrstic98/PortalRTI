@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {StudentService} from '../../services/student.service';
 import {first} from 'rxjs/operators';
-
-import * as XLSX from "xlsx";
 import {AccountService} from '../../services/account.service';
 import {AlertService} from '../../services/alert.service';
 import {Student} from '../../models/student';
+import {NgxCsvParser, NgxCSVParserError} from 'ngx-csv-parser';
+import * as XLSX from "xlsx";
 
 class StudentData {
   korime: string;
@@ -36,7 +36,8 @@ export class StudentManagementComponent implements OnInit {
   constructor(
     private studentService: StudentService,
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private ngxScvParser: NgxCsvParser
   ) { }
 
   ngOnInit(): void {
@@ -109,10 +110,32 @@ export class StudentManagementComponent implements OnInit {
         this.uploadXLSX(event);
         break;
 
+      case "csv":
+        this.uploadCSV(event);
+        break;
+
       default:
         this.error = "Niste učitali odgovarajući tip fajla";
         return;
     }
+  }
+
+  /**
+   * Koristimo prethodno instaliranu CSV biblioteku
+   * da iz fajla iscitamo vrednosti
+   *
+   * event -> parametar koji se prima kada se desi upload
+   * */
+  uploadCSV(event) {
+    let file = event.target.files[0];
+
+    this.ngxScvParser.parse(file, { header: true, delimiter: ',' })
+      .pipe()
+      .subscribe((result: Array<StudentData>) => {
+        this.uploadedData = result;
+      }, (error: NgxCSVParserError) => {
+        this.error = error.message;
+      })
   }
 
   /**
