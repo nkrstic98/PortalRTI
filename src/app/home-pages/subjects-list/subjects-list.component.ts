@@ -55,15 +55,15 @@ export class SubjectsListComponent implements OnInit {
     this.subjectService.getAll()
       .pipe(first())
       .subscribe(subjects => {
-        this.subjects = subjects.filter(value => value.odseci.find(value => value.modul == this.modul));
-        this.filteredSubjects = this.subjects.filter(value => value.odseci.find(value => value.semestar == 1));
+        this.subjects = subjects.filter(value => value.odseci.find(value => value.modul == this.modul) != undefined);
+        this.filteredSubjects = this.subjects.filter(value => value.odseci.find(value => value.semestar == 1 && value.modul == this.modul) != undefined);
       })
 
     this.selected.setValue(0);
   }
 
   getBySemester(semestar) {
-    this.filteredSubjects = this.subjects.filter(value => value.odseci.find(value => value.semestar == semestar + 1));
+    this.filteredSubjects = this.subjects.filter(value => value.odseci.find(value => value.semestar == semestar + 1 && value.modul == this.modul) != undefined);
     this.selected.setValue(semestar);
   }
 
