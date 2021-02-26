@@ -30,7 +30,7 @@ export class SubjectComponent implements OnInit {
     private alertService: AlertService,
     private route: ActivatedRoute
   ) {
-
+    this.subscription = this.teacherService.subject.subscribe(value => this.subject = value);
     //Kada se promeni ruta, vracamo se na prvu stranu predmeta
     //Uvek se na pocetku prikazuje informacija sa obavestenjima
     this.router.events.subscribe(() => {
@@ -42,27 +42,40 @@ export class SubjectComponent implements OnInit {
     this.page = JSON.parse(localStorage.getItem('page'));
     console.log(this.page);
 
-    this.teacherService.getSubject(localStorage.getItem('subject'));
+    // this.teacherService.getSubject(localStorage.getItem('subject'));
 
     this.user = JSON.parse(localStorage.getItem('user'));
 
-    this.teacherService.subject.subscribe(subject => {
-      this.subject = subject;
-      // localStorage.setItem('subject', JSON.stringify(this.subject));
-      // console.log(this.subject);
-      if(this.page == null) {
-        if(this.user.type == 2) {
-          this.page = 1;
-          localStorage.setItem('page', JSON.stringify(this.page));
-          // this.changePage(0);
-        }
-        else {
-          this.page = 2;
-          localStorage.setItem('page', JSON.stringify(this.page));
-          // this.changePage(1);
-        }
+    // this.teacherService.subject.subscribe(subject => {
+    //   this.subject = subject;
+    //   // localStorage.setItem('subject', JSON.stringify(this.subject));
+    //   // console.log(this.subject);
+    //   if(this.page == null) {
+    //     if(this.user.type == 2) {
+    //       this.page = 1;
+    //       localStorage.setItem('page', JSON.stringify(this.page));
+    //       // this.changePage(0);
+    //     }
+    //     else {
+    //       this.page = 2;
+    //       localStorage.setItem('page', JSON.stringify(this.page));
+    //       // this.changePage(1);
+    //     }
+    //   }
+    // });
+
+    if(this.page == null) {
+      if(this.user.type == 2) {
+        this.page = 1;
+        localStorage.setItem('page', JSON.stringify(this.page));
+        // this.changePage(0);
       }
-    });
+      else {
+        this.page = 2;
+        localStorage.setItem('page', JSON.stringify(this.page));
+        // this.changePage(1);
+      }
+    }
   }
 
   ngOnDestroy() {
@@ -84,6 +97,7 @@ export class SubjectComponent implements OnInit {
 
   togglePageShow(page) {
     this.alertService.clear();
+    // this.ngOnInit();
 
     switch (page)
     {
@@ -101,9 +115,10 @@ export class SubjectComponent implements OnInit {
     this.subjectService.editSubject(this.subject)
       .pipe(first())
       .subscribe({
-        next: value => {
+        next: (value:Subject) => {
           this.alertService.success('Uspešno ste ažurirali prikaz stranica', {autoClose: true});
-          this.ngOnInit();
+          // this.ngOnInit();
+          this.teacherService.setSubject(this.subject);
         },
         error: err => {
           this.alertService.error('Greška prilikom ažuriranja prikazivanja stranica', {autoClose: true});

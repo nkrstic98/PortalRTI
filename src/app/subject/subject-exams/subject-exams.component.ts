@@ -7,6 +7,7 @@ import {AlertService} from '../../services/alert.service';
 import {WorkerService} from '../../services/worker.service';
 import {first} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {TeacherService} from '../../services/teacher.service';
 
 @Component({
   selector: 'app-subject-exams',
@@ -26,7 +27,8 @@ export class SubjectExamsComponent implements OnInit {
     private route: ActivatedRoute,
     private subjectService: SubjectService,
     private alertService: AlertService,
-    private workerService: WorkerService
+    private workerService: WorkerService,
+    private teacherService: TeacherService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class SubjectExamsComponent implements OnInit {
       .subscribe((subject: Subject) => {
         this.dbFiles = subject.fajlovi_ispit;
         this.subject = subject.sifra;
+        this.teacherService.setSubject(subject);
       })
   }
 

@@ -9,6 +9,7 @@ import {WorkerService} from '../../services/worker.service';
 import {TextEditorService} from '../../services/text-editor.service';
 import {first} from 'rxjs/operators';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {TeacherService} from '../../services/teacher.service';
 
 @Component({
   selector: 'app-subject-project',
@@ -34,7 +35,8 @@ export class SubjectProjectComponent implements OnInit {
     private subjectService: SubjectService,
     private alertService: AlertService,
     private workerService: WorkerService,
-    private textEditorService: TextEditorService
+    private textEditorService: TextEditorService,
+    private teacherService: TeacherService
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class SubjectProjectComponent implements OnInit {
       .subscribe((subject: Subject) => {
         this.subject = subject;
         this.textEditorService.changeText(subject.info_projekat);
+        this.teacherService.setSubject(subject);
       })
   }
 
