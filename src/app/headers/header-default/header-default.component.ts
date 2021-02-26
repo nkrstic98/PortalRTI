@@ -40,6 +40,9 @@ export class HeaderDefaultComponent implements OnInit {
               .pipe(first())
               .subscribe((val: Subject) => {
                 this.mySubjects.push(val);
+                if(this.mySubjects.length == st.subjects.length) {
+                  this.mySubjects = this.mySubjects.sort((a, b) => a.sifra.localeCompare(b.sifra));
+                }
               })
           })
         })
