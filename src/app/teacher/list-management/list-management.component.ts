@@ -76,6 +76,20 @@ export class ListManagementComponent implements OnInit {
       return;
     }
 
+    let termin = new Date(this.spisak.termin);
+    let rok = new Date(this.spisak.rok_za_prijavu);
+    let sada = new Date(Date.now());
+
+    if(termin.getTime() < sada.getTime()) {
+      this.alerService.error("Termin održavanja nije ispravan. Proverite unete podatke");
+      return;
+    }
+
+    if(rok.getTime() < sada.getTime()) {
+      this.alerService.error("Zadati rok za prijavu nije ispravan. Proverite unete podatke");
+      return;
+    }
+
     this.workerService.submitList(this.spisak)
       .pipe(first())
       .subscribe({
