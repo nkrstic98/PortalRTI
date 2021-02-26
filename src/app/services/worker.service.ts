@@ -56,8 +56,8 @@ export class WorkerService {
       fd.append("image", workerImage.name);
     }
     else {
-      if(worker.workerImage != "") {
-        fd.append("image", worker.workerImage);
+      if(worker.image != "") {
+        fd.append("image", worker.image);
       }
       else {
         fd.append("image", "");

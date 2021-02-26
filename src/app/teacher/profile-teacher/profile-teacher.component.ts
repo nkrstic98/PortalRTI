@@ -19,12 +19,13 @@ export class ProfileTeacherComponent implements OnInit {
     private router: Router,
     private workerService: WorkerService,
     private alertService: AlertService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.workerService.get(this.user.username)
-      .pipe(first())
+      // .pipe(first())
       .subscribe(value => {
         this.teacher = value;
       })

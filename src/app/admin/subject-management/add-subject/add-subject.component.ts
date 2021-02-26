@@ -132,7 +132,7 @@ export class AddSubjectComponent implements OnInit {
       }
     }
 
-    console.log(this.modul);
+    console.log(this);
 
     if(this.sifra == "" || this.naziv == "" || this.espb == "" || this.modul.length == 0 || this.predavanja == "" ||
       this.vezbe == "" || this.don == "") {

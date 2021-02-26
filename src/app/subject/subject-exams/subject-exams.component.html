@@ -31,7 +31,7 @@
         </thead>
         <tbody cdkDropList (cdkDropListDropped)="drop($event)">
         <tr *ngFor="let f of dbFiles" cdkDrag>
-          <td class="align-middle"><a href="http://localhost:4000/uploads/subjects/{{subject}}/exams/{{f.filename}}">{{f.filename}}</a></td>
+          <td class="align-middle"><a target="_blank" href="http://localhost:4000/uploads/subjects/{{subject}}/exams/{{f.filename}}">{{f.filename}}</a></td>
           <td class="align-middle">{{f.date}}</td>
           <td class="align-middle">{{f.authorName}}</td>
           <td class="align-middle">{{f.size}} KB</td>
